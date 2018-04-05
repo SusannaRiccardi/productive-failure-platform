@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import ProductiveFailureStageOneContainer from './ProductiveFailureStageOneContainer';
+import ProductiveFailureStageOneContainer from './stage-one/ProductiveFailureStageOneContainer';
 import ProductiveFailureStageTwoContainer from './ProductiveFailureStageTwoContainer';
 import ProductiveFailureStageThreeContainer from './ProductiveFailureStageThreeContainer';
 

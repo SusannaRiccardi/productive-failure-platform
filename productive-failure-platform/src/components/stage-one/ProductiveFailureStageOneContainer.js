@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Panel, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import PatternDescription from './PatternDescription';
-
+import StageOneElements from './StageOneElements';
+import StageOneRepresentations from './StageOneRepresentations';
 
 export default class ProductiveFailureStageOneContainer extends Component {
 	constructor(props) {
@@ -17,18 +18,10 @@ export default class ProductiveFailureStageOneContainer extends Component {
 
                 <Row>
                     <Col sm={6} md={3}>
-                        <div className="stage-1--elements">
-                            <Panel>
-                                <Panel.Body>Draggable elements</Panel.Body>
-                            </Panel>
-                        </div>
+                        <StageOneElements />
                     </Col>
                     <Col sm={6} md={9}>
-                        <div className="stage-1--field">
-                            <Panel>
-                                <Panel.Body>Field for activity</Panel.Body>
-                            </Panel>
-                        </div>
+                        <StageOneRepresentations />
                     </Col>
                 </Row>
             </div>
