@@ -32,11 +32,13 @@ export default class StageOneSolutions extends Component {
                     <Col sm={6} md={3}>
                         <StageOneElements 
                             representationNumber={this.state.representationNumber}
+                            representation={config.representations[this.state.representationNumber]}
                         />
                     </Col>
                     <Col sm={6} md={9}>
                         <StageOneRepresentations 
                             representationNumber={this.state.representationNumber}
+                            representation={config.representations[this.state.representationNumber]}
                         />
                     </Col>
                 </Row>

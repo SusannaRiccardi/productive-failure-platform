@@ -10,6 +10,7 @@ export default class StageOneRepresentations extends Component {
                     <Panel.Title componentClass="h3">Representations</Panel.Title>
                 </Panel.Heading>
                 <Panel.Body>
+                    Constraint: {this.props.representation.constraint}
                     
                 </Panel.Body>
             </Panel>
