@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PatternDescription from './PatternDescription';
-import StageOneElements from './StageOneElements';
+import StageOneSolutions from './StageOneSolutions';
 import StageOneRepresentations from './StageOneRepresentations';
 
 export default class ProductiveFailureStageOneContainer extends Component {
@@ -16,14 +16,7 @@ export default class ProductiveFailureStageOneContainer extends Component {
                     <PatternDescription />
                 </div>
 
-                <Row>
-                    <Col sm={6} md={3}>
-                        <StageOneElements />
-                    </Col>
-                    <Col sm={6} md={9}>
-                        <StageOneRepresentations />
-                    </Col>
-                </Row>
+                <StageOneSolutions />
             </div>
         );
     }
