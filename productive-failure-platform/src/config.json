@@ -8,7 +8,7 @@
             ]
         },
         {
-            "id" : 0,
+            "id" : 1,
             "constraint" : "Can't use pictures.",
             "removedElements" : [
                 "block"

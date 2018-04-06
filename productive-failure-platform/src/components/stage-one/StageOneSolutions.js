@@ -42,7 +42,7 @@ export default class StageOneSolutions extends Component {
                 </Row>
 
                 {this.state.representationNumber > 0 && <Button onClick={() => this.handleRepresentationNumberChange(-1)}>Back</Button>}
-                {this.state.representationNumber < config.representations.length && <Button onClick={() => this.handleRepresentationNumberChange(1)}>Forward</Button>}
+                {this.state.representationNumber < (config.representations.length - 1) && <Button onClick={() => this.handleRepresentationNumberChange(1)}>Forward</Button>}
             </div>
         );
     }
