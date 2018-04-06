@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { Panel, Row, Col } from 'react-bootstrap';
-import { Rectangle, Circle, Ellipse, CornerBox, Triangle } from 'react-shapes';
+import { Panel } from 'react-bootstrap';
+import { Rectangle, Circle, Triangle } from 'react-shapes';
 
 // Main page: login or home
 export default class PatternDescription extends Component {
-	constructor(props) {
-		super(props)
-	}
-
     render() {
         return (
             <Panel>

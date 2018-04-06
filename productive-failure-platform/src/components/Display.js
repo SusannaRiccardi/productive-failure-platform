@@ -5,10 +5,6 @@ import ProductiveFailureStageTwoContainer from './ProductiveFailureStageTwoConta
 import ProductiveFailureStageThreeContainer from './ProductiveFailureStageThreeContainer';
 
 export default class Display extends Component {
-	constructor(props) {
-		super(props)
-	}
-
     render() {
         return (
             <div>
