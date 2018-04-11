@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Display from './components/Display';
 import Banner from './components/Banner';
 import '../src/App.css';
+import '../src/literallycanvas.css';
 
 
 const App = () => (
