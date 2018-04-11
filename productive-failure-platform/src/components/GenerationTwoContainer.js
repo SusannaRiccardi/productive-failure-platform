@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 
-export default class ProductiveFailureStageTwoContainer extends Component {
+export default class GenerationTwoContainer extends Component {
     render() {
         return (
             <div>
-                Stage2
+                Stage3
             </div>
         );
     }
