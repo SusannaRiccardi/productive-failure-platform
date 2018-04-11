@@ -5,7 +5,7 @@ var _ = require('lodash');
 
 
 // Main page: login or home
-export default class StageOneElements extends Component {
+export default class GenerationOneElements extends Component {
     render() {
         const representation = this.props.representation;
         return (

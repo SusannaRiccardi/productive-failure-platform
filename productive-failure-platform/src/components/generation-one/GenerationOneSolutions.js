@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
-import StageOneElements from './StageOneElements';
-import StageOneRepresentations from './StageOneRepresentations';
+import GenerationOneElements from './GenerationOneElements';
+import GenerationOneRepresentations from './GenerationOneRepresentations';
 import config from '../../config';
 
 
-export default class StageOneSolutions extends Component {
+export default class GenerationOneSolutions extends Component {
 	constructor(props) {
         super(props)
         
@@ -30,13 +30,13 @@ export default class StageOneSolutions extends Component {
             <div className="StageOneSolutions-container">
                 <Row>
                     <Col sm={6} md={3}>
-                        <StageOneElements 
+                        <GenerationOneElements 
                             representationNumber={this.state.representationNumber}
                             representation={config.representations[this.state.representationNumber]}
                         />
                     </Col>
                     <Col sm={6} md={9}>
-                        <StageOneRepresentations 
+                        <GenerationOneRepresentations 
                             representationNumber={this.state.representationNumber}
                             representation={config.representations[this.state.representationNumber]}
                         />

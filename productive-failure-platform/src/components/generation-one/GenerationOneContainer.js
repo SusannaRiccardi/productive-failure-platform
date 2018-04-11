@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PatternDescription from './PatternDescription';
-import StageOneSolutions from './StageOneSolutions';
+import GenerationOneSolutions from './GenerationOneSolutions';
 
-export default class ProductiveFailureStageOneContainer extends Component {
+export default class GenerationOneContainer extends Component {
     render() {
         return (
             <div className="stage-1-container">
@@ -10,7 +10,7 @@ export default class ProductiveFailureStageOneContainer extends Component {
                     <PatternDescription />
                 </div>
 
-                <StageOneSolutions />
+                <GenerationOneSolutions />
             </div>
         );
     }
