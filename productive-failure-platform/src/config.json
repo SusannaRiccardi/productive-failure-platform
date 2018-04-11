@@ -3,15 +3,24 @@
         {
             "id" : 0,
             "constraint" : "Can't use text.",
-            "removedElements" : [
-                "text"
+            "elements" : [
+                "pencil",
+                "eraser",
+                "line",
+                "rectangle",
+                "arrow",
+                "ellipse"
             ]
         },
         {
             "id" : 1,
             "constraint" : "Can't use pictures.",
-            "removedElements" : [
-                "block"
+            "elements" : [
+                "pencil",
+                "eraser",
+                "line",
+                "text",
+                "arrow"
             ]
         }
     ]

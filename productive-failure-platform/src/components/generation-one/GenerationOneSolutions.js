@@ -93,6 +93,7 @@ export default class GenerationOneSolutions extends Component {
 
     render() {
         var representation = config.representations[this.state.representationNumber];
+
         return (
             <div className="StageOneSolutions-container">
                 <Row>
@@ -104,26 +105,53 @@ export default class GenerationOneSolutions extends Component {
                             <Panel.Body>
                                 {/* TODO: in config, put elements that are in the representation, not the one to be removed */}
                                 <div className="GenerateOneSolutions--container">
-                                    <div id="pencil" onClick={() => this.activateTool('pencil')} className={this.state.selectedTool.localeCompare('pencil') === 0 ? 'active' : ''}>
-                                        Pencil
+                                    {_.includes(representation.elements, 'pencil') && (
+                                        <div id="pencil" onClick={() => this.activateTool('pencil')} className={this.state.selectedTool.localeCompare('pencil') === 0 ? 'active' : ''}>
+                                            Pencil
+                                        </div>
+                                    )}
+
+                                    {_.includes(representation.elements, 'eraser') && (
+                                        <div id="eraser" onClick={() => this.activateTool('eraser')} className={this.state.selectedTool.localeCompare('eraser') === 0 ? 'active' : ''}>
+                                            Eraser
+                                        </div>
+                                    )}
+
+                                    {_.includes(representation.elements, 'line') && (
+                                        <div id="line" onClick={() => this.activateTool('line')} className={this.state.selectedTool.localeCompare('line') === 0 ? 'active' : ''}>
+                                            Line
+                                        </div>
+                                    )}
+
+                                    {_.includes(representation.elements, 'rectangle') && (
+                                        <div id="rectangle" onClick={() => this.activateTool('rectangle')} className={this.state.selectedTool.localeCompare('rectangle') === 0 ? 'active' : ''}>
+                                            Rectangle
+                                        </div>
+                                    )}
+                                    
+                                    {_.includes(representation.elements, 'text') && (
+                                        <div id="text" onClick={() => this.activateTool('text')} className={this.state.selectedTool.localeCompare('text') === 0 ? 'active' : ''}>
+                                            Text
+                                        </div>
+                                    )}
+                                    
+                                    {_.includes(representation.elements, 'arrow') && (
+                                        <div id="arrow" onClick={() => this.activateTool('arrow')} className={this.state.selectedTool.localeCompare('arrow') === 0 ? 'active' : ''}>
+                                            Arrow
+                                        </div>
+                                    )}
+
+                                    {_.includes(representation.elements, 'ellipse') && (
+                                        <div id="ellipse" onClick={() => this.activateTool('ellipse')} className={this.state.selectedTool.localeCompare('ellipse') === 0 ? 'active' : ''}>
+                                            Ellipse
+                                        </div>
+                                    )}
+
+                                    <div onClick={() => lc.undo()}>
+                                        Undo
                                     </div>
-                                    <div id="eraser" onClick={() => this.activateTool('eraser')} className={this.state.selectedTool.localeCompare('eraser') === 0 ? 'active' : ''}>
-                                        Eraser
-                                    </div>
-                                    <div id="line" onClick={() => this.activateTool('line')} className={this.state.selectedTool.localeCompare('line') === 0 ? 'active' : ''}>
-                                        Line
-                                    </div>
-                                    <div id="rectangle" onClick={() => this.activateTool('rectangle')} className={this.state.selectedTool.localeCompare('rectangle') === 0 ? 'active' : ''}>
-                                        Rectangle
-                                    </div>
-                                    <div id="text" onClick={() => this.activateTool('text')} className={this.state.selectedTool.localeCompare('text') === 0 ? 'active' : ''}>
-                                        Text
-                                    </div>
-                                    <div id="arrow" onClick={() => this.activateTool('arrow')} className={this.state.selectedTool.localeCompare('arrow') === 0 ? 'active' : ''}>
-                                        Arrow
-                                    </div>
-                                    <div id="ellipse" onClick={() => this.activateTool('ellipse')} className={this.state.selectedTool.localeCompare('ellipse') === 0 ? 'active' : ''}>
-                                        Ellipse
+                                    <div onClick={() => lc.redo()}>
+                                        Redo
                                     </div>
                                 </div>
                             </Panel.Body>
