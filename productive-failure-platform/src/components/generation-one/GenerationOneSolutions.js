@@ -62,7 +62,18 @@ export default class GenerationOneSolutions extends Component {
     
     // Function to handle the change of page of representation
     handleRepresentationNumberChange(newRepresentation) {
+        // Save current representation in localStorage
+        let canvasRepresentation = JSON.stringify(lc.getSnapshot());
+        localStorage.setItem(this.state.representationNumber, canvasRepresentation);
+
         let newRepresentationNumber = this.state.representationNumber + newRepresentation;
+        // If there is an already saved representation in the local storage, retrieve it, otherwise blank out the canvas
+        let newCanvasRepresentation = localStorage.getItem(newRepresentationNumber);
+        if (newCanvasRepresentation) {
+            lc.loadSnapshot(JSON.parse(newCanvasRepresentation));
+        } else {
+            lc = window.LC.init(document.getElementsByClassName('literally-core-container')[0]);
+        }
 
         this.setState({
             representationNumber : newRepresentationNumber
