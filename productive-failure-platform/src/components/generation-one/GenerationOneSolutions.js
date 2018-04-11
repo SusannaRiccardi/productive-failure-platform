@@ -72,7 +72,7 @@ export default class GenerationOneSolutions extends Component {
         if (newCanvasRepresentation) {
             lc.loadSnapshot(JSON.parse(newCanvasRepresentation));
         } else {
-            lc = window.LC.init(document.getElementsByClassName('literally-core-container')[0]);
+            lc.clear();
         }
 
         this.setState({
