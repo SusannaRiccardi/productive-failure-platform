@@ -45,17 +45,17 @@ export default class GenerationOneSolutions extends Component {
                 el : document.getElementById('text'),
                 tool : new window.LC.tools.Text(lc)
             }, {
-                name : 'polygon',
-                el : document.getElementById('polygon'),
-                tool : new window.LC.tools.Polygon(lc)
+                name : 'arrow',
+                el : document.getElementById('arrow'),
+                tool : function() {
+                    let arrow = new window.LC.tools.Line(lc);
+                    arrow.hasEndArrow = true;
+                    return arrow;
+                }()
             }, {
-                name : 'pan',
-                el : document.getElementById('pan'),
-                tool : new window.LC.tools.Pan(lc)
-            }, {
-                name : 'eyedropper',
-                el : document.getElementById('eyedropper'),
-                tool : new window.LC.tools.Eyedropper(lc)
+                name : 'ellipse',
+                el : document.getElementById('ellipse'),
+                tool : new window.LC.tools.Ellipse(lc)
             }
         ]
     }
@@ -119,14 +119,11 @@ export default class GenerationOneSolutions extends Component {
                                     <div id="text" onClick={() => this.activateTool('text')} className={this.state.selectedTool.localeCompare('text') === 0 ? 'active' : ''}>
                                         Text
                                     </div>
-                                    <div id="polygon" onClick={() => this.activateTool('polygon')} className={this.state.selectedTool.localeCompare('polygon') === 0 ? 'active' : ''}>
-                                        Polygon
+                                    <div id="arrow" onClick={() => this.activateTool('arrow')} className={this.state.selectedTool.localeCompare('arrow') === 0 ? 'active' : ''}>
+                                        Arrow
                                     </div>
-                                    <div id="pan" onClick={() => this.activateTool('pan')} className={this.state.selectedTool.localeCompare('pan') === 0 ? 'active' : ''}>
-                                        Pan
-                                    </div>
-                                    <div id="eyedropper" onClick={() => this.activateTool('eyedropper')} className={this.state.selectedTool.localeCompare('eyedropper') === 0 ? 'active' : ''}>
-                                        Eyedropper
+                                    <div id="ellipse" onClick={() => this.activateTool('ellipse')} className={this.state.selectedTool.localeCompare('ellipse') === 0 ? 'active' : ''}>
+                                        Ellipse
                                     </div>
                                 </div>
                             </Panel.Body>
