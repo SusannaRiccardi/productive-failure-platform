@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Panel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import config from '../../config';
 var _ = require('lodash');
 // literallycanvas variables
@@ -18,6 +19,7 @@ export default class GenerationOneSolutions extends Component {
 
         this.handleRepresentationNumberChange = this.handleRepresentationNumberChange.bind(this);
         this.activateTool = this.activateTool.bind(this);
+        this.saveGenerationOne = this.saveGenerationOne.bind(this);
     }
 
     componentDidMount() {
@@ -89,6 +91,13 @@ export default class GenerationOneSolutions extends Component {
         this.setState({
             selectedTool : tool
         })
+    }
+
+    saveGenerationOne() {
+        // Save current representation
+        let canvasRepresentation = JSON.stringify(lc.getSnapshot());
+        localStorage.setItem(this.state.representationNumber, canvasRepresentation);
+
     }
 
     render() {
@@ -174,6 +183,10 @@ export default class GenerationOneSolutions extends Component {
 
                 {this.state.representationNumber > 0 && <Button onClick={() => this.handleRepresentationNumberChange(-1)}>Back</Button>}
                 {this.state.representationNumber < (config.representations.length - 1) && <Button onClick={() => this.handleRepresentationNumberChange(1)}>Forward</Button>}
+
+                <Link to={`generation-two`} onClick={() => this.saveGenerationOne()}>
+                    Go to the next stage
+                </Link>
             </div>
         );
     }
