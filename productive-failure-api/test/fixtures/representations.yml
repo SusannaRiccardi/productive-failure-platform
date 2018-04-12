@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  constraint: MyString
+  svg: MyString
+  productive_failure_id: MyString
+
+two:
+  constraint: MyString
+  svg: MyString
+  productive_failure_id: MyString
