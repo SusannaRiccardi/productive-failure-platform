@@ -94,26 +94,31 @@ export default class GenerationOneSolutions extends Component {
         })
     }
 
-    saveGenerationOne() {
-        // Save current representation
-        let canvasRepresentation = JSON.stringify(lc.getSnapshot());
-        localStorage.setItem(this.state.representationNumber, canvasRepresentation);
-
+    saveGenerationOne(e) {
+        e.preventDefault();
+        // TODO: look for better method to have id
         let url = window.location.href;
         let splitString = _.split(url, '/');
         let id = splitString[splitString.length - 2];
 
-        axios.post('http://localhost:3001/api/v1/representations', {
-            representation: {
-                constraint: config.representations[this.state.representationNumber].constraint,
-                svg: canvasRepresentation,
-                productive_failure_id: id
+        // Save current representation
+        let canvasRepresentation = JSON.stringify(lc.getSnapshot());
+        localStorage.setItem(this.state.representationNumber, canvasRepresentation);
+
+        for (let i = 0; i < config.representations.length; i++) {
+            let representation = {
+                representation: {
+                    constraint: config.representations[i].constraint,
+                    svg: localStorage.getItem(i),
+                    productive_failure_id: id
+                }
             }
-        })
-        .then(response => {
-            console.log(response)
-        })
-        .catch(error => console.log(error))
+            axios.post('http://localhost:3001/api/v1/representations', representation)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => console.log(error))
+        }
     }
 
     render() {
@@ -200,7 +205,7 @@ export default class GenerationOneSolutions extends Component {
                 {this.state.representationNumber > 0 && <Button onClick={() => this.handleRepresentationNumberChange(-1)}>Back</Button>}
                 {this.state.representationNumber < (config.representations.length - 1) && <Button onClick={() => this.handleRepresentationNumberChange(1)}>Forward</Button>}
 
-                <Link to={`generation-two`} onClick={() => this.saveGenerationOne()}>
+                <Link to={`generation-two`} onClick={(e) => this.saveGenerationOne(e)}>
                     Go to the next stage
                 </Link>
             </div>
