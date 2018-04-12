@@ -99,6 +99,21 @@ export default class GenerationOneSolutions extends Component {
         let canvasRepresentation = JSON.stringify(lc.getSnapshot());
         localStorage.setItem(this.state.representationNumber, canvasRepresentation);
 
+        let url = window.location.href;
+        let splitString = _.split(url, '/');
+        let id = splitString[splitString.length - 2];
+
+        axios.post('http://localhost:3001/api/v1/representations', {
+            representation: {
+                constraint: config.representations[this.state.representationNumber].constraint,
+                svg: canvasRepresentation,
+                productive_failure_id: id
+            }
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => console.log(error))
     }
 
     render() {
