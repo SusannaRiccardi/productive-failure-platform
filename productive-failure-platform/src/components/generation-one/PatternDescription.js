@@ -9,11 +9,14 @@ export default class PatternDescription extends Component {
             <Panel>
                 <Panel.Body>
                     <div className="PatternDescription-description">
-                        Described here is a pattern. Your goal is to try to come up with as many representations of the pattern as possible.
-                        You can drag the elements in the <b>Elements</b> section and drop them in the <b>Solutions</b> section. You should 
-                        submit four represenations. For each representation, you will have a constraint, which you need to respect in order
-                        to come up with a solution. You can go through your represenations and modify them. When you think you are finished,
-                        click on the button <b>Take me to the next stage</b>.
+                        In this box you see a pattern, composed of shapes. Your goal in this first step is to try to come up with 
+                        as many representations of the pattern as possible.
+                        You can click on the elements in the <b>Elements</b> section: this will allow you to use the selected tool 
+                        in the <b>Representations</b> section. <br/>
+                        You can add multiple descriptions for the pattern: just click on the <b>Forward</b> and <b>Back</b> buttons. <br/>
+                        For each representation, you will be provided with a constraint: this means that you won't be able to use certain tools. <br/>
+                        You can modify the representations as many times as you want. Once you are ready to move on, click on
+                        the <b>Take me to the next stage</b> button.
                     </div>
 
                     <div className="PatternDescription-title">
@@ -21,30 +24,58 @@ export default class PatternDescription extends Component {
                     </div>
 
                     <div className="PatternDescription-pattern">
-                        <Circle r={25} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Rectangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Rectangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Triangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
+                        <div className="circle">
+                            <Circle r={20} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="rectangle">
+                            <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="rectangle">
+                            <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="triangle">
+                            <Triangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
 
-                        <Circle r={25} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Rectangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Rectangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Triangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
+                        <div className="circle">
+                            <Circle r={20} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="rectangle">
+                            <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="rectangle">
+                            <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="triangle">
+                            <Triangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
 
-                        <Circle r={25} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Rectangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Rectangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Triangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
+                        <div className="circle">
+                            <Circle r={20} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="rectangle">
+                            <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="rectangle">
+                            <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="triangle">
+                            <Triangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
 
-                        <Circle r={25} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Rectangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Rectangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Triangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
+                        <div className="circle">
+                            <Circle r={20} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="rectangle">
+                            <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="rectangle">
+                            <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
+                        <div className="triangle">
+                            <Triangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        </div>
 
-                        <Circle r={25} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Rectangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Rectangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
-                        <Triangle width={50} height={50} fill={{color:'#337ab7'}} stroke={{color:'#337ab7'}} strokeWidth={3} />
                     </div>
                 </Panel.Body>
             </Panel>
