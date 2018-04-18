@@ -30,7 +30,12 @@ export default class GenerationOneSolutions extends Component {
     }
 
     componentDidMount() {
-        lc = window.LC.init(document.getElementsByClassName('literally-core-container')[0]);
+        // Initialise literally canvas
+        let options = {
+            secondaryColor: '#000',
+            backgroundColor: '#fff'
+        }
+        lc = window.LC.init(document.getElementsByClassName('literally-core-container')[0], options);
         
         tools = [
             {

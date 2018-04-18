@@ -17,8 +17,8 @@
 }
 
 .literally-core-container {
-    background-color: white;
     border-style: inset;
+    margin-top: 10px;
 }
 
 /* Elements generation one */
