@@ -250,13 +250,19 @@ export default class GenerationOneSolutions extends Component {
                         </Panel>
                     </Col>
                 </Row>
-
-                {this.state.representationNumber > 0 && <Button onClick={() => this.handleRepresentationNumberChange(-1)}>Back</Button>}
-                {this.state.representationNumber < (config.representations.length - 1) && <Button onClick={() => this.handleRepresentationNumberChange(1)}>Forward</Button>}
-
-                <Link to={`generation-two`} onClick={(e) => this.saveGenerationOne(e)}>
-                    Go to the next stage
-                </Link>
+                
+                <div className="representations-buttons">
+                    {this.state.representationNumber > 0 && <Button onClick={() => this.handleRepresentationNumberChange(-1)}>Back</Button>}
+                    {this.state.representationNumber < (config.representations.length - 1) && <Button onClick={() => this.handleRepresentationNumberChange(1)}>Forward</Button>}
+                </div>
+                
+                <div className="next-stage-button">
+                    <Button onClick={(e) => this.saveGenerationOne(e)}>
+                        <Link to={`generation-two`}>
+                            Take me to the next stage
+                        </Link>
+                    </Button>
+                </div>
             </div>
         );
     }
