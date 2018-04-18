@@ -3,12 +3,15 @@ import { Row, Col, Button, Panel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
+import pencil from '../../img/pencil.png'
 import eraser from '../../img/eraser.png'
-import pencil from '../../img/pencil.svg'
 import line from '../../img/line.png'
-import rectangle from '../../img/square.png'
-import ellipse from '../../img/circle.png'
+import rectangle from '../../img/rectangle.png'
+import ellipse from '../../img/ellipse.png'
 import arrow from '../../img/arrow.png'
+import redo from '../../img/redo.png'
+import undo from '../../img/undo.png'
+import text from '../../img/text.png'
 var _ = require('lodash');
 // literallycanvas variables
 var lc;
@@ -167,70 +170,95 @@ export default class GenerationOneSolutions extends Component {
                                 <div className="GenerateOneSolutions--container">
                                     
                                     {_.includes(representation.elements, 'pencil') && (
-                                        <img 
-                                            className={this.state.selectedTool.localeCompare('pencil') === 0 ? 'pencil active' : 'pencil'}
-                                            src={pencil}
-                                            alt="pencil"
-                                            onClick={() => this.activateTool('pencil')}
-                                        />
+                                        <div className={this.state.selectedTool.localeCompare('pencil') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('pencil')}>
+                                            <img
+                                                className="pencil"
+                                                src={pencil}
+                                                alt="pencil"
+                                            />
+                                            Select pencil
+                                        </div>
                                     )}
 
                                     {_.includes(representation.elements, 'eraser') && (
-                                        <img 
-                                            className={this.state.selectedTool.localeCompare('eraser') === 0 ? 'eraser active' : 'eraser'}
-                                            src={eraser}
-                                            alt="eraser"
-                                            onClick={() => this.activateTool('eraser')}
-                                        />
+                                        <div className={this.state.selectedTool.localeCompare('eraser') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('eraser')}>
+                                            <img
+                                                className="eraser"
+                                                src={eraser}
+                                                alt="eraser"
+                                            />
+                                            Select eraser
+                                        </div>
                                     )}
 
                                     {_.includes(representation.elements, 'line') && (
-                                        <img 
-                                            className={this.state.selectedTool.localeCompare('line') === 0 ? 'line active' : 'line'}
-                                            src={line}
-                                            alt="line"
-                                            onClick={() => this.activateTool('line')}
-                                        />
-                                    )}
-
-                                    {_.includes(representation.elements, 'rectangle') && (
-                                        <img 
-                                            className={this.state.selectedTool.localeCompare('rectangle') === 0 ? 'rectangle active' : 'rectangle'}
-                                            src={rectangle}
-                                            alt="rectangle"
-                                            onClick={() => this.activateTool('rectangle')}
-                                        />
-                                    )}
-                                    
-                                    {_.includes(representation.elements, 'text') && (
-                                        <div id="text" onClick={() => this.activateTool('text')} className={this.state.selectedTool.localeCompare('text') === 0 ? 'active' : ''}>
-                                            Text
+                                        <div className={this.state.selectedTool.localeCompare('line') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('line')}>
+                                            <img
+                                                className="line"
+                                                src={line}
+                                                alt="line"
+                                            />
+                                            Select line
                                         </div>
                                     )}
                                     
                                     {_.includes(representation.elements, 'arrow') && (
-                                        <img 
-                                            className={this.state.selectedTool.localeCompare('arrow') === 0 ? 'arrow active' : 'arrow'}
-                                            src={arrow}
-                                            alt="arrow"
-                                            onClick={() => this.activateTool('arrow')}
-                                        />
+                                        <div className={this.state.selectedTool.localeCompare('arrow') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('arrow')}>
+                                            <img
+                                                className="arrow"
+                                                src={arrow}
+                                                alt="arrow"
+                                            />
+                                            Select arrow
+                                        </div>
+                                    )}
+                                    
+                                    {_.includes(representation.elements, 'text') && (
+                                        <div className={this.state.selectedTool.localeCompare('text') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('text')}>
+                                            <img
+                                                className="text"
+                                                src={text}
+                                                alt="text"
+                                            />
+                                            Write text
+                                        </div>
+                                    )}
+
+                                    {_.includes(representation.elements, 'rectangle') && (
+                                        <div className={this.state.selectedTool.localeCompare('rectangle') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('rectangle')}>
+                                            <img
+                                                className="rectangle"
+                                                src={rectangle}
+                                                alt="rectangle"
+                                            />
+                                            Select rectangle
+                                        </div>
                                     )}
 
                                     {_.includes(representation.elements, 'ellipse') && (
-                                        <img 
-                                            className={this.state.selectedTool.localeCompare('ellipse') === 0 ? 'ellipse active' : 'ellipse'}
-                                            src={ellipse}
-                                            alt="ellipse"
-                                            onClick={() => this.activateTool('ellipse')}
-                                        />
+                                        <div className={this.state.selectedTool.localeCompare('ellipse') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('ellipse')}>
+                                            <img
+                                                className="ellipse"
+                                                src={ellipse}
+                                                alt="ellipse"
+                                            />
+                                            Select ellipse
+                                        </div>
                                     )}
 
-                                    <div onClick={() => lc.undo()}>
-                                        Undo
-                                    </div>
-                                    <div onClick={() => lc.redo()}>
-                                        Redo
+                                    <div className="undo-redo">
+                                        <img
+                                            className="undo"
+                                            src={undo}
+                                            alt="undo"
+                                            onClick={() => lc.undo()}
+                                        />
+                                        <img
+                                            className="redo"
+                                            src={redo}
+                                            alt="redo"
+                                            onClick={() => lc.redo()}
+                                        />
                                     </div>
                                 </div>
                             </Panel.Body>

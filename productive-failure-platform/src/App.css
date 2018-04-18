@@ -3,7 +3,7 @@
 }
 
 .active {
-    background: yellow;
+    background-color: rgb(179, 222, 229);
 }
 
 .PatternDescription-pattern {
@@ -22,9 +22,10 @@
 }
 
 /* Elements generation one */
-.pencil, .eraser, .line, .rectangle, .ellipse, .arrow {
+.pencil, .eraser, .line, .rectangle, .ellipse, .arrow, .text, .undo, .redo {
     width: 40px;
     height: 40px;
+    margin-right: 10px;
 }
 
 .next-stage-button {
@@ -35,4 +36,15 @@
 .representations-buttons {
     display: flex;
     justify-content: center;
+}
+
+.tool-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.undo-redo {
+    text-align: center;
 }
