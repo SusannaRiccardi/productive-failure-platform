@@ -5,3 +5,24 @@
 .active {
     background: yellow;
 }
+
+.PatternDescription-pattern {
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.triangle {
+    margin-bottom: 3px;
+}
+
+.literally-core-container {
+    background-color: white;
+    border-style: inset;
+}
+
+/* Elements generation one */
+.pencil, .eraser, .line, .rectangle, .ellipse, .arrow {
+    width: 40px;
+    height: 40px;
+}

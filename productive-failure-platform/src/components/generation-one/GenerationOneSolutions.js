@@ -3,6 +3,12 @@ import { Row, Col, Button, Panel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
+import eraser from '../../img/eraser.png'
+import pencil from '../../img/pencil.svg'
+import line from '../../img/line.png'
+import rectangle from '../../img/square.png'
+import ellipse from '../../img/circle.png'
+import arrow from '../../img/arrow.png'
 var _ = require('lodash');
 // literallycanvas variables
 var lc;
@@ -135,28 +141,41 @@ export default class GenerationOneSolutions extends Component {
                             <Panel.Body>
                                 {/* TODO: in config, put elements that are in the representation, not the one to be removed */}
                                 <div className="GenerateOneSolutions--container">
+                                    
                                     {_.includes(representation.elements, 'pencil') && (
-                                        <div id="pencil" onClick={() => this.activateTool('pencil')} className={this.state.selectedTool.localeCompare('pencil') === 0 ? 'active' : ''}>
-                                            Pencil
-                                        </div>
+                                        <img 
+                                            className={this.state.selectedTool.localeCompare('pencil') === 0 ? 'pencil active' : 'pencil'}
+                                            src={pencil}
+                                            alt="pencil"
+                                            onClick={() => this.activateTool('pencil')}
+                                        />
                                     )}
 
                                     {_.includes(representation.elements, 'eraser') && (
-                                        <div id="eraser" onClick={() => this.activateTool('eraser')} className={this.state.selectedTool.localeCompare('eraser') === 0 ? 'active' : ''}>
-                                            Eraser
-                                        </div>
+                                        <img 
+                                            className={this.state.selectedTool.localeCompare('eraser') === 0 ? 'eraser active' : 'eraser'}
+                                            src={eraser}
+                                            alt="eraser"
+                                            onClick={() => this.activateTool('eraser')}
+                                        />
                                     )}
 
                                     {_.includes(representation.elements, 'line') && (
-                                        <div id="line" onClick={() => this.activateTool('line')} className={this.state.selectedTool.localeCompare('line') === 0 ? 'active' : ''}>
-                                            Line
-                                        </div>
+                                        <img 
+                                            className={this.state.selectedTool.localeCompare('line') === 0 ? 'line active' : 'line'}
+                                            src={line}
+                                            alt="line"
+                                            onClick={() => this.activateTool('line')}
+                                        />
                                     )}
 
                                     {_.includes(representation.elements, 'rectangle') && (
-                                        <div id="rectangle" onClick={() => this.activateTool('rectangle')} className={this.state.selectedTool.localeCompare('rectangle') === 0 ? 'active' : ''}>
-                                            Rectangle
-                                        </div>
+                                        <img 
+                                            className={this.state.selectedTool.localeCompare('rectangle') === 0 ? 'rectangle active' : 'rectangle'}
+                                            src={rectangle}
+                                            alt="rectangle"
+                                            onClick={() => this.activateTool('rectangle')}
+                                        />
                                     )}
                                     
                                     {_.includes(representation.elements, 'text') && (
@@ -166,15 +185,21 @@ export default class GenerationOneSolutions extends Component {
                                     )}
                                     
                                     {_.includes(representation.elements, 'arrow') && (
-                                        <div id="arrow" onClick={() => this.activateTool('arrow')} className={this.state.selectedTool.localeCompare('arrow') === 0 ? 'active' : ''}>
-                                            Arrow
-                                        </div>
+                                        <img 
+                                            className={this.state.selectedTool.localeCompare('arrow') === 0 ? 'arrow active' : 'arrow'}
+                                            src={arrow}
+                                            alt="arrow"
+                                            onClick={() => this.activateTool('arrow')}
+                                        />
                                     )}
 
                                     {_.includes(representation.elements, 'ellipse') && (
-                                        <div id="ellipse" onClick={() => this.activateTool('ellipse')} className={this.state.selectedTool.localeCompare('ellipse') === 0 ? 'active' : ''}>
-                                            Ellipse
-                                        </div>
+                                        <img 
+                                            className={this.state.selectedTool.localeCompare('ellipse') === 0 ? 'ellipse active' : 'ellipse'}
+                                            src={ellipse}
+                                            alt="ellipse"
+                                            onClick={() => this.activateTool('ellipse')}
+                                        />
                                     )}
 
                                     <div onClick={() => lc.undo()}>
