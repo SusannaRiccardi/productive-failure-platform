@@ -30,12 +30,35 @@ export default class GenerationOneSolutions extends Component {
     }
 
     componentDidMount() {
+        // TODO: look at better way to have id of productive failure activity
+        let url = window.location.href;
+        let splitString = _.split(url, '/');
+        let id = splitString[splitString.length - 2];
+        
+        this.setState({
+            productiveFailureId : id
+        })
+
         // Initialise literally canvas
         let options = {
             secondaryColor: '#000',
             backgroundColor: '#fff'
         }
+
         lc = window.LC.init(document.getElementsByClassName('literally-core-container')[0], options);
+
+        // Clean localStorage if another productive failure activity was created, or load 
+        let previousActivity = localStorage.getItem("productiveFailure");
+        if (previousActivity !== null && previousActivity !== id) {
+            localStorage.clear();
+        } else if (previousActivity !== null && previousActivity === id) {
+            let canvas = localStorage.getItem(this.state.representationNumber);
+            if (canvas) {
+                lc.loadSnapshot(JSON.parse(canvas));
+            }
+        } else {
+            localStorage.setItem("productiveFailure", id);
+        }
         
         tools = [
             {
@@ -107,10 +130,6 @@ export default class GenerationOneSolutions extends Component {
 
     saveGenerationOne(e) {
         e.preventDefault();
-        // TODO: look for better method to have id
-        let url = window.location.href;
-        let splitString = _.split(url, '/');
-        let id = splitString[splitString.length - 2];
 
         // Save current representation
         let canvasRepresentation = JSON.stringify(lc.getSnapshot());
@@ -121,7 +140,7 @@ export default class GenerationOneSolutions extends Component {
                 representation: {
                     constraint: config.representations[i].constraint,
                     svg: localStorage.getItem(i),
-                    productive_failure_id: id
+                    productive_failure_id: this.state.productiveFailureId
                 }
             }
             axios.post('http://localhost:3001/api/v1/representations', representation)
