@@ -1337,6 +1337,22 @@ defineCanvasRenderer('Rectangle', function(ctx, shape) {
   return ctx.strokeRect(x, y, dimension, dimension);
 });
 
+defineCanvasRenderer('Triangle', function(ctx, shape) {    
+    var x, y;
+    x = shape.x;
+    y = shape.y;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + shape.width / 2, y + shape.height);
+    ctx.lineTo(x - shape.width / 2, y + shape.height);
+    ctx.closePath();
+    ctx.fillStyle = shape.fillColor;
+    ctx.fill();
+    ctx.lineWidth = shape.strokeWidth;
+    ctx.strokeStyle = shape.strokeColor;
+    return ctx.stroke();
+  });
+
 defineCanvasRenderer('Ellipse', function(ctx, shape) {
   var centerX, centerY, halfHeight, halfWidth;
   ctx.save();
@@ -1553,10 +1569,10 @@ module.exports = {
   zoomStep: 0.2,
   snapshot: null,
   onInit: function onInit() {},
-  tools: [require('../tools/Pencil'), require('../tools/Eraser'), require('../tools/Line'), require('../tools/Rectangle'), require('../tools/Ellipse'), require('../tools/Text'), require('../tools/Polygon'), require('../tools/Pan'), require('../tools/Eyedropper')]
+  tools: [require('../tools/Pencil'), require('../tools/Eraser'), require('../tools/Line'), require('../tools/Rectangle'), require('../tools/Ellipse'), require('../tools/Text'), require('../tools/Polygon'), require('../tools/Pan'), require('../tools/Eyedropper'), require('../tools/Triangle')]
 };
 
-},{"../tools/Ellipse":19,"../tools/Eraser":20,"../tools/Eyedropper":21,"../tools/Line":22,"../tools/Pan":23,"../tools/Pencil":24,"../tools/Polygon":25,"../tools/Rectangle":26,"../tools/Text":28}],7:[function(require,module,exports){
+},{"../tools/Ellipse":19,"../tools/Eraser":20,"../tools/Eyedropper":21,"../tools/Line":22,"../tools/Pan":23,"../tools/Pencil":24,"../tools/Polygon":25,"../tools/Rectangle":26,"../tools/Text":28,"../tools/Triangle":29}],7:[function(require,module,exports){
 "use strict";
 
 /**
@@ -2353,6 +2369,57 @@ defineShape('Rectangle', {
   }
 });
 
+defineShape('Triangle', {
+    constructor: function(args) {
+      if (args == null) {
+        args = {};
+      }
+      this.x = args.x || 0;
+      this.y = args.y || 0;
+      this.width = args.width || 0;
+      this.height = args.height || 0;
+      this.strokeWidth = args.strokeWidth || 1;
+      this.strokeColor = args.strokeColor || 'black';
+      return this.fillColor = args.fillColor || 'transparent';
+    },
+    getBoundingRect: function() {
+      return {
+        x: this.x - this.strokeWidth / 2,
+        y: this.y - this.strokeWidth / 2,
+        width: this.width + this.strokeWidth,
+        height: this.height + this.strokeWidth
+      };
+    },
+    toJSON: function() {
+      return {
+        x: this.x,
+        y: this.y,
+        width: this.width,
+        height: this.height,
+        strokeWidth: this.strokeWidth,
+        strokeColor: this.strokeColor,
+        fillColor: this.fillColor
+      };
+    },
+    fromJSON: function(data) {
+      return createShape('Triangle', data);
+    },
+    move: function(moveInfo) {
+      if (moveInfo == null) {
+        moveInfo = {};
+      }
+      this.x = this.x - moveInfo.xDiff;
+      return this.y = this.y - moveInfo.yDiff;
+    },
+    setUpperLeft: function(upperLeft) {
+      if (upperLeft == null) {
+        upperLeft = {};
+      }
+      this.x = upperLeft.x;
+      return this.y = upperLeft.y;
+    }
+  });
+
 defineShape('Ellipse', {
   constructor: function(args) {
     if (args == null) {
@@ -3059,6 +3126,23 @@ defineSVGRenderer('Rectangle', function(shape) {
   return "<rect x='" + x + "' y='" + y + "' width='" + width + "' height='" + height + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
 });
 
+defineSVGRenderer('Triangle', function(shape) {
+    var height, width, x, x1, x2, y, y1, y2;
+    x1 = shape.x;
+    y1 = shape.y;
+    x2 = shape.x + shape.width;
+    y2 = shape.y + shape.height;
+    x = Math.min(x1, x2);
+    y = Math.min(y1, y2);
+    width = Math.max(x1, x2) - x;
+    height = Math.max(y1, y2) - y;
+    if (shape.strokeWidth % 2 !== 0) {
+      x += 0.5;
+      y += 0.5;
+    }
+    return "<rect x='" + x + "' y='" + y + "' width='" + width + "' height='" + height + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
+  });
+
 defineSVGRenderer('SelectionBox', function(shape) {
   return "";
 });
@@ -3455,6 +3539,7 @@ tools = {
   Ellipse: require('./tools/Ellipse'),
   Text: require('./tools/Text'),
   Polygon: require('./tools/Polygon'),
+  Triangle: require('./tools/Triangle'),
   Pan: require('./tools/Pan'),
   Eyedropper: require('./tools/Eyedropper'),
   SelectShape: require('./tools/SelectShape'),
@@ -3565,7 +3650,7 @@ module.exports = {
 };
 
 
-},{"./core/LiterallyCanvas":1,"./core/canvasRenderer":5,"./core/defaultOptions":6,"./core/localization":9,"./core/renderSnapshotToImage":11,"./core/renderSnapshotToSVG":12,"./core/shapes":13,"./core/svgRenderer":14,"./core/util":15,"./ie_customevent":16,"./ie_setLineDash":17,"./tools/Ellipse":19,"./tools/Eraser":20,"./tools/Eyedropper":21,"./tools/Line":22,"./tools/Pan":23,"./tools/Pencil":24,"./tools/Polygon":25,"./tools/Rectangle":26,"./tools/SelectShape":27,"./tools/Text":28,"./tools/base":29}],19:[function(require,module,exports){
+},{"./core/LiterallyCanvas":1,"./core/canvasRenderer":5,"./core/defaultOptions":6,"./core/localization":9,"./core/renderSnapshotToImage":11,"./core/renderSnapshotToSVG":12,"./core/shapes":13,"./core/svgRenderer":14,"./core/util":15,"./ie_customevent":16,"./ie_setLineDash":17,"./tools/Ellipse":19,"./tools/Eraser":20,"./tools/Eyedropper":21,"./tools/Line":22,"./tools/Pan":23,"./tools/Pencil":24,"./tools/Polygon":25,"./tools/Rectangle":26,"./tools/SelectShape":27,"./tools/Text":28,"./tools/base":29,"./tools/Triangle":30}],19:[function(require,module,exports){
 var Ellipse, ToolWithStroke, createShape,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty;
@@ -4156,6 +4241,50 @@ module.exports = Rectangle = (function(superClass) {
   return Rectangle;
 
 })(ToolWithStroke);
+
+},{"../core/shapes":13,"./base":29}],30:[function(require,module,exports){
+    var Triangle, ToolWithStroke, createShape,
+      extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+      hasProp = {}.hasOwnProperty;
+    
+    ToolWithStroke = require('./base').ToolWithStroke;
+    
+    createShape = require('../core/shapes').createShape;
+    
+    module.exports = Triangle = (function(superClass) {
+      extend(Triangle, superClass);
+    
+      function Triangle() {
+        return Triangle.__super__.constructor.apply(this, arguments);
+      }
+    
+      Triangle.prototype.name = 'Triangle';
+    
+      Triangle.prototype.iconName = 'triangle';
+      
+      Triangle.prototype.begin = function(x, y, lc) {
+        return this.currentShape = createShape('Triangle', {
+          x: x,
+          y: y,
+          strokeWidth: this.strokeWidth,
+          strokeColor: lc.getColor('primary'),
+          fillColor: lc.getColor('secondary')
+        });
+      };
+    
+      Triangle.prototype["continue"] = function(x, y, lc) {
+        this.currentShape.width = x - this.currentShape.x;
+        this.currentShape.height = y - this.currentShape.y;
+        return lc.drawShapeInProgress(this.currentShape);
+      };
+    
+      Triangle.prototype.end = function(x, y, lc) {
+        return lc.saveShape(this.currentShape);
+      };
+    
+      return Triangle;
+    
+    })(ToolWithStroke);
 
 
 },{"../core/shapes":13,"./base":29}],27:[function(require,module,exports){

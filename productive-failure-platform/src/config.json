@@ -9,7 +9,8 @@
                 "line",
                 "rectangle",
                 "arrow",
-                "ellipse"
+                "ellipse",
+                "triangle"
             ]
         },
         {

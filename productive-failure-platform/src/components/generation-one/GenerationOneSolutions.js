@@ -12,6 +12,7 @@ import arrow from '../../img/arrow.png'
 import redo from '../../img/redo.png'
 import undo from '../../img/undo.png'
 import text from '../../img/text.png'
+import triangle from '../../img/triangle.png'
 var _ = require('lodash');
 // literallycanvas variables
 var lc;
@@ -96,6 +97,10 @@ export default class GenerationOneSolutions extends Component {
                 name : 'ellipse',
                 el : document.getElementById('ellipse'),
                 tool : new window.LC.tools.Ellipse(lc)
+            }, {
+                name : 'triangle',
+                el : document.getElementById('triangle'),
+                tool : new window.LC.tools.Triangle(lc)
             }
         ]
     }
@@ -243,6 +248,17 @@ export default class GenerationOneSolutions extends Component {
                                                 alt="ellipse"
                                             />
                                             Select ellipse
+                                        </div>
+                                    )}
+
+                                    {_.includes(representation.elements, 'triangle') && (
+                                        <div className={this.state.selectedTool.localeCompare('triangle') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('triangle')}>
+                                            <img
+                                                className="triangle"
+                                                src={triangle}
+                                                alt="triangle"
+                                            />
+                                            Select triangle
                                         </div>
                                     )}
 

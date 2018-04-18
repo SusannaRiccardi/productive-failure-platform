@@ -22,7 +22,7 @@
 }
 
 /* Elements generation one */
-.pencil, .eraser, .line, .rectangle, .ellipse, .arrow, .text, .undo, .redo {
+.pencil, .eraser, .line, .rectangle, .ellipse, .arrow, .text, .undo, .redo, .triangle {
     width: 40px;
     height: 40px;
     margin-right: 10px;
