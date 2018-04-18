@@ -1,0 +1,2 @@
+class ActivityPattern < ApplicationRecord
+end
