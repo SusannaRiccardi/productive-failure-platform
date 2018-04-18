@@ -1329,11 +1329,12 @@ defineCanvasRenderer('Rectangle', function(ctx, shape) {
     x += 0.5;
     y += 0.5;
   }
+  let dimension = Math.min(shape.width, shape.height);
   ctx.fillStyle = shape.fillColor;
-  ctx.fillRect(x, y, shape.width, shape.height);
+  ctx.fillRect(x, y, dimension, dimension);
   ctx.lineWidth = shape.strokeWidth;
   ctx.strokeStyle = shape.strokeColor;
-  return ctx.strokeRect(x, y, shape.width, shape.height);
+  return ctx.strokeRect(x, y, dimension, dimension);
 });
 
 defineCanvasRenderer('Ellipse', function(ctx, shape) {
