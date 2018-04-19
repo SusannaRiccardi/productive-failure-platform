@@ -13,7 +13,7 @@ module Api::V1
         private
           
         def representation_params
-            params.require(:representation).permit(:constraint, :svg, :productive_failure_id)
+            params.require(:representation).permit(:constraint, :svg, :productive_failure_id, :activity_pattern_id)
         end
     end
 end
