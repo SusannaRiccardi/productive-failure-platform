@@ -1,0 +1,28 @@
+{
+    "representations" : [
+        {
+            "id" : 0,
+            "constraint" : "Can't use text.",
+            "elements" : [
+                "pencil",
+                "eraser",
+                "line",
+                "rectangle",
+                "arrow",
+                "ellipse",
+                "triangle"
+            ]
+        },
+        {
+            "id" : 1,
+            "constraint" : "Can't use pictures.",
+            "elements" : [
+                "pencil",
+                "eraser",
+                "line",
+                "text",
+                "arrow"
+            ]
+        }
+    ]
+}

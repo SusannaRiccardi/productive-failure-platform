@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import ProductiveFailureStageOneContainer from './ProductiveFailureStageOneContainer';
-import ProductiveFailureStageTwoContainer from './ProductiveFailureStageTwoContainer';
-import ProductiveFailureStageThreeContainer from './ProductiveFailureStageThreeContainer';
+import GenerationOneContainer from './generation-one/GenerationOneContainer';
+import GenerationTwoContainer from './GenerationTwoContainer';
+import ConsolidationContainer from './ConsolidationContainer';
 
 export default class Display extends Component {
-	constructor(props) {
-		super(props)
-	}
-
     render() {
         return (
             <div>
-                <Route path="/productive-failure/:id/stage-1" component={ProductiveFailureStageOneContainer}/>
-                <Route path="/productive-failure/:id/stage-2" component={ProductiveFailureStageTwoContainer}/>
-                <Route path="/productive-failure/:id/stage-3" component={ProductiveFailureStageThreeContainer}/>
+                <Route path="/productive-failure/:id/generation-one" component={GenerationOneContainer}/>
+                <Route path="/productive-failure/:id/generation-two" component={GenerationTwoContainer}/>
+                <Route path="/productive-failure/:id/consolidation" component={ConsolidationContainer}/>
             </div>
         );
     }

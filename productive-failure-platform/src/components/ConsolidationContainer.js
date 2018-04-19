@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 
 
-export default class ProductiveFailureStageTwoContainer extends Component {
-	constructor(props) {
-		super(props)
-	}
-
+export default class ConsolidationContainer extends Component {
     render() {
         return (
             <div>
