@@ -165,7 +165,7 @@ export default class GenerationOneSolutions extends Component {
         return (
             <div className="StageOneSolutions-container">
                 <Row>
-                    <Col sm={6} md={3}>
+                    <Col sm={6} md={2}>
                         <Panel>
                             <Panel.Heading>
                                 <Panel.Title componentClass="h3">Elements</Panel.Title>
@@ -280,7 +280,7 @@ export default class GenerationOneSolutions extends Component {
                             </Panel.Body>
                         </Panel>
                     </Col>
-                    <Col sm={6} md={9}>
+                    <Col sm={6} md={10}>
                         <Panel>
                             <Panel.Heading>
                                 <Panel.Title componentClass="h3">Representations</Panel.Title>
