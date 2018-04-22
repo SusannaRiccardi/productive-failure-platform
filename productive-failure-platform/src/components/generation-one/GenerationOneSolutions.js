@@ -137,26 +137,38 @@ export default class GenerationOneSolutions extends Component {
     }
 
     saveGenerationOne(e) {
-        e.preventDefault();
-
         // Save current representation
         let canvasRepresentation = JSON.stringify(lc.getSnapshot());
         localStorage.setItem(this.state.representationNumber, canvasRepresentation);
 
-        for (let i = 0; i < config.representations.length; i++) {
-            let representation = {
-                representation: {
-                    constraint: config.representations[i].constraint,
-                    svg: localStorage.getItem(i),
-                    productive_failure_id: this.state.productiveFailureId
-                }
-            }
-            axios.post('http://localhost:3001/api/v1/representations', representation)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => console.log(error))
+        let activityPattern = {
+            productive_failure_id: this.state.productiveFailureId,
+            pattern_id: this.props.patterns[0].id
         }
+
+        axios.post('http://localhost:3001/api/v1/activity_patterns', activityPattern)
+        .then(res => {
+            for (let i = 0; i < config.representations.length; i++) {
+                let representation = {
+                    representation: {
+                        constraint: config.representations[i].constraint,
+                        svg: localStorage.getItem(i),
+                        productive_failure_id: this.state.productiveFailureId,
+                        activity_pattern_id: res.data.id
+                    }
+                }
+                axios.post('http://localhost:3001/api/v1/representations', representation)
+                .then(response => {
+                    console.log(res)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     render() {

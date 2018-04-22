@@ -39,7 +39,7 @@ export default class GenerationOneContainer extends Component {
                 </div>
 
                 <GenerationOneSolutions 
-                    pattern={this.state.patterns}
+                    patterns={this.state.patterns}
                 />
             </div>
         );
