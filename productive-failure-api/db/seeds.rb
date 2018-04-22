@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+patterns = Pattern.create(
+    [
+        {
+            pattern: "circle-triangle-square-square"
+        }, {
+            pattern: "triangle-square-circle-circle"
+        }, {
+            pattern: "circle-circle-triangle-square"
+        }, {
+            pattern: "circle-square-square-triangle"
+        }
+    ]
+)
