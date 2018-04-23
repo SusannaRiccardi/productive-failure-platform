@@ -44,21 +44,6 @@ export default class PatternDescription extends Component {
         return (
             <Panel>
                 <Panel.Body>
-                    <div className="PatternDescription-description">
-                        In this box you see a pattern, composed of shapes. Your goal in this first step is to try to come up with 
-                        as many representations of the pattern as possible.
-                        You can click on the elements in the <b>Elements</b> section: this will allow you to use the selected tool 
-                        in the <b>Representations</b> section. <br/>
-                        You can add multiple descriptions for the pattern: just click on the <b>Forward</b> and <b>Back</b> buttons. <br/>
-                        For each representation, you will be provided with a constraint: this means that you won't be able to use certain tools. <br/>
-                        You can modify the representations as many times as you want. Once you are ready to move on, click on
-                        the <b>Take me to the next stage</b> button.
-                    </div>
-
-                    <div className="PatternDescription-title">
-                        Here is the pattern you need to describe:
-                    </div>
-
                     <div className="PatternDescription-pattern">
                         {this.props.patterns.length > 0 && this.renderPattern()}
                     </div>
