@@ -31,8 +31,8 @@ export default class GenerationOneContainer extends Component {
     
     render() {
         return (
-            <div className="stage-1-container">
-                <div className="stage-1--pattern">
+            <div className="generation-one-container">
+                <div className="generation-one-pattern">
                     <PatternDescription 
                         patterns={this.state.patterns}
                     />
