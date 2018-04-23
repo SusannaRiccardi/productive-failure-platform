@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Panel, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import PatternGeneration from './PatternGeneration';
 var lc;
 
 
@@ -49,6 +50,8 @@ export default class GenerationTwoContainer extends Component {
                         </Panel>
                     </Col>
                 </Row>
+
+                <PatternGeneration />
             </div>
         );
     }
