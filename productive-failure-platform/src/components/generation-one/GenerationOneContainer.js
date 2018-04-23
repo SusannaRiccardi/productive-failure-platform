@@ -73,6 +73,8 @@ export default class GenerationOneContainer extends Component {
                 <GenerationOneSolutions 
                     patterns={this.state.patterns}
                 />
+
+                {!this.state.showModal && <Button bsStyle="info" onClick={this.handleOpenCloseModal}>Get info about this step</Button>}
             </div>
         );
     }
