@@ -15,7 +15,8 @@ import text from '../../img/text.png'
 import triangle from '../../img/triangle.png'
 var _ = require('lodash');
 // literallycanvas variables
-var lc;
+var lcPatternOne;
+var lcPatternTwo;
 var tools;
 
 
@@ -49,16 +50,18 @@ export default class GenerationOneSolutions extends Component {
             backgroundColor: '#fff'
         }
 
-        lc = window.LC.init(document.getElementsByClassName('literally-core-container')[0], options);
+        lcPatternOne = window.LC.init(document.getElementsByClassName('literally-core-container')[0], options);
+        lcPatternTwo = window.LC.init(document.getElementsByClassName('literally-core-container-two')[0], options);
 
         // Clean localStorage if another productive failure activity was created, or load 
         let previousActivity = localStorage.getItem("productiveFailure");
         if (previousActivity !== null && previousActivity !== id) {
             localStorage.clear();
         } else if (previousActivity !== null && previousActivity === id) {
+            // TODO
             let canvas = localStorage.getItem(this.state.representationNumber);
             if (canvas) {
-                lc.loadSnapshot(JSON.parse(canvas));
+                lcPatternOne.loadSnapshot(JSON.parse(canvas));
             }
         } else {
             localStorage.setItem("productiveFailure", id);
@@ -68,39 +71,39 @@ export default class GenerationOneSolutions extends Component {
             {
                 name : 'pencil',
                 el : document.getElementById('pencil'),
-                tool: new window.LC.tools.Pencil(lc)
+                tool: new window.LC.tools.Pencil(lcPatternOne)
             }, {
                 name : 'eraser',
                 el : document.getElementById('eraser'),
-                tool : new window.LC.tools.Eraser(lc)
+                tool : new window.LC.tools.Eraser(lcPatternOne)
             }, {
                 name : 'line',
                 el : document.getElementById('line'),
-                tool : new window.LC.tools.Line(lc)
+                tool : new window.LC.tools.Line(lcPatternOne)
             }, {
                 name : 'rectangle',
                 el : document.getElementById('rectangle'),
-                tool : new window.LC.tools.Rectangle(lc)
+                tool : new window.LC.tools.Rectangle(lcPatternOne)
             }, {
                 name : 'text',
                 el : document.getElementById('text'),
-                tool : new window.LC.tools.Text(lc)
+                tool : new window.LC.tools.Text(lcPatternOne)
             }, {
                 name : 'arrow',
                 el : document.getElementById('arrow'),
                 tool : function() {
-                    let arrow = new window.LC.tools.Line(lc);
+                    let arrow = new window.LC.tools.Line(lcPatternOne);
                     arrow.hasEndArrow = true;
                     return arrow;
                 }()
             }, {
                 name : 'ellipse',
                 el : document.getElementById('ellipse'),
-                tool : new window.LC.tools.Ellipse(lc)
+                tool : new window.LC.tools.Ellipse(lcPatternOne)
             }, {
                 name : 'triangle',
                 el : document.getElementById('triangle'),
-                tool : new window.LC.tools.Triangle(lc)
+                tool : new window.LC.tools.Triangle(lcPatternOne)
             }
         ]
     }
@@ -108,16 +111,17 @@ export default class GenerationOneSolutions extends Component {
     // Function to handle the change of page of representation
     handleRepresentationNumberChange(newRepresentation) {
         // Save current representation in localStorage
-        let canvasRepresentation = JSON.stringify(lc.getSnapshot());
+        let canvasRepresentation = JSON.stringify(lcPatternOne.getSnapshot());
         localStorage.setItem(this.state.representationNumber, canvasRepresentation);
 
         let newRepresentationNumber = this.state.representationNumber + newRepresentation;
         // If there is an already saved representation in the local storage, retrieve it, otherwise blank out the canvas
         let newCanvasRepresentation = localStorage.getItem(newRepresentationNumber);
+        // TODO
         if (newCanvasRepresentation) {
-            lc.loadSnapshot(JSON.parse(newCanvasRepresentation));
+            lcPatternOne.loadSnapshot(JSON.parse(newCanvasRepresentation));
         } else {
-            lc.clear();
+            lcPatternOne.clear();
         }
 
         this.setState({
@@ -129,7 +133,8 @@ export default class GenerationOneSolutions extends Component {
         let toolObject = _.find(tools, (t) => {
             return t.name === tool
         });
-        lc.setTool(toolObject.tool);
+        lcPatternOne.setTool(toolObject.tool);
+        lcPatternTwo.setTool(toolObject.tool);
 
         this.setState({
             selectedTool : tool
@@ -138,14 +143,14 @@ export default class GenerationOneSolutions extends Component {
 
     saveGenerationOne(e) {
         // Save current representation
-        let canvasRepresentation = JSON.stringify(lc.getSnapshot());
+        let canvasRepresentation = JSON.stringify(lcPatternOne.getSnapshot());
         localStorage.setItem(this.state.representationNumber, canvasRepresentation);
 
         let activityPattern = {
             productive_failure_id: this.state.productiveFailureId,
             pattern_id: this.props.patterns[0].id
         }
-
+        // TODO
         axios.post('http://localhost:3001/api/v1/activity_patterns', activityPattern)
         .then(res => {
             for (let i = 0; i < config.representations.length; i++) {
@@ -279,13 +284,13 @@ export default class GenerationOneSolutions extends Component {
                                             className="undo"
                                             src={undo}
                                             alt="undo"
-                                            onClick={() => lc.undo()}
+                                            onClick={() => lcPatternOne.undo()}
                                         />
                                         <img
                                             className="redo"
                                             src={redo}
                                             alt="redo"
-                                            onClick={() => lc.redo()}
+                                            onClick={() => lcPatternOne.redo()}
                                         />
                                     </div>
                                 </div>
@@ -301,6 +306,9 @@ export default class GenerationOneSolutions extends Component {
                                 Constraint: {representation.constraint}
 
                                 <div className="literally-core-container">
+                                </div>
+
+                                <div className="literally-core-container-two">
                                 </div>
                             </Panel.Body>
                         </Panel>

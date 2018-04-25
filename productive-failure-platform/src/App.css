@@ -10,7 +10,7 @@
     margin-bottom: 3px;
 }
 
-.literally-core-container {
+.literally-core-container, .literally-core-container-two {
     border-style: inset;
     margin-top: 10px;
 }
