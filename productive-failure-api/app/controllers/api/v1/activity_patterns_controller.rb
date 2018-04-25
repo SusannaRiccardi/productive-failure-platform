@@ -9,6 +9,11 @@ module Api::V1
             @activity_pattern = ActivityPattern.create(activity_pattern_params)
             render json: @activity_pattern
         end
+
+        def show
+            @activity_pattern = ActivityPattern.find(params[:id])
+            render json: @activity_pattern
+        end
           
         private
           
