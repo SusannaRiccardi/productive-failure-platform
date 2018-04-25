@@ -1,7 +1,7 @@
 module Api::V1
     class ActivityPatternsController < ApplicationController
         def index
-            @activity_pattern = ActivityPattern.find_by_productive_failure_id(params[:productive_failure_id])
+            @activity_pattern = ActivityPattern.where(productive_failure_id: params[:productive_failure_id])
             render json: @activity_pattern
         end
 
