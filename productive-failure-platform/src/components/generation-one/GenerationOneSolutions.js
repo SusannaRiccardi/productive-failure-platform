@@ -110,18 +110,27 @@ export default class GenerationOneSolutions extends Component {
     
     // Function to handle the change of page of representation
     handleRepresentationNumberChange(newRepresentation) {
-        // Save current representation in localStorage
-        let canvasRepresentation = JSON.stringify(lcPatternOne.getSnapshot());
-        localStorage.setItem(this.state.representationNumber, canvasRepresentation);
+        // Save representations of the two patterns in the local storage
+        let canvasRepresentation1 = JSON.stringify(lcPatternOne.getSnapshot());
+        localStorage.setItem(`${this.props.patterns[0].id}-${this.state.representationNumber}`, canvasRepresentation1);
+        let canvasRepresentation2 = JSON.stringify(lcPatternTwo.getSnapshot());
+        localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}`, canvasRepresentation2);
 
         let newRepresentationNumber = this.state.representationNumber + newRepresentation;
         // If there is an already saved representation in the local storage, retrieve it, otherwise blank out the canvas
-        let newCanvasRepresentation = localStorage.getItem(newRepresentationNumber);
-        // TODO
-        if (newCanvasRepresentation) {
-            lcPatternOne.loadSnapshot(JSON.parse(newCanvasRepresentation));
+        let newCanvasRepresentation1 = localStorage.getItem(`${this.props.patterns[0].id}-${newRepresentationNumber}`);
+        let newCanvasRepresentation2 = localStorage.getItem(`${this.props.patterns[1].id}-${newRepresentationNumber}`);
+        
+        if (newCanvasRepresentation1) {
+            lcPatternOne.loadSnapshot(JSON.parse(newCanvasRepresentation1));
         } else {
             lcPatternOne.clear();
+        }
+
+        if (newCanvasRepresentation2) {
+            lcPatternTwo.loadSnapshot(JSON.parse(newCanvasRepresentation2));
+        } else {
+            lcPatternTwo.clear();
         }
 
         this.setState({
