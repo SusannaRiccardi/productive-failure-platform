@@ -6,12 +6,6 @@
     background-color: rgb(179, 222, 229);
 }
 
-.PatternDescription-pattern {
-    padding: 10px;
-    display: flex;
-    justify-content: space-evenly;
-}
-
 .triangle {
     margin-bottom: 3px;
 }
@@ -51,4 +45,24 @@
 
 .modal-button {
     text-align: center;
+}
+
+.PatternDescription {
+    display: flex;
+    width: 100%;
+}
+
+.PatternDescription--pattern {
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+}
+
+.second-pattern {
+    border-left-style: solid;
+    border-color: grey;
+}
+
+.pattern-titles {
+    margin-bottom: 10px;
 }

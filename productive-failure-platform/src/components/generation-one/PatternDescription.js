@@ -12,27 +12,29 @@ export default class PatternDescription extends Component {
         this.renderPattern = this.renderPattern.bind(this);
     }
 
-    renderPattern() {
-        let pattern = this.props.patterns[0].pattern.split('-');
-        // TODO: duplicate pattern
+    renderPattern(givenPattern) {
+        let patternArray = givenPattern.pattern.split('-');
+        // Duplicate pattern
+        let patternCopy = _.cloneDeep(patternArray);
+        let pattern = patternArray.concat(patternCopy, patternCopy)
 
         return pattern.map((shape, id) => {
             if (shape === "circle") {
                 return (
                     <div className="pattern--circle" key={id}>
-                        <Circle r={20} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        <Circle r={15} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
                     </div>
                 )
             } else if (shape === "triangle") {
                 return (
                     <div className="pattern--triangle" key={id}>
-                        <Triangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        <Triangle width={30} height={30} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
                     </div>
                 )
             } else if (shape === "square") {
                 return (
                     <div className="pattern--square" key={id}>
-                        <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        <Rectangle width={30} height={30} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
                     </div>
                 )
             }
@@ -44,8 +46,21 @@ export default class PatternDescription extends Component {
         return (
             <Panel>
                 <Panel.Body>
-                    <div className="PatternDescription-pattern">
-                        {this.props.patterns.length > 0 && this.renderPattern()}
+                    <div className="PatternDescription pattern-titles">
+                        <div className="PatternDescription--pattern">
+                            <h4>First pattern</h4>
+                        </div>
+                        <div className="PatternDescription--pattern">
+                            <h4>Second pattern</h4>
+                        </div>
+                    </div>
+                    <div className="PatternDescription">
+                        <div className="PatternDescription--pattern">
+                            {this.props.patterns.length > 0 && this.renderPattern(this.props.patterns[0])}
+                        </div>
+                        <div className="PatternDescription--pattern second-pattern">
+                            {this.props.patterns.length > 0 && this.renderPattern(this.props.patterns[1])}
+                        </div>
                     </div>
                 </Panel.Body>
             </Panel>
