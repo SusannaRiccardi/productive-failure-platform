@@ -58,10 +58,13 @@ export default class GenerationOneSolutions extends Component {
         if (previousActivity !== null && previousActivity !== id) {
             localStorage.clear();
         } else if (previousActivity !== null && previousActivity === id) {
-            // TODO
-            let canvas = localStorage.getItem(this.state.representationNumber);
-            if (canvas) {
-                lcPatternOne.loadSnapshot(JSON.parse(canvas));
+            let canvas1 = localStorage.getItem(`${this.props.patterns[0].id}-${this.state.representationNumber}`);
+            let canvas2 = localStorage.getItem(`${this.props.patterns[1].id}-${this.state.representationNumber}`);
+            if (canvas1) {
+                lcPatternOne.loadSnapshot(JSON.parse(canvas1));
+            }
+            if (canvas2) {
+                lcPatternTwo.loadSnapshot(JSON.parse(canvas2));
             }
         } else {
             localStorage.setItem("productiveFailure", id);
