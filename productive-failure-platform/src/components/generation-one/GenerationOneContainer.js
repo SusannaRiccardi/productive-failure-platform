@@ -39,7 +39,7 @@ export default class GenerationOneContainer extends Component {
 
         axios.get(`http://localhost:3001/api/v1/activity_patterns?productive_failure_id=${id}`)
         .then(response => {
-            if (response.data == null) {
+            if (response.data == null || response.data.length == 0) {
                 axios.get('http://localhost:3001/api/v1/patterns')
                 .then(response => {
                     this.setState({
