@@ -51,6 +51,7 @@ export default class GenerationOneContainer extends Component {
                             productive_failure_id: id,
                             pattern_id: response.data[i].id
                         }
+
                         axios.post('http://localhost:3001/api/v1/activity_patterns', activityPattern)
                         .then(response => {
                             let activityPatterns = _.cloneDeep(this.state.activityPatterns)
