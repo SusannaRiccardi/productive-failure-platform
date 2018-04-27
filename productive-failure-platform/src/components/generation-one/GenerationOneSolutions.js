@@ -154,38 +154,36 @@ export default class GenerationOneSolutions extends Component {
     }
 
     saveGenerationOne(e) {
-        // Save current representation
-        let canvasRepresentation = JSON.stringify(lcPatternOne.getSnapshot());
-        localStorage.setItem(this.state.representationNumber, canvasRepresentation);
+        // Save representations of the two patterns in the local storage
+        let canvasRepresentation1 = JSON.stringify(lcPatternOne.getSnapshot());
+        localStorage.setItem(`${this.props.patterns[0].id}-${this.state.representationNumber}`, canvasRepresentation1);
+        let canvasRepresentation2 = JSON.stringify(lcPatternTwo.getSnapshot());
+        localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}`, canvasRepresentation2);
 
-        let activityPattern = {
-            productive_failure_id: this.state.productiveFailureId,
-            pattern_id: this.props.patterns[0].id
-        }
-        // TODO
-        axios.post('http://localhost:3001/api/v1/activity_patterns', activityPattern)
-        .then(res => {
-            for (let i = 0; i < config.representations.length; i++) {
+        for (let i = 0; i < config.representations.length; i++) {
+            let activityPattern = _.find(this.props.activityPatterns, (activity) => {
+                return activity.pattern_id == this.props.patterns[i].id
+            })
+
+            for (let j = 0; i < 2; i++) {
                 let representation = {
                     representation: {
                         constraint: config.representations[i].constraint,
-                        svg: localStorage.getItem(i),
+                        svg: localStorage.getItem(`${this.props.patterns[j].id}-${i}`),
                         productive_failure_id: this.state.productiveFailureId,
-                        activity_pattern_id: res.data.id
+                        activity_pattern_id: activityPattern.id
                     }
                 }
+                
                 axios.post('http://localhost:3001/api/v1/representations', representation)
                 .then(response => {
-                    console.log(res)
+                    console.log(response)
                 })
                 .catch(error => {
                     console.log(error)
                 })
             }
-        })
-        .catch(err => {
-            console.log(err)
-        })
+        }
     }
 
     render() {

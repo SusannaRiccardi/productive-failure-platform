@@ -54,10 +54,11 @@ export default class GenerationOneContainer extends Component {
 
                         axios.post('http://localhost:3001/api/v1/activity_patterns', activityPattern)
                         .then(response => {
-                            let activityPatterns = _.cloneDeep(this.state.activityPatterns)
+                            let activityPatterns = _.cloneDeep(this.state.activityPatterns);
+                            activityPatterns.push(response.data);
 
                             this.setState({
-                                activityPatterns: activityPatterns.push(response.data)
+                                activityPatterns: activityPatterns
                             })
                         })
                         .catch(error => console.log(error))
@@ -125,6 +126,7 @@ export default class GenerationOneContainer extends Component {
     
                     <GenerationOneSolutions 
                         patterns={this.state.patterns}
+                        activityPatterns={this.state.activityPatterns}
                     />
     
                     {!this.state.showModal && <Button bsStyle="info" onClick={this.handleOpenCloseModal}>Get info about this step</Button>}
