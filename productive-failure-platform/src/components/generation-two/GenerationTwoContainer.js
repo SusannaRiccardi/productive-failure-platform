@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Panel, Row, Col, Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import PatternGeneration from './PatternGeneration';
-var lc;
 
 
 export default class GenerationTwoContainer extends Component {
@@ -22,9 +21,6 @@ export default class GenerationTwoContainer extends Component {
         .then(response => {
             this.setState({
                 representation: response.data
-            }, () => {
-                lc = window.LC.init(document.getElementsByClassName('literally-core-container')[0]);
-                lc.loadSnapshot(JSON.parse(this.state.representation.svg));
             })
         })
         .catch(error => console.log(error))
@@ -57,8 +53,7 @@ export default class GenerationTwoContainer extends Component {
                 <Row>
                     <Panel>
                         <Panel.Body>
-                            <div className="literally-core-container">
-                            </div>
+                            {this.state.representation !== null && <div dangerouslySetInnerHTML={{__html: this.state.representation.svg}}/>}
                         </Panel.Body>
                     </Panel>
                 </Row>
