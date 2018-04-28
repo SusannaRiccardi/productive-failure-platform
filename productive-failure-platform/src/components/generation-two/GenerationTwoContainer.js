@@ -64,6 +64,8 @@ export default class GenerationTwoContainer extends Component {
                 </Row>
 
                 <PatternGeneration />
+
+                {!this.state.showModal && <Button bsStyle="info" onClick={this.handleOpenCloseModal}>Get info about this step</Button>}
             </div>
         );
     }
