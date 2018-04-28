@@ -4,5 +4,11 @@ module Api::V1
             @patterns = Pattern.order("Random()").first(2)
             render json: @patterns
         end
+
+        def show
+            @pattern = Pattern.find(params[:id])
+            render json: @pattern
+        end
+
     end
 end
