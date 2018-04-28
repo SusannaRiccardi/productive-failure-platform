@@ -58,8 +58,8 @@ export default class GenerationOneSolutions extends Component {
         if (previousActivity !== null && previousActivity !== id) {
             localStorage.clear();
         } else if (previousActivity !== null && previousActivity === id) {
-            let canvas1 = localStorage.getItem(`${this.props.patterns[0].id}-${this.state.representationNumber}`);
-            let canvas2 = localStorage.getItem(`${this.props.patterns[1].id}-${this.state.representationNumber}`);
+            let canvas1 = localStorage.getItem(`${this.props.patterns[0].id}-${this.state.representationNumber}-json`);
+            let canvas2 = localStorage.getItem(`${this.props.patterns[1].id}-${this.state.representationNumber}-json`);
             if (canvas1) {
                 lcPatternOne.loadSnapshot(JSON.parse(canvas1));
             }
@@ -114,15 +114,19 @@ export default class GenerationOneSolutions extends Component {
     // Function to handle the change of page of representation
     handleRepresentationNumberChange(newRepresentation) {
         // Save representations of the two patterns in the local storage
-        let canvasRepresentation1 = JSON.stringify(lcPatternOne.getSnapshot());
-        localStorage.setItem(`${this.props.patterns[0].id}-${this.state.representationNumber}`, canvasRepresentation1);
-        let canvasRepresentation2 = JSON.stringify(lcPatternTwo.getSnapshot());
-        localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}`, canvasRepresentation2);
+        let canvasRepresentation1JSON = JSON.stringify(lcPatternOne.getSnapshot());
+        let canvasRepresentation1SVG = lcPatternOne.getSVGString();
+        localStorage.setItem(`${this.props.patterns[0].id}-${this.state.representationNumber}-json`, canvasRepresentation1JSON);
+        localStorage.setItem(`${this.props.patterns[0].id}-${this.state.representationNumber}-svg`, canvasRepresentation1SVG);
+        let canvasRepresentation2JSON = JSON.stringify(lcPatternTwo.getSnapshot());
+        let canvasRepresentation2SVG = lcPatternTwo.getSVGString();
+        localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}-json`, canvasRepresentation2JSON);
+        localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}-svg`, canvasRepresentation2SVG);
 
         let newRepresentationNumber = this.state.representationNumber + newRepresentation;
         // If there is an already saved representation in the local storage, retrieve it, otherwise blank out the canvas
-        let newCanvasRepresentation1 = localStorage.getItem(`${this.props.patterns[0].id}-${newRepresentationNumber}`);
-        let newCanvasRepresentation2 = localStorage.getItem(`${this.props.patterns[1].id}-${newRepresentationNumber}`);
+        let newCanvasRepresentation1 = localStorage.getItem(`${this.props.patterns[0].id}-${newRepresentationNumber}-json`);
+        let newCanvasRepresentation2 = localStorage.getItem(`${this.props.patterns[1].id}-${newRepresentationNumber}-json`);
         
         if (newCanvasRepresentation1) {
             lcPatternOne.loadSnapshot(JSON.parse(newCanvasRepresentation1));
@@ -155,10 +159,14 @@ export default class GenerationOneSolutions extends Component {
 
     saveGenerationOne(e) {
         // Save representations of the two patterns in the local storage
-        let canvasRepresentation1 = JSON.stringify(lcPatternOne.getSnapshot());
-        localStorage.setItem(`${this.props.patterns[0].id}-${this.state.representationNumber}`, canvasRepresentation1);
-        let canvasRepresentation2 = JSON.stringify(lcPatternTwo.getSnapshot());
-        localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}`, canvasRepresentation2);
+        let canvasRepresentation1JSON = JSON.stringify(lcPatternOne.getSnapshot());
+        let canvasRepresentation1SVG = lcPatternOne.getSVGString();
+        localStorage.setItem(`${this.props.patterns[0].id}-${this.state.representationNumber}-json`, canvasRepresentation1JSON);
+        localStorage.setItem(`${this.props.patterns[0].id}-${this.state.representationNumber}-svg`, canvasRepresentation1SVG);
+        let canvasRepresentation2JSON = JSON.stringify(lcPatternTwo.getSnapshot());
+        let canvasRepresentation2SVG = lcPatternTwo.getSVGString();
+        localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}-json`, canvasRepresentation2JSON);
+        localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}-svg`, canvasRepresentation2SVG);
 
         for (let i = 0; i < config.representations.length; i++) {
             let activityPattern = _.find(this.props.activityPatterns, (activity) => {
@@ -169,7 +177,7 @@ export default class GenerationOneSolutions extends Component {
                 let representation = {
                     representation: {
                         constraint: config.representations[i].constraint,
-                        svg: localStorage.getItem(`${this.props.patterns[j].id}-${i}`),
+                        svg: localStorage.getItem(`${this.props.patterns[j].id}-${i}-svg`),
                         productive_failure_id: this.state.productiveFailureId,
                         activity_pattern_id: activityPattern.id
                     }
