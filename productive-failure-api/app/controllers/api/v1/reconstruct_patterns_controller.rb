@@ -13,7 +13,7 @@ module Api::V1
         private
 
         def reconstruct_pattern_params
-            params.require(:reconstruct_pattern).permit(:productive_failure_id, :pattern_id)
+            params.require(:reconstruct_pattern).permit(:productive_failure_id, :representation_id)
         end
     end
 end
