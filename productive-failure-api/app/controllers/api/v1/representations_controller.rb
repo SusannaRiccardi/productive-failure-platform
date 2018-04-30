@@ -1,3 +1,5 @@
+require 'json'
+
 module Api::V1
     class RepresentationsController < ApplicationController
         def index
@@ -6,19 +8,16 @@ module Api::V1
         end
 
         def create
-            @representation = Representation.create(representation_params)
-            render json: @representation
+            representations = JSON.parse(params[:data])
+
+            representations.each do |representation|
+                Representation.create(representation["representation"])
+            end
         end
 
         def show
             @representation = Representation.find(params[:id])
             render json: @representation
-        end
-          
-        private
-          
-        def representation_params
-            params.require(:representation).permit(:constraint, :svg, :productive_failure_id, :activity_pattern_id)
         end
     end
 end

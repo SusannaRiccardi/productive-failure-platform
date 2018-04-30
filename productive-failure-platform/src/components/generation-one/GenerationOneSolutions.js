@@ -168,30 +168,37 @@ export default class GenerationOneSolutions extends Component {
         localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}-json`, canvasRepresentation2JSON);
         localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}-svg`, canvasRepresentation2SVG);
 
+        let representations = [];
         for (let i = 0; i < config.representations.length; i++) {
+            // Find activity pattern id
             let activityPattern = _.find(this.props.activityPatterns, (activity) => {
                 return activity.pattern_id == this.props.patterns[i].id
             })
 
-            for (let j = 0; i < 2; i++) {
+            for (let j = 0; j < 2; j++) {
                 let representation = {
-                    representation: {
+                    representation : {
                         constraint: config.representations[i].constraint,
                         svg: localStorage.getItem(`${this.props.patterns[j].id}-${i}-svg`),
                         productive_failure_id: this.state.productiveFailureId,
                         activity_pattern_id: activityPattern.id
                     }
                 }
-                
-                axios.post('http://localhost:3001/api/v1/representations', representation)
-                .then(response => {
-                    console.log(response)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+                representations.push(representation);
             }
         }
+
+        axios.post('http://localhost:3001/api/v1/representations', {
+            headers: {
+                'Content-Type': 'application/json'
+            }, data : JSON.stringify(representations)
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
 
     render() {
