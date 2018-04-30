@@ -46,23 +46,29 @@ export default class GenerationOneContainer extends Component {
                         patterns: response.data
                     })
 
+                    let activityPatterns = [];
+
                     for (let i = 0; i < response.data.length; i++) {
                         let activityPattern = {
-                            productive_failure_id: id,
-                            pattern_id: response.data[i].id
+                            activityPattern : {
+                                productive_failure_id: id,
+                                pattern_id: response.data[i].id
+                            }
                         }
+                        activityPatterns.push(activityPattern)
+                    }
 
-                        axios.post('http://localhost:3001/api/v1/activity_patterns', activityPattern)
+                        axios.post('http://localhost:3001/api/v1/activity_patterns', {
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }, data : JSON.stringify(activityPatterns)
+                        })
                         .then(response => {
-                            let activityPatterns = _.cloneDeep(this.state.activityPatterns);
-                            activityPatterns.push(response.data);
-
                             this.setState({
-                                activityPatterns: activityPatterns
+                                activityPatterns: response.data
                             })
                         })
                         .catch(error => console.log(error))
-                    }
                 })
                 .catch(error => console.log(error))
             } else {
