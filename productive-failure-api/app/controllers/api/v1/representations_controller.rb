@@ -9,6 +9,11 @@ module Api::V1
             @representation = Representation.create(representation_params)
             render json: @representation
         end
+
+        def show
+            @representation = Representation.find(params[:id])
+            render json: @representation
+        end
           
         private
           

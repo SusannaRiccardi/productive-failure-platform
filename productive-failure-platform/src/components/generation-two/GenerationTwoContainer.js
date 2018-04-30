@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Panel, Row, Col, Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import PatternGeneration from './PatternGeneration';
+var _ = require('lodash');
 
 
 export default class GenerationTwoContainer extends Component {
@@ -13,15 +14,57 @@ export default class GenerationTwoContainer extends Component {
             showModal : true
         }
 
+        this.getReconstructPattern = this.getReconstructPattern.bind(this);
         this.handleOpenCloseModal = this.handleOpenCloseModal.bind(this);
     }
     
     componentWillMount() {
-        axios.get('http://localhost:3001/api/v1/representation')
+        this.getReconstructPattern();
+    }
+
+    getReconstructPattern() {
+        // TODO: look at better way to have id of productive failure activity
+        let url = window.location.href;
+        let splitString = _.split(url, '/');
+        let id = splitString[splitString.length - 2];
+
+        axios.get(`http://localhost:3001/api/v1/reconstruct_patterns?productive_failure_id=${id}`)
         .then(response => {
-            this.setState({
-                representation: response.data
-            })
+            if (response.data == null || response.data.length == 0) {
+                // Get pattern if no reconstruct_pattern with this productive_failure_id exists
+                axios.get('http://localhost:3001/api/v1/representation')
+                .then(response => {
+                    this.setState({
+                        representation: response.data
+                    })
+
+                    // create reconstruct_pattern
+                    let reconstructPattern = {
+                        productive_failure_id: id,
+                        representation_id: response.data.id
+                    }
+
+                    axios.post('http://localhost:3001/api/v1/reconstruct_patterns', reconstructPattern)
+                    .then(response => {
+                        this.setState({
+                            reconstructPattern : response.data
+                        })
+                    })
+                })
+                .catch(error => console.log(error))
+            } else {
+                this.setState({
+                    reconstructPattern : response.data[0]
+                })
+                
+                axios.get(`http://localhost:3001/api/v1/representations/${response.data[0].representation_id}`)
+                .then(response => {
+                    this.setState({
+                        representation: response.data
+                    })
+                })
+                .catch(error => console.log(error))
+            }
         })
         .catch(error => console.log(error))
     }
