@@ -79,3 +79,12 @@
 .canvas-container {
     display: flex;
 }
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.stage-1-container {
+    margin: 20px;
+}
