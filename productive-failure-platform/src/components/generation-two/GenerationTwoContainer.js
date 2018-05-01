@@ -108,14 +108,20 @@ export default class GenerationTwoContainer extends Component {
                         </div>
                     </Modal.Body>
                 </Modal>
-
-                <Row>
-                    <Panel>
-                        <Panel.Body>
-                            {/* {this.state.representation !== null && <div dangerouslySetInnerHTML={{__html: this.state.representation.svg}}/>} */}
-                        </Panel.Body>
-                    </Panel>
-                </Row>
+                {this.state.representations.length === 2 && (
+                    <div>
+                        <Panel className="">
+                            <Panel.Body>
+                                <div className="representation-one" dangerouslySetInnerHTML={{__html: this.state.representations[0].svg}}/>
+                            </Panel.Body>
+                        </Panel>
+                        <Panel>
+                            <Panel.Body>
+                                <div className="representation-two" dangerouslySetInnerHTML={{__html: this.state.representations[1].svg}}/>
+                            </Panel.Body>
+                        </Panel>
+                    </div>
+                )}
 
                 <PatternGeneration />
 
