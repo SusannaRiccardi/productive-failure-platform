@@ -10,7 +10,7 @@ export default class GenerationTwoContainer extends Component {
         super(props);
 
         this.state = {
-            representation : null,
+            representations : [],
             showModal : true
         }
 
@@ -35,35 +35,51 @@ export default class GenerationTwoContainer extends Component {
                 axios.get('http://localhost:3001/api/v1/representation')
                 .then(response => {
                     this.setState({
-                        representation: response.data
+                        representations: response.data
                     })
 
-                    // create reconstruct_pattern
-                    let reconstructPattern = {
-                        productive_failure_id: id,
-                        representation_id: response.data.id
+                    let reconstructPatterns = [];
+
+                    for (let i = 0; i < response.data.length; i++) {
+                        let reconstructPattern = {
+                            reconstructPattern : {
+                                productive_failure_id: id,
+                                representation_id: response.data[i].id
+                            }
+                        }
+                        reconstructPatterns.push(reconstructPattern)
                     }
 
-                    axios.post('http://localhost:3001/api/v1/reconstruct_patterns', reconstructPattern)
+                    axios.post('http://localhost:3001/api/v1/reconstruct_patterns', {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }, data : JSON.stringify(reconstructPatterns)
+                    })
                     .then(response => {
                         this.setState({
                             reconstructPattern : response.data
                         })
                     })
+                    .catch(error => console.log(error))
                 })
                 .catch(error => console.log(error))
             } else {
                 this.setState({
-                    reconstructPattern : response.data[0]
+                    reconstructPatterns : response.data
                 })
-                
-                axios.get(`http://localhost:3001/api/v1/representations/${response.data[0].representation_id}`)
-                .then(response => {
-                    this.setState({
-                        representation: response.data
+
+                for (let i = 0; i < response.data.length; i++) {
+                    axios.get(`http://localhost:3001/api/v1/representations/${response.data[i].representation_id}`)
+                    .then(response => {
+                        let representations = _.cloneDeep(this.state.representations)
+                        representations.push(response.data)
+
+                        this.setState({
+                            representations: representations
+                        })
                     })
-                })
-                .catch(error => console.log(error))
+                    .catch(error => console.log(error))
+                }
             }
         })
         .catch(error => console.log(error))
@@ -96,7 +112,7 @@ export default class GenerationTwoContainer extends Component {
                 <Row>
                     <Panel>
                         <Panel.Body>
-                            {this.state.representation !== null && <div dangerouslySetInnerHTML={{__html: this.state.representation.svg}}/>}
+                            {/* {this.state.representation !== null && <div dangerouslySetInnerHTML={{__html: this.state.representation.svg}}/>} */}
                         </Panel.Body>
                     </Panel>
                 </Row>

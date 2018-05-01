@@ -6,8 +6,14 @@ module Api::V1
         end
 
         def create
-            @reconstruct_pattern = ReconstructPattern.create(reconstruct_pattern_params)
-            render json: @reconstruct_pattern
+            reconstruct_patterns = JSON.parse(params[:data])
+            result = []
+            reconstruct_patterns.each do |reconstruct_pattern|
+                @reconstruct_pattern = ReconstructPattern.create(reconstruct_pattern["reconstructPattern"])
+                result.push(@reconstruct_pattern)
+            end
+
+            render json: result
         end
           
         private

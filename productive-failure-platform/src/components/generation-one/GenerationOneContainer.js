@@ -58,17 +58,17 @@ export default class GenerationOneContainer extends Component {
                         activityPatterns.push(activityPattern)
                     }
 
-                        axios.post('http://localhost:3001/api/v1/activity_patterns', {
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }, data : JSON.stringify(activityPatterns)
+                    axios.post('http://localhost:3001/api/v1/activity_patterns', {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }, data : JSON.stringify(activityPatterns)
+                    })
+                    .then(response => {
+                        this.setState({
+                            activityPatterns: response.data
                         })
-                        .then(response => {
-                            this.setState({
-                                activityPatterns: response.data
-                            })
-                        })
-                        .catch(error => console.log(error))
+                    })
+                    .catch(error => console.log(error))
                 })
                 .catch(error => console.log(error))
             } else {
