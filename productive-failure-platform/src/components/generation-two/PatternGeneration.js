@@ -17,9 +17,9 @@ export default class PatternGeneration extends Component {
 
         this.createElements = this.createElements.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
-        this.reorder = this.reorder.bind(this);
-        this.getList = this.getList.bind(this);
         this.moveElement = this.moveElement.bind(this);
+        this.reorderElements = this.reorderElements.bind(this);
+        this.getList = this.getList.bind(this);
         this.getItemStyle = this.getItemStyle.bind(this);
         this.getListStyle = this.getListStyle.bind(this);
     }
@@ -124,46 +124,28 @@ export default class PatternGeneration extends Component {
             }
         } else if (source.droppableId === "droppable2") {
             // Case: move object from pattern one box
-            console.log("TODO2")
+            // Case: move the object inside the pattern box
+            if (destination.droppableId === source.droppableId) {
+                const insideBox = this.reorderElements(
+                    this.getList(source.droppableId),
+                    source.index,
+                    destination.index
+                )
+
+                this.setState({
+                    patternOne : insideBox
+                })
+            } else if (destination.droppableId === "droppable") {
+                console.log('todo delete')
+            }
         } else {
             // Case: move object from pattern two box
             console.log("TODO3")
         }
-
-        // // the object has been dropped in the same droppable box
-        // if (source.droppableId === destination.droppableId) {
-        //     const items = this.reorder(
-        //         this.getList(source.droppableId),
-        //         source.index,
-        //         destination.index
-        //     )
-
-        //     let state = { items };
-
-        //     if (source.droppableId === 'droppable2') {
-        //         state = { selected: items };
-        //     }
-
-        //     this.setState({
-        //         items
-        //     });
-        // } else {
-        //     const result = this.move(
-        //         this.getList(source.droppableId),
-        //         this.getList(destination.droppableId),
-        //         source,
-        //         destination
-        //     );
-
-        //     this.setState({
-        //         items: result.droppable,
-        //         selected: result.droppable2
-        //     });
-        // }
     }
 
     // Function used to reorder the result
-    reorder(list, startIndex, endIndex) {
+    reorderElements(list, startIndex, endIndex) {
         const result = Array.from(list);
         const [removed] = result.splice(startIndex, 1);
         result.splice(endIndex, 0, removed);
