@@ -19,6 +19,7 @@ export default class PatternGeneration extends Component {
         this.onDragEnd = this.onDragEnd.bind(this);
         this.moveElement = this.moveElement.bind(this);
         this.reorderElements = this.reorderElements.bind(this);
+        this.deleteElement = this.deleteElement.bind(this);
         this.getList = this.getList.bind(this);
         this.getItemStyle = this.getItemStyle.bind(this);
         this.getListStyle = this.getListStyle.bind(this);
@@ -136,7 +137,14 @@ export default class PatternGeneration extends Component {
                     patternOne : insideBox
                 })
             } else if (destination.droppableId === "droppable") {
-                console.log('todo delete')
+                const deleteElement = this.deleteElement(
+                    this.getList(source.droppableId),
+                    source.index
+                )
+
+                this.setState({
+                    patternOne : deleteElement
+                })
             }
         } else {
             // Case: move object from pattern two box
@@ -152,7 +160,14 @@ export default class PatternGeneration extends Component {
                     patternTwo : insideBox
                 })
             } else if (destination.droppableId === "droppable") {
-                console.log('todo delete')
+                const deleteElement = this.deleteElement(
+                    this.getList(source.droppableId),
+                    source.index
+                )
+
+                this.setState({
+                    patternTwo : deleteElement
+                })
             }
         }
     }
@@ -163,10 +178,6 @@ export default class PatternGeneration extends Component {
         const [removed] = result.splice(startIndex, 1);
         result.splice(endIndex, 0, removed);
         return result;
-    }
-
-    getList(id) {
-        return this.state[this.id2List[id]];
     }
 
     // Moves an item from one list to another list.
@@ -182,6 +193,16 @@ export default class PatternGeneration extends Component {
         result[droppableDestination.droppableId] = destClone;
 
         return result;
+    }
+
+    deleteElement(source, index) {
+        const [removed] = source.splice(index, 1);
+        return source;
+    }
+
+
+    getList(id) {
+        return this.state[this.id2List[id]];
     }
 
     render() {
