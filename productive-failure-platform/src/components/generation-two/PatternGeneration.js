@@ -140,7 +140,20 @@ export default class PatternGeneration extends Component {
             }
         } else {
             // Case: move object from pattern two box
-            console.log("TODO3")
+            // Case: move the object inside the pattern box
+            if (destination.droppableId === source.droppableId) {
+                const insideBox = this.reorderElements(
+                    this.getList(source.droppableId),
+                    source.index,
+                    destination.index
+                )
+
+                this.setState({
+                    patternTwo : insideBox
+                })
+            } else if (destination.droppableId === "droppable") {
+                console.log('todo delete')
+            }
         }
     }
 
