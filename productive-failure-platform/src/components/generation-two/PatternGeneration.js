@@ -19,9 +19,20 @@ export default class PatternGeneration extends Component {
         this.onDragEnd = this.onDragEnd.bind(this);
         this.reorder = this.reorder.bind(this);
         this.getList = this.getList.bind(this);
-        this.move = this.move.bind(this);
+        this.moveElement = this.moveElement.bind(this);
         this.getItemStyle = this.getItemStyle.bind(this);
         this.getListStyle = this.getListStyle.bind(this);
+    }
+
+    /**
+     * A semi-generic way to handle multiple lists. Matches
+     * the IDs of the droppable container to the names of the
+     * source arrays stored in the state.
+     */
+    id2List = {
+        droppable: 'elements',
+        droppable2: 'patternOne',
+        droppable3: 'patternTwo',
     }
 
     // Function that creates the list of all the elements that can be dragged and dropped inside the other lists
@@ -47,17 +58,6 @@ export default class PatternGeneration extends Component {
         elements.push(triangle);
 
         return elements;
-    }
-
-    /**
-     * A semi-generic way to handle multiple lists. Matches
-     * the IDs of the droppable container to the names of the
-     * source arrays stored in the state.
-     */
-    id2List = {
-        droppable: 'elements',
-        droppable2: 'patternOne',
-        droppable3: 'patternTwo',
     }
 
     // TODO: remove
@@ -99,37 +99,67 @@ export default class PatternGeneration extends Component {
         if (!destination) {
             return;
         }
+        
+        if (source.droppableId === "droppable") {
+            // Case: move object from elements box to one of the pattern boxes
+            if (destination.droppableId === "droppable2" || destination.droppableId === "droppable3") {
+                const movedElement = this.moveElement(
+                    this.getList(source.droppableId),
+                    this.getList(destination.droppableId),
+                    source,
+                    destination
+                )
 
-        // the object has been dropped in the same droppable box
-        if (source.droppableId === destination.droppableId) {
-            const items = this.reorder(
-                this.getList(source.droppableId),
-                source.index,
-                destination.index
-            )
-
-            let state = { items };
-
-            if (source.droppableId === 'droppable2') {
-                state = { selected: items };
+                if (destination.droppableId === "droppable2") {
+                    this.setState({
+                        elements : movedElement.droppable,
+                        patternOne : movedElement.droppable2
+                    })
+                } else {
+                    this.setState({
+                        elements : movedElement.droppable,
+                        patternTwo : movedElement.droppable3
+                    })
+                }
             }
-
-            this.setState({
-                items
-            });
+        } else if (source.droppableId === "droppable2") {
+            // Case: move object from pattern one box
+            console.log("TODO2")
         } else {
-            const result = this.move(
-                this.getList(source.droppableId),
-                this.getList(destination.droppableId),
-                source,
-                destination
-            );
-
-            this.setState({
-                items: result.droppable,
-                selected: result.droppable2
-            });
+            // Case: move object from pattern two box
+            console.log("TODO3")
         }
+
+        // // the object has been dropped in the same droppable box
+        // if (source.droppableId === destination.droppableId) {
+        //     const items = this.reorder(
+        //         this.getList(source.droppableId),
+        //         source.index,
+        //         destination.index
+        //     )
+
+        //     let state = { items };
+
+        //     if (source.droppableId === 'droppable2') {
+        //         state = { selected: items };
+        //     }
+
+        //     this.setState({
+        //         items
+        //     });
+        // } else {
+        //     const result = this.move(
+        //         this.getList(source.droppableId),
+        //         this.getList(destination.droppableId),
+        //         source,
+        //         destination
+        //     );
+
+        //     this.setState({
+        //         items: result.droppable,
+        //         selected: result.droppable2
+        //     });
+        // }
     }
 
     // Function used to reorder the result
@@ -145,7 +175,7 @@ export default class PatternGeneration extends Component {
     }
 
     // Moves an item from one list to another list.
-    move(source, destination, droppableSource, droppableDestination) {
+    moveElement(source, destination, droppableSource, droppableDestination) {
         const sourceClone = Array.from(source);
         const destClone = Array.from(destination);
         const [removed] = sourceClone.splice(droppableSource.index, 1);
@@ -192,7 +222,7 @@ export default class PatternGeneration extends Component {
                     )}
                 </Droppable>
                 {/* Pattern one droppable */}
-                <Droppable droppableId="droppable" direction="horizontal">
+                <Droppable droppableId="droppable2" direction="horizontal">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
