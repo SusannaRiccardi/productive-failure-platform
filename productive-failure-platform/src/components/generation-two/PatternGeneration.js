@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
+var _ = require('lodash');
 var counter = 0;
 
 
@@ -9,7 +10,7 @@ export default class PatternGeneration extends Component {
         super(props);
 
         this.state = {
-            elements: this.createElements(),
+            elements: this.createElements([]),
             patternOne: [],
             patternTwo: [],
             gridElements: 8
@@ -37,28 +38,49 @@ export default class PatternGeneration extends Component {
     }
 
     // Function that creates the list of all the elements that can be dragged and dropped inside the other lists
-    createElements() {
-        let elements = [];
+    createElements(elements) {
+        let newElements = []
         
-        let circle = {
-            id : `item-${counter++}`,
-            content : 'circle'
-        }
-        elements.push(circle);
+        let circle = _.find(elements, (el) => {
+            return el.content === "circle"
+        })
 
-        let square = {
-            id : `item-${counter++}`,
-            content : 'square'
+        if (!circle) {
+            circle = {
+                id : `item-${counter++}`,
+                content : 'circle'
+            }
         }
-        elements.push(square);
 
-        let triangle = {
-            id : `item-${counter++}`,
-            content : 'triangle'
+        newElements.push(circle)
+
+        let square = _.find(elements, (el) => {
+            return el.content === "square"
+        })
+
+        if (!square) {
+            square = {
+                id : `item-${counter++}`,
+                content : 'square'
+            }
         }
-        elements.push(triangle);
 
-        return elements;
+        newElements.push(square)
+
+        let triangle = _.find(elements, (el) => {
+            return el.content === "triangle"
+        })
+
+        if (!triangle) {
+            triangle = {
+                id : `item-${counter++}`,
+                content : 'triangle'
+            }
+        }
+
+        newElements.push(triangle)
+
+        return newElements;
     }
 
     // TODO: remove
@@ -111,14 +133,16 @@ export default class PatternGeneration extends Component {
                     destination
                 )
 
+                const elements = this.createElements(movedElement.droppable)
+
                 if (destination.droppableId === "droppable2") {
                     this.setState({
-                        elements : movedElement.droppable,
+                        elements : elements,
                         patternOne : movedElement.droppable2
                     })
                 } else {
                     this.setState({
-                        elements : movedElement.droppable,
+                        elements : elements,
                         patternTwo : movedElement.droppable3
                     })
                 }
