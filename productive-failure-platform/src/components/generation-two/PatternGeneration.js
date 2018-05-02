@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
+var counter = 0;
 
 
 export default class PatternGeneration extends Component {
@@ -9,18 +9,44 @@ export default class PatternGeneration extends Component {
         super(props);
 
         this.state = {
-            items: this.getItems(10),
-            selected: this.getItems(5, 10),
-            grid: 8
+            elements: this.createElements(),
+            patternOne: [],
+            patternTwo: [],
+            gridElements: 8
         }
 
+        this.createElements = this.createElements.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
         this.reorder = this.reorder.bind(this);
         this.getList = this.getList.bind(this);
         this.move = this.move.bind(this);
-        this.getItems = this.getItems.bind(this);
         this.getItemStyle = this.getItemStyle.bind(this);
         this.getListStyle = this.getListStyle.bind(this);
+    }
+
+    // Function that creates the list of all the elements that can be dragged and dropped inside the other lists
+    createElements() {
+        let elements = [];
+        
+        let circle = {
+            id : `item-${counter++}`,
+            content : 'circle'
+        }
+        elements.push(circle);
+
+        let square = {
+            id : `item-${counter++}`,
+            content : 'square'
+        }
+        elements.push(square);
+
+        let triangle = {
+            id : `item-${counter++}`,
+            content : 'triangle'
+        }
+        elements.push(triangle);
+
+        return elements;
     }
 
     /**
@@ -29,16 +55,9 @@ export default class PatternGeneration extends Component {
      * source arrays stored in the state.
      */
     id2List = {
-        droppable: 'items',
-        droppable2: 'selected'
-    }
-    
-    // fake data generator (TODO: Remove)
-    getItems(count, offset = 0) {
-        return Array.from({ length: count }, (v, k) => k).map(k => ({
-            id: `item-${k + offset}`,
-            content: `item ${k + offset}`
-        }))
+        droppable: 'elements',
+        droppable2: 'patternOne',
+        droppable3: 'patternTwo',
     }
 
     // TODO: remove
@@ -47,8 +66,8 @@ export default class PatternGeneration extends Component {
             {
                 // some basic styles to make the items look a bit nicer
                 userSelect: 'none',
-                padding: this.state.grid * 2,
-                margin: `0 0 ${this.state.grid}px 0`,
+                padding: this.state.gridElements * 2,
+                margin: `0 0 ${this.state.gridElements}px 0`,
     
                 // change background colour if dragging
                 background: isDragging ? 'lightgreen' : 'grey',
@@ -64,8 +83,9 @@ export default class PatternGeneration extends Component {
         return (
             {
                 background: isDraggingOver ? 'lightblue' : 'lightgrey',
-                padding: this.state.grid,
-                width: 250
+                display: 'flex',
+                padding: this.state.gridElements,
+                overflow: 'auto',
             }
         )
     }
@@ -142,12 +162,13 @@ export default class PatternGeneration extends Component {
     render() {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-                <Droppable droppableId="droppable">
+                {/* Elements droppable */}
+                <Droppable droppableId="droppable" direction="horizontal">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
                             style={this.getListStyle(snapshot.isDraggingOver)}>
-                            {this.state.items.map((item, index) => (
+                            {this.state.elements.map((item, index) => (
                                 <Draggable
                                     key={item.id}
                                     draggableId={item.id}
@@ -170,12 +191,42 @@ export default class PatternGeneration extends Component {
                         </div>
                     )}
                 </Droppable>
-                <Droppable droppableId="droppable2">
+                {/* Pattern one droppable */}
+                <Droppable droppableId="droppable" direction="horizontal">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
                             style={this.getListStyle(snapshot.isDraggingOver)}>
-                            {this.state.selected.map((item, index) => (
+                            {this.state.patternOne.map((item, index) => (
+                                <Draggable
+                                    key={item.id}
+                                    draggableId={item.id}
+                                    index={index}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            style={this.getItemStyle(
+                                                snapshot.isDragging,
+                                                provided.draggableProps.style
+                                            )}>
+                                            {item.content}
+                                        </div>
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+                {/* Pattern two droppable */}
+                <Droppable droppableId="droppable3" direction="horizontal">
+                    {(provided, snapshot) => (
+                        <div
+                            ref={provided.innerRef}
+                            style={this.getListStyle(snapshot.isDraggingOver)}>
+                            {this.state.patternTwo.map((item, index) => (
                                 <Draggable
                                     key={item.id}
                                     draggableId={item.id}
