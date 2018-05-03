@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Panel } from 'react-bootstrap';
+import { Row, Button, Panel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';

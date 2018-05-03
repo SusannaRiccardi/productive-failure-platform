@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, Row, Col, Modal, Button } from 'react-bootstrap';
+import { Panel, Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import PatternGeneration from './PatternGeneration';
 var _ = require('lodash');
@@ -30,7 +30,7 @@ export default class GenerationTwoContainer extends Component {
 
         axios.get(`http://localhost:3001/api/v1/reconstruct_patterns?productive_failure_id=${id}`)
         .then(response => {
-            if (response.data == null || response.data.length == 0) {
+            if (response.data === null || response.data.length === 0) {
                 // Get pattern if no reconstruct_pattern with this productive_failure_id exists
                 axios.get('http://localhost:3001/api/v1/representation')
                 .then(response => {

@@ -39,7 +39,7 @@ export default class GenerationOneContainer extends Component {
 
         axios.get(`http://localhost:3001/api/v1/activity_patterns?productive_failure_id=${id}`)
         .then(response => {
-            if (response.data == null || response.data.length == 0) {
+            if (response.data === null || response.data.length === 0) {
                 axios.get('http://localhost:3001/api/v1/patterns')
                 .then(response => {
                     this.setState({
@@ -94,7 +94,7 @@ export default class GenerationOneContainer extends Component {
     }
     
     render() {
-        if (this.state.patterns.length != 2) {
+        if (this.state.patterns.length !== 2) {
             return (
                 // Loading page
                 <div></div>
