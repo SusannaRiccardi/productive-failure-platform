@@ -1,17 +1,10 @@
-.generation-one-container, .generation-two-container {
+/* Generation one */
+.stage-1-container {
     margin: 20px;
 }
 
-.active {
-    background-color: rgb(179, 222, 229);
-}
-
-.triangle {
-    margin-bottom: 3px;
-}
-
 .literally-core-container, .literally-core-container-two {
-    border-style: inset;
+    border-style: groove;
     margin: 10px;
 }
 
@@ -19,16 +12,23 @@
     flex: 1;
 }
 
-/* Elements generation one */
+.active {
+    background-color: rgb(179, 222, 229);
+}
+
+.GeneratationOneSolutions--elements {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .pencil, .eraser, .line, .rectangle, .ellipse, .arrow, .text, .undo, .redo, .triangle {
     width: 40px;
     height: 40px;
     margin-right: 10px;
 }
 
-.GeneratationOneSolutions--elements {
-    display: flex;
-    justify-content: space-evenly;
+.triangle {
+    margin-bottom: 3px;
 }
 
 .next-stage-button {
@@ -49,10 +49,6 @@
 }
 
 .undo-redo {
-    text-align: center;
-}
-
-.modal-button {
     text-align: center;
 }
 
@@ -85,7 +81,8 @@
     margin-left: 0;
 }
 
-.stage-1-container {
+/* Generation two */
+.generation-two-container {
     margin: 20px;
 }
 
@@ -127,4 +124,9 @@ svg {
 .pattern-generation-two {
     flex: 1;
     margin-left: 10px;
+}
+
+/* Generic */
+.modal-button {
+    text-align: center;
 }
