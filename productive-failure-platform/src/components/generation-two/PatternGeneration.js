@@ -83,36 +83,6 @@ export default class PatternGeneration extends Component {
 
         return newElements;
     }
-
-    // TODO: remove
-    getItemStyle(isDragging, draggableStyle) { 
-        return (
-            {
-                // some basic styles to make the items look a bit nicer
-                userSelect: 'none',
-                padding: this.state.gridElements * 2,
-                margin: `0 0 ${this.state.gridElements}px 0`,
-    
-                // change background colour if dragging
-                background: isDragging ? 'lightgreen' : 'grey',
-    
-                // styles we need to apply on draggables
-                ...draggableStyle
-            }
-        )
-    }
-
-    // TODO: remove
-    getListStyle(isDraggingOver) {
-        return (
-            {
-                background: isDraggingOver ? 'lightblue' : 'lightgrey',
-                display: 'flex',
-                padding: this.state.gridElements,
-                overflow: 'auto',
-            }
-        )
-    }
     
     onDragEnd(result) {
         // result is an object containing the information about the object that has just been moved.
@@ -230,6 +200,39 @@ export default class PatternGeneration extends Component {
         return this.state[this.id2List[id]];
     }
 
+    getItemStyle(isDragging, draggableStyle) { 
+        return (
+            {
+                userSelect: 'none',
+                padding: this.state.gridElements,
+                margin: this.state.gridElements,
+    
+                // change background colour if dragging
+                background: isDragging ? '#5cb85c' : '',
+    
+                // styles we need to apply on draggables
+                ...draggableStyle
+            }
+        )
+    }
+
+    getListStyle(isDraggingOver) {
+        return (
+            {
+                background: isDraggingOver ? 'lightblue' : '',
+                display: 'flex',
+                padding: this.state.gridElements,
+                overflow: 'auto',
+                minHeight: '100px',
+                alignItems: 'center',
+                borderStyle: 'solid',
+                borderWidth: '1px',
+                borderColor: 'lightgrey',
+                borderRadius: '4px'
+            }
+        )
+    }
+
     renderShape(content) {
         if (content === "circle") {
             return (
@@ -249,64 +252,68 @@ export default class PatternGeneration extends Component {
     render() {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-                {/* Pattern one droppable */}
-                <Droppable droppableId="droppable2" direction="horizontal">
-                    {(provided, snapshot) => (
-                        <div
-                            ref={provided.innerRef}
-                            style={this.getListStyle(snapshot.isDraggingOver)}>
-                            {this.state.patternOne.map((item, index) => (
-                                <Draggable
-                                    key={item.id}
-                                    draggableId={item.id}
-                                    index={index}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={this.getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}>
-                                            {this.renderShape(item.content)}
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-                {/* Pattern two droppable */}
-                <Droppable droppableId="droppable3" direction="horizontal">
-                    {(provided, snapshot) => (
-                        <div
-                            ref={provided.innerRef}
-                            style={this.getListStyle(snapshot.isDraggingOver)}>
-                            {this.state.patternTwo.map((item, index) => (
-                                <Draggable
-                                    key={item.id}
-                                    draggableId={item.id}
-                                    index={index}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={this.getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}>
-                                            {this.renderShape(item.content)}
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
+                <div className="pattern-generation-container">
+                    {/* Pattern one droppable */}
+                    <Droppable droppableId="droppable2" direction="horizontal">
+                        {(provided, snapshot) => (
+                            <div
+                                className="pattern-generation-one"
+                                ref={provided.innerRef}
+                                style={this.getListStyle(snapshot.isDraggingOver)}>
+                                {this.state.patternOne.map((item, index) => (
+                                    <Draggable
+                                        key={item.id}
+                                        draggableId={item.id}
+                                        index={index}>
+                                        {(provided, snapshot) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                style={this.getItemStyle(
+                                                    snapshot.isDragging,
+                                                    provided.draggableProps.style
+                                                )}>
+                                                {this.renderShape(item.content)}
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                ))}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                    {/* Pattern two droppable */}
+                    <Droppable droppableId="droppable3" direction="horizontal">
+                        {(provided, snapshot) => (
+                            <div
+                                className="pattern-generation-two"
+                                ref={provided.innerRef}
+                                style={this.getListStyle(snapshot.isDraggingOver)}>
+                                {this.state.patternTwo.map((item, index) => (
+                                    <Draggable
+                                        key={item.id}
+                                        draggableId={item.id}
+                                        index={index}>
+                                        {(provided, snapshot) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                style={this.getItemStyle(
+                                                    snapshot.isDragging,
+                                                    provided.draggableProps.style
+                                                )}>
+                                                {this.renderShape(item.content)}
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                ))}
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </div>
                 {/* Elements droppable */}
                 <Droppable droppableId="droppable" direction="horizontal">
                     {(provided, snapshot) => (

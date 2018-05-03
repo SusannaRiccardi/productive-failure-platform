@@ -113,3 +113,18 @@ svg {
     width: 100%;
     height: 100%;
 }
+
+.pattern-generation-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.pattern-generation-one {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.pattern-generation-two {
+    flex: 1;
+    margin-left: 10px;
+}
