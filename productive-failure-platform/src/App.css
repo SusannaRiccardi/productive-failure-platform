@@ -88,3 +88,28 @@
 .stage-1-container {
     margin: 20px;
 }
+
+.representations-container {
+    display: flex;
+    max-height: 400px;
+}
+
+.representation-one {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.representation-two {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.representation-stage-two {
+    width: 100%;
+    height: 100%;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}

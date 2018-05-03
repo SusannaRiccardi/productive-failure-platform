@@ -109,15 +109,15 @@ export default class GenerationTwoContainer extends Component {
                     </Modal.Body>
                 </Modal>
                 {this.state.representations.length === 2 && (
-                    <div>
-                        <Panel className="">
-                            <Panel.Body>
-                                <div className="representation-one" dangerouslySetInnerHTML={{__html: this.state.representations[0].svg}}/>
+                    <div className="representations-container">
+                        <Panel className="representation-one">
+                            <Panel.Body className="representation-stage-two">
+                                <div className="representation-stage-two" dangerouslySetInnerHTML={{__html: this.state.representations[0].svg}}/>
                             </Panel.Body>
                         </Panel>
-                        <Panel>
-                            <Panel.Body>
-                                <div className="representation-two" dangerouslySetInnerHTML={{__html: this.state.representations[1].svg}}/>
+                        <Panel className="representation-two">
+                            <Panel.Body className="representation-stage-two">
+                                <div className="representation-stage-two" dangerouslySetInnerHTML={{__html: this.state.representations[1].svg}}/>
                             </Panel.Body>
                         </Panel>
                     </div>
