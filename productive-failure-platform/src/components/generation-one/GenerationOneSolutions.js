@@ -157,7 +157,7 @@ export default class GenerationOneSolutions extends Component {
         })
     }
 
-    saveGenerationOne(e) {
+    saveGenerationOne() {
         // Save representations of the two patterns in the local storage
         let canvasRepresentation1JSON = JSON.stringify(lcPatternOne.getSnapshot());
         let canvasRepresentation1SVG = lcPatternOne.getSVGString();
@@ -344,15 +344,15 @@ export default class GenerationOneSolutions extends Component {
                 
                 <div className="representations-buttons">
                     {this.state.representationNumber > 0 && <Button onClick={() => this.handleRepresentationNumberChange(-1)}>Back</Button>}
-                    {this.state.representationNumber < (config.representations.length - 1) && <Button onClick={() => this.handleRepresentationNumberChange(1)}>Forward</Button>}
-                </div>
-                
-                <div className="next-stage-button">
-                    <Button onClick={(e) => this.saveGenerationOne(e)}>
-                        <Link to={`generation-two`}>
-                            Take me to the next stage
-                        </Link>
-                    </Button>
+                    {this.state.representationNumber === (config.representations.length - 1) ? (
+                        <Button onClick={this.saveGenerationOne}>
+                            <Link to={`generation-two`}>
+                                Finish
+                            </Link>
+                        </Button>                    
+                    ) : (
+                        <Button onClick={() => this.handleRepresentationNumberChange(1)}>Forward</Button>
+                    )}
                 </div>
             </div>
         );
