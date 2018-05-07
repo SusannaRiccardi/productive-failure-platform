@@ -2907,7 +2907,7 @@ defineShape('Text', {
     this.v = args.v || 0;
     this.text = args.text || '';
     this.color = args.color || 'black';
-    this.font = args.font || '18px sans-serif';
+    this.font = args.font || '32px sans-serif';
     this.forcedWidth = args.forcedWidth || null;
     return this.forcedHeight = args.forcedHeight || null;
   },
@@ -4476,7 +4476,7 @@ module.exports = Text = (function(superClass) {
 
   function Text() {
     this.text = '';
-    this.font = 'bold 18px sans-serif';
+    this.font = 'bold 32px sans-serif';
     this.currentShape = null;
     this.currentShapeState = null;
     this.initialShapeBoundingRect = null;
