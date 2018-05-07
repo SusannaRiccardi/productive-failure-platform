@@ -1,7 +1,34 @@
 import React, { Component } from 'react';
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Nav, ProgressBar } from 'react-bootstrap';
+var _ = require('lodash');
+
 
 export default class Banner extends Component {
+    constructor() {
+        super();
+        
+        this.state = {
+            step : this.findStep()
+        }
+
+        this.findStep = this.findStep.bind(this);
+    }
+
+    findStep() {
+        // TODO: look at better way to have the step
+        let url = window.location.href;
+        let splitString = _.split(url, '/');
+        
+        let step;
+        if (splitString[splitString.length - 1] === 'generation-one') {
+            step = 30
+        } else if (splitString[splitString.length - 1] === 'generation-two') {
+            step = 60
+        }
+
+        return step;
+    }
+    
     render() {
         return (
             <Navbar>
@@ -10,6 +37,7 @@ export default class Banner extends Component {
                         Productive Failure
                     </Navbar.Brand>
                 </Navbar.Header>
+                <ProgressBar label={`Progress: ${this.state.step}%`} now={this.state.step} />
             </Navbar>
         );
     }

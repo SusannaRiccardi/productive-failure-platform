@@ -204,3 +204,9 @@ svg {
 .modal-button {
     text-align: center;
 }
+
+/* Banner */
+.progress {
+    width: 500px;
+    margin: 15px auto;
+}
