@@ -95,6 +95,29 @@ export default class PatternGeneration extends Component {
         if (!destination) {
             return;
         }
+
+        // the element has been dropped into trash
+        if (destination.droppableId === 'droppable4') {
+            if (source.droppableId === 'droppable2') {
+                const deleteElement = this.deleteElement(
+                    this.getList(source.droppableId),
+                    source.index
+                )
+
+                this.setState({
+                    patternOne : deleteElement
+                })
+            } else if (source.droppableId === 'droppable3') {
+                const deleteElement = this.deleteElement(
+                    this.getList(source.droppableId),
+                    source.index
+                )
+
+                this.setState({
+                    patternTwo : deleteElement
+                })
+            }
+        }
         
         if (source.droppableId === "droppable") {
             // Case: move object from elements box to one of the pattern boxes
@@ -348,6 +371,16 @@ export default class PatternGeneration extends Component {
                                     )}
                                 </Draggable>
                             ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+                {/* Trash droppable */}
+                <Droppable droppableId="droppable4" direction="horizontal">
+                    {(provided, snapshot) => (
+                        <div
+                            ref={provided.innerRef}
+                            style={this.getListStyle(snapshot.isDraggingOver)}>
                             {provided.placeholder}
                         </div>
                     )}
