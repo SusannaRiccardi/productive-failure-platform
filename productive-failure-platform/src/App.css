@@ -108,7 +108,6 @@ svg {
 
 .pattern-generation-container {
     display: flex;
-    margin-bottom: 20px;
 }
 
 .pattern-generation-one {
@@ -127,6 +126,11 @@ svg {
 
 .pattern-generation-two__body {
     padding: 0;
+}
+
+.elements-pattern-generation {
+    width: 50%;
+    margin: auto;
 }
 
 /* Generic */
