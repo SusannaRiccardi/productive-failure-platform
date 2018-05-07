@@ -111,11 +111,17 @@ export default class GenerationTwoContainer extends Component {
                 {this.state.representations.length === 2 && (
                     <div className="representations-container">
                         <Panel className="representation-one">
+                            <Panel.Heading>
+                                <Panel.Title componentClass="h3">Representation one</Panel.Title>
+                            </Panel.Heading>
                             <Panel.Body className="representation-stage-two">
                                 <div className="representation-stage-two" dangerouslySetInnerHTML={{__html: this.state.representations[0].svg}}/>
                             </Panel.Body>
                         </Panel>
                         <Panel className="representation-two">
+                            <Panel.Heading>
+                                <Panel.Title componentClass="h3">Representation two</Panel.Title>
+                            </Panel.Heading>
                             <Panel.Body className="representation-stage-two">
                                 <div className="representation-stage-two" dangerouslySetInnerHTML={{__html: this.state.representations[1].svg}}/>
                             </Panel.Body>
