@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
+import { Button } from 'react-bootstrap';
 var _ = require('lodash');
 var counter = 0;
 
@@ -25,6 +26,7 @@ export default class PatternGeneration extends Component {
         this.getItemStyle = this.getItemStyle.bind(this);
         this.getListStyle = this.getListStyle.bind(this);
         this.renderShape = this.renderShape.bind(this);
+        this.clearElements = this.clearElements.bind(this);
     }
 
     /**
@@ -249,6 +251,13 @@ export default class PatternGeneration extends Component {
         }
     }
 
+    clearElements() {
+        this.setState({
+            patternOne : [],
+            patternTwo : []
+        })
+    }
+
     render() {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
@@ -343,6 +352,8 @@ export default class PatternGeneration extends Component {
                         </div>
                     )}
                 </Droppable>
+
+                <Button bsStyle="primary" onClick={this.clearElements}>Clear</Button>
             </DragDropContext>
         );
     }
