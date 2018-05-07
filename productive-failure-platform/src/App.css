@@ -116,9 +116,17 @@ svg {
     margin-right: 10px;
 }
 
+.pattern-generation-one__body {
+    padding: 0;
+}
+
 .pattern-generation-two {
     flex: 1;
     margin-left: 10px;
+}
+
+.pattern-generation-two__body {
+    padding: 0;
 }
 
 /* Generic */
