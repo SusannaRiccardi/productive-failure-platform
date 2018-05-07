@@ -251,8 +251,8 @@ export default class PatternGeneration extends Component {
                 display: 'flex',
                 padding: this.state.gridElements,
                 overflow: 'auto',
-                minHeight: '100px',
-                alignItems: 'center'
+                height: '100px',
+                width: 'inherit'
             }
         )
     }
@@ -263,7 +263,6 @@ export default class PatternGeneration extends Component {
                 background: isDraggingOver ? 'lightblue' : '',
                 display: 'flex',
                 padding: this.state.gridElements,
-                overflow: 'auto',
                 minHeight: '100px',
                 alignItems: 'center',
                 justifyContent: 'space-evenly'
@@ -277,7 +276,6 @@ export default class PatternGeneration extends Component {
                 background: isDraggingOver ? 'lightblue' : '',
                 display: 'flex',
                 padding: this.state.gridElements,
-                overflow: 'auto',
                 minHeight: '100px',
                 alignItems: 'center',
                 justifyContent: 'space-evenly'
@@ -288,15 +286,21 @@ export default class PatternGeneration extends Component {
     renderShape(content) {
         if (content === "circle") {
             return (
-                <Circle r={15} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                <div className="shape-container">
+                    <Circle r={20} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                </div>
             )
         } else if (content === "triangle") {
             return (
-                <Triangle width={30} height={30} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                <div className="shape-container">
+                    <Triangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                </div>
             )
         } else {
             return (
-                <Rectangle width={30} height={30} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                <div className="shape-container">
+                    <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                </div>
             )
         }
     }
