@@ -4,8 +4,10 @@
 }
 
 .literally-core-container, .literally-core-container-two {
-    border-style: groove;
+    border-style: solid;
     margin: 10px;
+    border-color: #DDD;
+    border-width: 2px;
 }
 
 .canvas1, .canvas2 {
@@ -25,14 +27,34 @@
     margin-right: 10px;
 }
 
-.pattern-description-two {
+.generation-one-representations-container {
+    display: flex;
+}
+
+.representation-container-one {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.representation-container-two {
     flex: 1;
     margin-left: 10px;
 }
 
-.GeneratationOneSolutions--elements {
+.generation-one-elements {
+    width: 80%;
+    margin: auto;
+}
+
+.generation-one-elements__body {
+    height: 100px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+}
+
+.pattern-description-two {
+    flex: 1;
+    margin-left: 10px;
 }
 
 .pencil, .eraser, .line, .rectangle, .ellipse, .arrow, .text, .undo, .redo, .triangle {

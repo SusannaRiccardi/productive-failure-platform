@@ -206,150 +206,141 @@ export default class GenerationOneSolutions extends Component {
 
         return (
             <div className="StageOneSolutions-container">
-                <Row>
-                    <Panel>
+                <div className="generation-one-representations-container">
+                    <Panel bsStyle="info" className="representation-container-one">
                         <Panel.Heading>
-                            <Panel.Title componentClass="h3">Representations</Panel.Title>
+                            <Panel.Title componentClass="h3">Representation for first pattern</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body>
-                            Constraint: {representation.constraint}
-
-                            <div className="canvas-container">
-                                <div className="canvas1">
-                                    <div className="literally-core-container">
-                                    </div>
-
-                                    <div className="undo-redo">
-                                        <img
-                                            className="undo"
-                                            src={undo}
-                                            alt="undo"
-                                            onClick={() => lcPatternOne.undo()}
-                                        />
-                                        <img
-                                            className="redo"
-                                            src={redo}
-                                            alt="redo"
-                                            onClick={() => lcPatternOne.redo()}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="canvas2">
-                                    <div className="literally-core-container-two">
-                                    </div>
-
-                                    <div className="undo-redo">
-                                        <img
-                                            className="undo"
-                                            src={undo}
-                                            alt="undo"
-                                            onClick={() => lcPatternTwo.undo()}
-                                        />
-                                        <img
-                                            className="redo"
-                                            src={redo}
-                                            alt="redo"
-                                            onClick={() => lcPatternTwo.redo()}
-                                        />
-                                    </div>
-                                </div>
+                            <div className="literally-core-container">
+                            </div>
+                            <div className="undo-redo">
+                                <img
+                                    className="undo"
+                                    src={undo}
+                                    alt="undo"
+                                    onClick={() => lcPatternOne.undo()}
+                                />
+                                <img
+                                    className="redo"
+                                    src={redo}
+                                    alt="redo"
+                                    onClick={() => lcPatternOne.redo()}
+                                />
                             </div>
                         </Panel.Body>
                     </Panel>
-                </Row>
-
-                <Row>
-                    <Panel>
+                    <Panel bsStyle="info" className="representation-container-two">
                         <Panel.Heading>
-                            <Panel.Title componentClass="h3">Elements</Panel.Title>
+                            <Panel.Title componentClass="h3">Representation for second pattern</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body>
-                            <div className="GenerateOneSolutions--container">
-                                <div className="GeneratationOneSolutions--elements">
-                                    {_.includes(representation.elements, 'pencil') && (
-                                        <div className={this.state.selectedTool.localeCompare('pencil') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('pencil')}>
-                                            <img
-                                                className="pencil"
-                                                src={pencil}
-                                                alt="pencil"
-                                            />
-                                        </div>
-                                    )}
-
-                                    {_.includes(representation.elements, 'eraser') && (
-                                        <div className={this.state.selectedTool.localeCompare('eraser') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('eraser')}>
-                                            <img
-                                                className="eraser"
-                                                src={eraser}
-                                                alt="eraser"
-                                            />
-                                        </div>
-                                    )}
-
-                                    {_.includes(representation.elements, 'line') && (
-                                        <div className={this.state.selectedTool.localeCompare('line') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('line')}>
-                                            <img
-                                                className="line"
-                                                src={line}
-                                                alt="line"
-                                            />
-                                        </div>
-                                    )}
-                                
-                                    {_.includes(representation.elements, 'arrow') && (
-                                        <div className={this.state.selectedTool.localeCompare('arrow') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('arrow')}>
-                                            <img
-                                                className="arrow"
-                                                src={arrow}
-                                                alt="arrow"
-                                            />
-                                        </div>
-                                    )}
-                                    
-                                    {_.includes(representation.elements, 'text') && (
-                                        <div className={this.state.selectedTool.localeCompare('text') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('text')}>
-                                            <img
-                                                className="text"
-                                                src={text}
-                                                alt="text"
-                                            />
-                                        </div>
-                                    )}
-
-                                    {_.includes(representation.elements, 'rectangle') && (
-                                        <div className={this.state.selectedTool.localeCompare('rectangle') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('rectangle')}>
-                                            <img
-                                                className="rectangle"
-                                                src={rectangle}
-                                                alt="rectangle"
-                                            />
-                                        </div>
-                                    )}
-
-                                    {_.includes(representation.elements, 'ellipse') && (
-                                        <div className={this.state.selectedTool.localeCompare('ellipse') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('ellipse')}>
-                                            <img
-                                                className="ellipse"
-                                                src={ellipse}
-                                                alt="ellipse"
-                                            />
-                                        </div>
-                                    )}
-
-                                    {_.includes(representation.elements, 'triangle') && (
-                                        <div className={this.state.selectedTool.localeCompare('triangle') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('triangle')}>
-                                            <img
-                                                className="triangle"
-                                                src={triangle}
-                                                alt="triangle"
-                                            />
-                                        </div>
-                                    )}
-                                </div>
+                            <div className="literally-core-container-two">
+                            </div>
+                            <div className="undo-redo">
+                                <img
+                                    className="undo"
+                                    src={undo}
+                                    alt="undo"
+                                    onClick={() => lcPatternTwo.undo()}
+                                />
+                                <img
+                                    className="redo"
+                                    src={redo}
+                                    alt="redo"
+                                    onClick={() => lcPatternTwo.redo()}
+                                />
                             </div>
                         </Panel.Body>
                     </Panel>
-                </Row>
+                </div>
+
+                <Panel bsStyle="info" className="generation-one-elements">
+                    <Panel.Heading>
+                        <Panel.Title componentClass="h3">Elements</Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Body className="generation-one-elements__body">
+                        {_.includes(representation.elements, 'pencil') && (
+                            <div className={this.state.selectedTool.localeCompare('pencil') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('pencil')}>
+                                <img
+                                    className="pencil"
+                                    src={pencil}
+                                    alt="pencil"
+                                />
+                            </div>
+                        )}
+
+                        {_.includes(representation.elements, 'eraser') && (
+                            <div className={this.state.selectedTool.localeCompare('eraser') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('eraser')}>
+                                <img
+                                    className="eraser"
+                                    src={eraser}
+                                    alt="eraser"
+                                />
+                            </div>
+                        )}
+
+                        {_.includes(representation.elements, 'line') && (
+                            <div className={this.state.selectedTool.localeCompare('line') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('line')}>
+                                <img
+                                    className="line"
+                                    src={line}
+                                    alt="line"
+                                />
+                            </div>
+                        )}
+                    
+                        {_.includes(representation.elements, 'arrow') && (
+                            <div className={this.state.selectedTool.localeCompare('arrow') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('arrow')}>
+                                <img
+                                    className="arrow"
+                                    src={arrow}
+                                    alt="arrow"
+                                />
+                            </div>
+                        )}
+                        
+                        {_.includes(representation.elements, 'text') && (
+                            <div className={this.state.selectedTool.localeCompare('text') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('text')}>
+                                <img
+                                    className="text"
+                                    src={text}
+                                    alt="text"
+                                />
+                            </div>
+                        )}
+
+                        {_.includes(representation.elements, 'rectangle') && (
+                            <div className={this.state.selectedTool.localeCompare('rectangle') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('rectangle')}>
+                                <img
+                                    className="rectangle"
+                                    src={rectangle}
+                                    alt="rectangle"
+                                />
+                            </div>
+                        )}
+
+                        {_.includes(representation.elements, 'ellipse') && (
+                            <div className={this.state.selectedTool.localeCompare('ellipse') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('ellipse')}>
+                                <img
+                                    className="ellipse"
+                                    src={ellipse}
+                                    alt="ellipse"
+                                />
+                            </div>
+                        )}
+
+                        {_.includes(representation.elements, 'triangle') && (
+                            <div className={this.state.selectedTool.localeCompare('triangle') === 0 ? 'tool-container active' : 'tool-container'} onClick={() => this.activateTool('triangle')}>
+                                <img
+                                    className="triangle"
+                                    src={triangle}
+                                    alt="triangle"
+                                />
+                            </div>
+                        )}
+                    </Panel.Body>
+                </Panel>
                 
                 <div className="representations-buttons">
                     {this.state.representationNumber > 0 && <Button onClick={() => this.handleRepresentationNumberChange(-1)}>Back</Button>}
