@@ -128,9 +128,24 @@ svg {
     padding: 0;
 }
 
+.elements-trash-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .elements-pattern-generation {
     width: 50%;
-    margin: auto;
+}
+
+.trash-container {
+    width: 100px;
+}
+
+.trash-image {
+    background-image: url(./img/trash.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-y: center;
 }
 
 /* Generic */

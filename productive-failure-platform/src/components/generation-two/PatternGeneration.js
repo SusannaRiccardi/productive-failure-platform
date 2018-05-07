@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
 import { Button, Panel } from 'react-bootstrap';
+import trash from '../../img/trash.svg';
 var _ = require('lodash');
 var counter = 0;
 
@@ -26,6 +27,7 @@ export default class PatternGeneration extends Component {
         this.getItemStyle = this.getItemStyle.bind(this);
         this.getListStyle = this.getListStyle.bind(this);
         this.getElementsStyle = this.getElementsStyle.bind(this);
+        this.getTrashStyle = this.getTrashStyle.bind(this);
         this.renderShape = this.renderShape.bind(this);
         this.clearElements = this.clearElements.bind(this);
     }
@@ -269,6 +271,20 @@ export default class PatternGeneration extends Component {
         )
     }
 
+    getTrashStyle(isDraggingOver) {
+        return (
+            {
+                background: isDraggingOver ? 'lightblue' : '',
+                display: 'flex',
+                padding: this.state.gridElements,
+                overflow: 'auto',
+                minHeight: '100px',
+                alignItems: 'center',
+                justifyContent: 'space-evenly'
+            }
+        )
+    }
+
     renderShape(content) {
         if (content === "circle") {
             return (
@@ -370,49 +386,62 @@ export default class PatternGeneration extends Component {
                     </Panel>
                 </div>
                 {/* Elements droppable */}
-                <Panel className="elements-pattern-generation" bsStyle="info">
-                    <Panel.Heading>
-                        <Panel.Title componentClass="h3">Elements</Panel.Title>
-                    </Panel.Heading>
-                    <Droppable droppableId="droppable" direction="horizontal">
-                        {(provided, snapshot) => (
-                            <div
-                                ref={provided.innerRef}
-                                style={this.getElementsStyle(snapshot.isDraggingOver)}>
-                                {this.state.elements.map((item, index) => (
-                                    <Draggable
-                                        key={item.id}
-                                        draggableId={item.id}
-                                        index={index}>
-                                        {(provided, snapshot) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                                style={this.getItemStyle(
-                                                    snapshot.isDragging,
-                                                    provided.draggableProps.style
-                                                )}>
-                                                {this.renderShape(item.content)}
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                ))}
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                </Panel>
-                {/* Trash droppable */}
-                <Droppable droppableId="droppable4" direction="horizontal">
-                    {(provided, snapshot) => (
-                        <div
-                            ref={provided.innerRef}
-                            style={this.getListStyle(snapshot.isDraggingOver)}>
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
+                <div className="elements-trash-container">
+                    <Panel className="elements-pattern-generation" bsStyle="info">
+                        <Panel.Heading>
+                            <Panel.Title componentClass="h3">Elements</Panel.Title>
+                        </Panel.Heading>
+                        <Panel.Body className="pattern-generation-two__body">
+                            <Droppable droppableId="droppable" direction="horizontal">
+                                {(provided, snapshot) => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        style={this.getElementsStyle(snapshot.isDraggingOver)}>
+                                        {this.state.elements.map((item, index) => (
+                                            <Draggable
+                                                key={item.id}
+                                                draggableId={item.id}
+                                                index={index}>
+                                                {(provided, snapshot) => (
+                                                    <div
+                                                        ref={provided.innerRef}
+                                                        {...provided.draggableProps}
+                                                        {...provided.dragHandleProps}
+                                                        style={this.getItemStyle(
+                                                            snapshot.isDragging,
+                                                            provided.draggableProps.style
+                                                        )}>
+                                                        {this.renderShape(item.content)}
+                                                    </div>
+                                                )}
+                                            </Draggable>
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </Panel.Body>
+                    </Panel>
+                    {/* Trash droppable */}
+                    <Panel bsStyle="info" className="trash-container">
+                        <Panel.Heading>
+                            <Panel.Title componentClass="h3">Trash</Panel.Title>
+                        </Panel.Heading>
+                        <Panel.Body className="pattern-generation-two__body trash-image">
+                            <Droppable droppableId="droppable4" direction="horizontal">
+                                {(provided, snapshot) => (
+                                    <div
+                                        className="trash-pattern-generation"
+                                        ref={provided.innerRef}
+                                        style={this.getTrashStyle(snapshot.isDraggingOver)}>
+                                        {/* <img src={trash} alt="trash" className="trash-image"/> */}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </Panel.Body>
+                    </Panel>
+                </div>
 
                 <Button bsStyle="primary" onClick={this.clearElements}>Clear</Button>
             </DragDropContext>
