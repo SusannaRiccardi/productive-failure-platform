@@ -236,7 +236,7 @@ export default class PatternGeneration extends Component {
                 margin: `0 0 ${this.state.gridElements}px 0`,
     
                 // change background colour if dragging
-                background: isDragging ? '#5cb85c' : '',
+                // background: isDragging ? '#5cb85c' : '',
     
                 // styles we need to apply on draggables
                 ...draggableStyle
@@ -438,7 +438,6 @@ export default class PatternGeneration extends Component {
                                         className="trash-pattern-generation"
                                         ref={provided.innerRef}
                                         style={this.getTrashStyle(snapshot.isDraggingOver)}>
-                                        {/* <img src={trash} alt="trash" className="trash-image"/> */}
                                         {provided.placeholder}
                                     </div>
                                 )}
