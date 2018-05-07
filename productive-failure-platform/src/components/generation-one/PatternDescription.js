@@ -44,26 +44,28 @@ export default class PatternDescription extends Component {
     
     render() {
         return (
-            <Panel>
-                <Panel.Body>
-                    <div className="PatternDescription pattern-titles">
-                        <div className="PatternDescription--pattern">
-                            <h4>First pattern</h4>
-                        </div>
-                        <div className="PatternDescription--pattern">
-                            <h4>Second pattern</h4>
-                        </div>
-                    </div>
-                    <div className="PatternDescription">
+            <div className="pattern-description-container">
+                <Panel bsStyle="info" className="pattern-description-one">
+                    <Panel.Heading>
+                        <Panel.Title componentClass="h3">First pattern</Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Body>
                         <div className="PatternDescription--pattern">
                             {this.props.patterns.length > 0 && this.renderPattern(this.props.patterns[0])}
                         </div>
-                        <div className="PatternDescription--pattern second-pattern">
+                    </Panel.Body>
+                </Panel>
+                <Panel bsStyle="info" className="pattern-description-two">
+                    <Panel.Heading>
+                        <Panel.Title componentClass="h3">Second pattern</Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Body>
+                        <div className="PatternDescription--pattern">
                             {this.props.patterns.length > 0 && this.renderPattern(this.props.patterns[1])}
                         </div>
-                    </div>
-                </Panel.Body>
-            </Panel>
+                    </Panel.Body>
+                </Panel>
+            </div>
         );
     }
 }

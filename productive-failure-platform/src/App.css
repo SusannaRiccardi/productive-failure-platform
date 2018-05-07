@@ -16,6 +16,20 @@
     background-color: rgb(179, 222, 229);
 }
 
+.pattern-description-container {
+    display: flex;
+}
+
+.pattern-description-one {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.pattern-description-two {
+    flex: 1;
+    margin-left: 10px;
+}
+
 .GeneratationOneSolutions--elements {
     display: flex;
     justify-content: space-evenly;
@@ -59,8 +73,7 @@
 
 .PatternDescription--pattern {
     display: flex;
-    width: 50%;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .second-pattern {
