@@ -120,6 +120,16 @@ svg {
     max-width: 50%;
 }
 
+.pattern-generation-one__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pattern-generation-clear {
+    padding: 0;
+}
+
 .pattern-generation-one__body {
     padding: 0;
 }

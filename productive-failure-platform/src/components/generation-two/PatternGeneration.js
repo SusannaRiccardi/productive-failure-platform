@@ -305,11 +305,16 @@ export default class PatternGeneration extends Component {
         }
     }
 
-    clearElements() {
-        this.setState({
-            patternOne : [],
-            patternTwo : []
-        })
+    clearElements(pattern) {
+        if (pattern === "one") {
+            this.setState({
+                patternOne : []
+            })
+        } else {
+            this.setState({
+                patternTwo : []
+            })
+        }
     }
 
     render() {
@@ -318,8 +323,9 @@ export default class PatternGeneration extends Component {
                 <div className="pattern-generation-container">
                     {/* Pattern one droppable */}
                     <Panel className="pattern-generation-one" bsStyle="info">
-                        <Panel.Heading>
+                        <Panel.Heading className="pattern-generation-one__heading">
                             <Panel.Title componentClass="h3">Pattern for first representation</Panel.Title>
+                            <Button bsStyle="link" className="pattern-generation-clear" onClick={() => this.clearElements('one')}>Clear</Button>
                         </Panel.Heading>
                         <Panel.Body className="pattern-generation-one__body">
                             <Droppable droppableId="droppable2" direction="horizontal">
@@ -354,8 +360,9 @@ export default class PatternGeneration extends Component {
                     </Panel>
                     {/* Pattern two droppable */}
                     <Panel className="pattern-generation-two" bsStyle="info">
-                        <Panel.Heading>
+                        <Panel.Heading className="pattern-generation-one__heading">
                             <Panel.Title componentClass="h3">Pattern for second representation</Panel.Title>
+                            <Button bsStyle="link" className="pattern-generation-clear" onClick={() => this.clearElements('two')}>Clear</Button>
                         </Panel.Heading>
                         <Panel.Body className="pattern-generation-two__body">
                             <Droppable droppableId="droppable3" direction="horizontal">
@@ -446,7 +453,6 @@ export default class PatternGeneration extends Component {
                     </Panel>
                 </div>
 
-                <Button bsStyle="primary" onClick={this.clearElements}>Clear</Button>
             </DragDropContext>
         );
     }
