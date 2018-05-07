@@ -232,8 +232,8 @@ export default class PatternGeneration extends Component {
         return (
             {
                 userSelect: 'none',
-                padding: this.state.gridElements,
-                margin: this.state.gridElements,
+                padding: this.state.gridElements * 2,
+                margin: `0 0 ${this.state.gridElements}px 0`,
     
                 // change background colour if dragging
                 background: isDragging ? '#5cb85c' : '',
