@@ -170,17 +170,19 @@ export default class GenerationOneSolutions extends Component {
         localStorage.setItem(`${this.props.patterns[1].id}-${this.state.representationNumber}-svg`, canvasRepresentation2SVG);
 
         let representations = [];
-        for (let i = 0; i < config.representations.length; i++) {
-            // Find activity pattern id
+        // iterate over two patterns
+        for (let i = 0; i < 2; i++) {
+            // find activity pattern id
             let activityPattern = _.find(this.props.activityPatterns, (activity) => {
                 return activity.pattern_id == this.props.patterns[i].id
             })
 
-            for (let j = 0; j < 2; j++) {
+            // iterate over representations
+            for (let j = 0; j < config.representations.length; j++) {
                 let representation = {
                     representation : {
-                        constraint: config.representations[i].constraint,
-                        svg: localStorage.getItem(`${this.props.patterns[j].id}-${i}-svg`),
+                        constraint: config.representations[j].constraint,
+                        svg: localStorage.getItem(`${this.props.patterns[i].id}-${j}-svg`),
                         productive_failure_id: this.state.productiveFailureId,
                         activity_pattern_id: activityPattern.id
                     }
@@ -349,15 +351,19 @@ export default class GenerationOneSolutions extends Component {
                 </Panel>
                 
                 <div className="representations-buttons">
-                    {this.state.representationNumber > 0 && <Button onClick={() => this.handleRepresentationNumberChange(-1)}>Back</Button>}
+                    {this.state.representationNumber > 0 ? (
+                        <Button className="representation-button" onClick={() => this.handleRepresentationNumberChange(-1)}>Back</Button>
+                    ) : (
+                        <Button className="representation-button" disabled>Back</Button>
+                    )}
                     {this.state.representationNumber === (config.representations.length - 1) ? (
-                        <Button onClick={this.saveGenerationOne}>
+                        <Button className="representation-button" onClick={this.saveGenerationOne}>
                             <Link to={`generation-two`}>
                                 Finish
                             </Link>
                         </Button>                    
                     ) : (
-                        <Button onClick={() => this.handleRepresentationNumberChange(1)}>Forward</Button>
+                        <Button className="representation-button" onClick={() => this.handleRepresentationNumberChange(1)}>Next</Button>
                     )}
                 </div>
             </div>

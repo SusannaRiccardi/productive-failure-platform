@@ -80,6 +80,11 @@
 .representations-buttons {
     display: flex;
     justify-content: center;
+    margin: 20px;
+}
+
+.representation-button {
+    margin: 0 10px;
 }
 
 .tool-container {
