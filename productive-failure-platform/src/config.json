@@ -2,7 +2,7 @@
     "representations" : [
         {
             "id" : 0,
-            "constraint" : "Can't use text.",
+            "constraint" : "Describe the pattern without using text.",
             "elements" : [
                 "pencil",
                 "eraser",
@@ -15,13 +15,24 @@
         },
         {
             "id" : 1,
-            "constraint" : "Can't use pictures.",
+            "constraint" : "Describe the pattern without using shapes.",
             "elements" : [
                 "pencil",
                 "eraser",
                 "line",
                 "text",
                 "arrow"
+            ]
+        }, {
+            "id" : 2,
+            "constraint" : "Describe the pattern without using arrows.",
+            "elements" : [
+                "pencil",
+                "eraser",
+                "text",
+                "ellipse",
+                "triangle",
+                "rectangle"
             ]
         }
     ]

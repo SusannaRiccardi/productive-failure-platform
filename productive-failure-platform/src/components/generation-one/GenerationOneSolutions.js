@@ -47,7 +47,8 @@ export default class GenerationOneSolutions extends Component {
         // Initialise literally canvas
         let options = {
             secondaryColor: '#000',
-            backgroundColor: '#fff'
+            backgroundColor: '#fff',
+            minHeight: '350px'
         }
 
         lcPatternOne = window.LC.init(document.getElementsByClassName('literally-core-container')[0], options);
@@ -206,6 +207,11 @@ export default class GenerationOneSolutions extends Component {
 
         return (
             <div className="StageOneSolutions-container">
+                <Panel bsStyle="danger" className="generation-one-constraint">
+                    <Panel.Body>
+                        {representation.constraint}
+                    </Panel.Body>
+                </Panel>
                 <div className="generation-one-representations-container">
                     <Panel bsStyle="info" className="representation-container-one">
                         <Panel.Heading>

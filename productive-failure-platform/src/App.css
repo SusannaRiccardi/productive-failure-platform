@@ -27,6 +27,12 @@
     margin-right: 10px;
 }
 
+.generation-one-constraint {
+    width: 30%;
+    margin: 0 auto 20px auto;
+    text-align: center;
+}
+
 .generation-one-representations-container {
     display: flex;
 }
@@ -47,7 +53,6 @@
 }
 
 .generation-one-elements__body {
-    height: 100px;
     display: flex;
     justify-content: space-between;
 }
@@ -82,6 +87,7 @@
     align-items: center;
     cursor: pointer;
     border-radius: 4px;
+    height: 80%;
 }
 
 .undo-redo {
