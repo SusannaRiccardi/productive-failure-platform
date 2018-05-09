@@ -11,7 +11,8 @@ export default class GenerationTwoContainer extends Component {
 
         this.state = {
             representations : [],
-            showModal : true
+            showModal : true,
+            reconstructPatterns : []
         }
 
         this.getReconstructPattern = this.getReconstructPattern.bind(this);
@@ -129,9 +130,11 @@ export default class GenerationTwoContainer extends Component {
                     </div>
                 )}
 
-                <PatternGeneration />
-
-                {!this.state.showModal && <Button bsStyle="info" onClick={this.handleOpenCloseModal}>Get info about this step</Button>}
+                <PatternGeneration 
+                    handleOpenCloseModal={this.handleOpenCloseModal}
+                    showModal={this.state.showModal}
+                    reconstructPatterns={this.state.reconstructPatterns} 
+                />
             </div>
         );
     }

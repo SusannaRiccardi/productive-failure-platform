@@ -3,6 +3,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
 import { Button, Panel } from 'react-bootstrap';
 import trash from '../../img/trash.svg';
+import axios from 'axios';
 var _ = require('lodash');
 var counter = 0;
 
@@ -30,6 +31,8 @@ export default class PatternGeneration extends Component {
         this.getTrashStyle = this.getTrashStyle.bind(this);
         this.renderShape = this.renderShape.bind(this);
         this.clearElements = this.clearElements.bind(this);
+        this.goToNextStep = this.goToNextStep.bind(this);
+        this.generatePattern = this.generatePattern.bind(this);
     }
 
     /**
@@ -317,6 +320,59 @@ export default class PatternGeneration extends Component {
         }
     }
 
+    goToNextStep() {
+        // TODO: look at better way to have id of productive failure activity
+        let url = window.location.href;
+        let splitString = _.split(url, '/');
+        let id = splitString[splitString.length - 2];
+
+        let generatedPatterns = [];
+
+        let patternOne = {
+            generated_pattern: {
+                reconstruct_pattern_id: this.props.reconstructPatterns[0].id,
+                pattern: this.generatePattern(0),
+                productive_failure_id: id,   
+            }
+        }
+        generatedPatterns.push(patternOne);
+
+        let patternTwo = {
+            generated_pattern: {
+                reconstruct_pattern_id: this.props.reconstructPatterns[1].id,
+                pattern: this.generatePattern(1),
+                productive_failure_id: id,   
+            }
+        }
+        generatedPatterns.push(patternTwo);
+
+        axios.post("http://localhost:3001/api/v1/generated_patterns", {
+            headers: {
+                'Content-Type': 'application/json'
+            }, data : JSON.stringify(generatedPatterns)
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+    }
+
+    // Function used to generate the pattern that will be saved in the database.
+    generatePattern(id) {
+        let pattern = "";
+        let patternArray = (id === 0) ? this.state.patternOne : this.state.patternTwo;
+        
+        for (let i = 0; i < (patternArray.length - 1); i++) {
+            pattern += patternArray[i].content;
+            pattern += "-"
+        }
+        pattern += patternArray[patternArray.length - 1].content;
+        return pattern;
+    }
+
     render() {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
@@ -453,6 +509,11 @@ export default class PatternGeneration extends Component {
                     </Panel>
                 </div>
 
+                <div className="info-buttons">
+                    <Button bsStyle="info" onClick={this.props.handleOpenCloseModal}>Get info about this step</Button>
+
+                    {(this.state.patternOne.length > 0 && this.state.patternTwo.length > 0) && <Button onClick={this.goToNextStep}>Finish</Button>}
+                </div>
             </DragDropContext>
         );
     }

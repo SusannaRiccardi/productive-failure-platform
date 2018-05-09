@@ -211,6 +211,11 @@ svg {
     background-position-y: center;
 }
 
+.info-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 /* Generic */
 .modal-button {
     text-align: center;
