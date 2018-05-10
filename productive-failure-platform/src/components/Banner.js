@@ -4,25 +4,21 @@ var _ = require('lodash');
 
 
 export default class Banner extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         
         this.state = {
-            step : this.findStep()
+            step : this.findStep(props)
         }
 
         this.findStep = this.findStep.bind(this);
     }
 
-    findStep() {
-        // TODO: look at better way to have the step
-        let url = window.location.href;
-        let splitString = _.split(url, '/');
-        
-        let step;
-        if (splitString[splitString.length - 1] === 'generation-one') {
+    findStep(props) {
+        let step = 1;
+        if (props.step === 1) {
             step = 33
-        } else if (splitString[splitString.length - 1] === 'generation-two') {
+        } else if (props.step === 2) {
             step = 66
         }
 
@@ -37,7 +33,7 @@ export default class Banner extends Component {
                         Productive Failure
                     </Navbar.Brand>
                 </Navbar.Header>
-                <ProgressBar label={`Progress: ${this.state.step/33} / 3`} now={this.state.step} />
+                <ProgressBar label={`Progress: ${this.props.step} / 3`} now={this.state.step} />
             </Navbar>
         );
     }

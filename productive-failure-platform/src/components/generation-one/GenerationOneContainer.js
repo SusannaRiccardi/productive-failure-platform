@@ -4,6 +4,7 @@ import GenerationOneSolutions from './GenerationOneSolutions';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 import GenerationOneTutorial from './GenerationOneTutorial';
+import Banner from '../Banner';
 var _ = require('lodash');
 
 
@@ -102,24 +103,27 @@ export default class GenerationOneContainer extends Component {
             )
         } else {
             return (
-                <div className="stage-1-container">
-                    <GenerationOneTutorial 
-                        open={this.state.showModal}
-                        close={this.handleOpenCloseModal}
-                    />
-    
-                    <div className="stage-1--pattern">
-                        <PatternDescription 
-                            patterns={this.state.patterns}
+                <div>
+                    <Banner step={1}/>
+                    <div className="stage-1-container">
+                        <GenerationOneTutorial 
+                            open={this.state.showModal}
+                            close={this.handleOpenCloseModal}
                         />
+        
+                        <div className="stage-1--pattern">
+                            <PatternDescription 
+                                patterns={this.state.patterns}
+                            />
+                        </div>
+        
+                        <GenerationOneSolutions 
+                            patterns={this.state.patterns}
+                            activityPatterns={this.state.activityPatterns}
+                        />
+        
+                        {!this.state.showModal && <Button bsStyle="info" onClick={this.handleOpenCloseModal}>Get info about this step</Button>}
                     </div>
-    
-                    <GenerationOneSolutions 
-                        patterns={this.state.patterns}
-                        activityPatterns={this.state.activityPatterns}
-                    />
-    
-                    {!this.state.showModal && <Button bsStyle="info" onClick={this.handleOpenCloseModal}>Get info about this step</Button>}
                 </div>
             );
         }

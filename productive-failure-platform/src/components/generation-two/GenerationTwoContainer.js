@@ -3,6 +3,7 @@ import { Panel, Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import PatternGeneration from './PatternGeneration';
 import GenerationTwoTutorial from './GenerationTwoTutorial';
+import Banner from '../Banner';
 var _ = require('lodash');
 
 
@@ -95,38 +96,41 @@ export default class GenerationTwoContainer extends Component {
 
     render() {
         return (
-            <div className="generation-two-container">
-                <GenerationTwoTutorial 
-                    open={this.state.showModal}
-                    close={this.handleOpenCloseModal}
-                />
+            <div>
+                <Banner step={2}/>
+                <div className="generation-two-container">
+                    <GenerationTwoTutorial 
+                        open={this.state.showModal}
+                        close={this.handleOpenCloseModal}
+                    />
 
-                {this.state.representations.length === 2 && (
-                    <div className="representations-container">
-                        <Panel className="representation-one" bsStyle="info">
-                            <Panel.Heading>
-                                <Panel.Title componentClass="h3">First representation</Panel.Title>
-                            </Panel.Heading>
-                            <Panel.Body className="representation-stage-two">
-                                <div className="representation-stage-two" dangerouslySetInnerHTML={{__html: this.state.representations[0].svg}}/>
-                            </Panel.Body>
-                        </Panel>
-                        <Panel className="representation-two" bsStyle="info">
-                            <Panel.Heading>
-                                <Panel.Title componentClass="h3">Second representation</Panel.Title>
-                            </Panel.Heading>
-                            <Panel.Body className="representation-stage-two">
-                                <div className="representation-stage-two" dangerouslySetInnerHTML={{__html: this.state.representations[1].svg}}/>
-                            </Panel.Body>
-                        </Panel>
-                    </div>
-                )}
+                    {this.state.representations.length === 2 && (
+                        <div className="representations-container">
+                            <Panel className="representation-one" bsStyle="info">
+                                <Panel.Heading>
+                                    <Panel.Title componentClass="h3">First representation</Panel.Title>
+                                </Panel.Heading>
+                                <Panel.Body className="representation-stage-two">
+                                    <div className="representation-stage-two" dangerouslySetInnerHTML={{__html: this.state.representations[0].svg}}/>
+                                </Panel.Body>
+                            </Panel>
+                            <Panel className="representation-two" bsStyle="info">
+                                <Panel.Heading>
+                                    <Panel.Title componentClass="h3">Second representation</Panel.Title>
+                                </Panel.Heading>
+                                <Panel.Body className="representation-stage-two">
+                                    <div className="representation-stage-two" dangerouslySetInnerHTML={{__html: this.state.representations[1].svg}}/>
+                                </Panel.Body>
+                            </Panel>
+                        </div>
+                    )}
 
-                <PatternGeneration 
-                    handleOpenCloseModal={this.handleOpenCloseModal}
-                    showModal={this.state.showModal}
-                    reconstructPatterns={this.state.reconstructPatterns} 
-                />
+                    <PatternGeneration 
+                        handleOpenCloseModal={this.handleOpenCloseModal}
+                        showModal={this.state.showModal}
+                        reconstructPatterns={this.state.reconstructPatterns} 
+                    />
+                </div>
             </div>
         );
     }
