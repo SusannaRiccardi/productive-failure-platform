@@ -227,3 +227,39 @@ svg {
     margin: 15px auto;
     background-color: #DDD;
 }
+
+/* Tutorial */
+.tutorial-container {
+    text-align: justify;
+    margin: 10px;
+}
+
+.tutorial-title {
+    margin-top: 0;
+    text-align: center;
+}
+
+.tutorial-text {
+    font-size: 15px;
+}
+
+.tutorial-pattern-container {
+    margin-bottom: 20px;
+}
+
+.tutorial-pattern-image {
+    width: 100%;
+}
+
+.tutorial-pattern-image-special {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.tutorial-patterns-examples {
+    display: flex;
+}
+
+.tutorial-pattern-column {
+    flex: 1;
+}
