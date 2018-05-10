@@ -34,7 +34,7 @@ export default class GenerationTwoContainer extends Component {
         .then(response => {
             if (response.data === null || response.data.length === 0) {
                 // Get pattern if no reconstruct_pattern with this productive_failure_id exists
-                axios.get('http://localhost:3001/api/v1/representation')
+                axios.get(`http://localhost:3001/api/v1/representation?productive_failure_id=${id}`)
                 .then(response => {
                     this.setState({
                         representations: response.data
