@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Button, Panel } from 'react-bootstrap';
+import { Row, Button, Panel, Well } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
@@ -209,11 +209,9 @@ export default class GenerationOneSolutions extends Component {
 
         return (
             <div className="StageOneSolutions-container">
-                <Panel bsStyle="danger" className="generation-one-constraint">
-                    <Panel.Body>
-                        {representation.constraint}
-                    </Panel.Body>
-                </Panel>
+                <Well bsSize="small" className="generation-one-constraint">
+                    <h4>{representation.constraint}</h4>
+                </Well>
                 <div className="generation-one-representations-container">
                     <Panel bsStyle="info" className="representation-container-one">
                         <Panel.Heading>
