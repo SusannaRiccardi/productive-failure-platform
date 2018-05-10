@@ -354,11 +354,11 @@ export default class GenerationOneSolutions extends Component {
                         <Button className="representation-button" disabled>Back</Button>
                     )}
                     {this.state.representationNumber === (config.representations.length - 1) ? (
-                        <Button className="representation-button" onClick={this.saveGenerationOne}>
-                            <Link to={`generation-two`}>
-                                Finish
-                            </Link>
-                        </Button>                    
+                        <Link to={`generation-two`}>
+                            <Button className="representation-button" onClick={this.saveGenerationOne}>
+                                    Finish
+                            </Button>                    
+                        </Link>
                     ) : (
                         <Button className="representation-button" onClick={() => this.handleRepresentationNumberChange(1)}>Next</Button>
                     )}
