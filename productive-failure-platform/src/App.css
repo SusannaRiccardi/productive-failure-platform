@@ -263,3 +263,11 @@ svg {
 .tutorial-pattern-column {
     flex: 1;
 }
+
+.tutorial-gif {
+    width: 100%;
+}
+
+.tutorial-gif-container {
+    margin-bottom: 20px;
+}

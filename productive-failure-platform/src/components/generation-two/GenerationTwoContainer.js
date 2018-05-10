@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Panel, Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import PatternGeneration from './PatternGeneration';
+import GenerationTwoTutorial from './GenerationTwoTutorial';
 var _ = require('lodash');
 
 
@@ -95,20 +96,11 @@ export default class GenerationTwoContainer extends Component {
     render() {
         return (
             <div className="generation-two-container">
-                <Modal show={this.state.showModal} onHide={this.handleOpenCloseModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Productive Failure activity - generation, step two</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <h4>How it works</h4>
-                        In this stage, you will see a description of a pattern by someone else. Your goal here is to reproduce
-                        the original pattern from the given representation. Drag the elements below and complete the pattern.
+                <GenerationTwoTutorial 
+                    open={this.state.showModal}
+                    close={this.handleOpenCloseModal}
+                />
 
-                        <div className="modal-button">
-                            <Button bsStyle="primary" onClick={this.handleOpenCloseModal}>Gotcha</Button>
-                        </div>
-                    </Modal.Body>
-                </Modal>
                 {this.state.representations.length === 2 && (
                     <div className="representations-container">
                         <Panel className="representation-one" bsStyle="info">
