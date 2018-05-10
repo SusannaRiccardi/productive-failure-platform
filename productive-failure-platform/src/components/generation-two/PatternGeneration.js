@@ -512,7 +512,7 @@ export default class PatternGeneration extends Component {
                 <div className="info-buttons">
                     <Button bsStyle="info" onClick={this.props.handleOpenCloseModal}>Get info about this step</Button>
 
-                    {(this.state.patternOne.length > 0 && this.state.patternTwo.length > 0) && <Button onClick={this.goToNextStep}>Finish</Button>}
+                    {(this.state.patternOne.length > 0 && this.state.patternTwo.length > 0) && <Button bsStyle="primary" onClick={this.goToNextStep}>Finish</Button>}
                 </div>
             </DragDropContext>
         );

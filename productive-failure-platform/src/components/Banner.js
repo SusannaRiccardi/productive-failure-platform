@@ -21,9 +21,9 @@ export default class Banner extends Component {
         
         let step;
         if (splitString[splitString.length - 1] === 'generation-one') {
-            step = 30
+            step = 33
         } else if (splitString[splitString.length - 1] === 'generation-two') {
-            step = 60
+            step = 66
         }
 
         return step;
@@ -37,7 +37,7 @@ export default class Banner extends Component {
                         Productive Failure
                     </Navbar.Brand>
                 </Navbar.Header>
-                <ProgressBar label={`Progress: ${this.state.step}%`} now={this.state.step} />
+                <ProgressBar label={`Progress: ${this.state.step/33} / 3`} now={this.state.step} />
             </Navbar>
         );
     }
