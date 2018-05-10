@@ -14,11 +14,8 @@ export default class PatternDescription extends Component {
 
     renderPattern(givenPattern) {
         let patternArray = givenPattern.pattern.split('-');
-        // Duplicate pattern
-        let patternCopy = _.cloneDeep(patternArray);
-        let pattern = patternArray.concat(patternCopy, patternCopy)
 
-        return pattern.map((shape, id) => {
+        return patternArray.map((shape, id) => {
             if (shape === "circle") {
                 return (
                     <div className="pattern--circle" key={id}>
