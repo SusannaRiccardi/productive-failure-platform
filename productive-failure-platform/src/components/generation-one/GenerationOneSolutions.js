@@ -56,8 +56,9 @@ export default class GenerationOneSolutions extends Component {
 
         // Clean localStorage if another productive failure activity was created, or load 
         let previousActivity = localStorage.getItem("productiveFailure");
-        if (previousActivity !== null && previousActivity !== id) {
+        if (previousActivity != id) {
             localStorage.clear();
+            localStorage.setItem("productiveFailure", id);
         } else if (previousActivity !== null && previousActivity === id) {
             let canvas1 = localStorage.getItem(`${this.props.patterns[0].id}-${this.state.representationNumber}-json`);
             let canvas2 = localStorage.getItem(`${this.props.patterns[1].id}-${this.state.representationNumber}-json`);
@@ -67,10 +68,8 @@ export default class GenerationOneSolutions extends Component {
             if (canvas2) {
                 lcPatternTwo.loadSnapshot(JSON.parse(canvas2));
             }
-        } else {
-            localStorage.setItem("productiveFailure", id);
         }
-        
+
         tools = [
             {
                 name : 'pencil',
