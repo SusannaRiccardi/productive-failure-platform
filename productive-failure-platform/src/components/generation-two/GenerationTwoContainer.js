@@ -60,7 +60,7 @@ export default class GenerationTwoContainer extends Component {
                     })
                     .then(response => {
                         this.setState({
-                            reconstructPattern : response.data
+                            reconstructPatterns : response.data
                         })
                     })
                     .catch(error => console.log(error))
