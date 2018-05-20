@@ -20,6 +20,8 @@ export default class Banner extends Component {
             step = 33
         } else if (props.step === 2) {
             step = 66
+        } else if (props.step === 3) {
+            step = 100
         }
 
         return step;
