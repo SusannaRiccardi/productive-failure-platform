@@ -6,8 +6,14 @@ module Api::V1
         end
 
         def create
-            @activity_pattern = ActivityPattern.create(activity_pattern_params)
-            render json: @activity_pattern
+            activity_patterns = JSON.parse(params[:data])
+            result = []
+            activity_patterns.each do |activity_pattern|
+                @activity_pattern = ActivityPattern.create(activity_pattern["activityPattern"])
+                result.push(@activity_pattern)
+            end
+
+            render json: result
         end
           
         private

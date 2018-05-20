@@ -1,34 +1,75 @@
+/* Generation one */
 .stage-1-container {
     margin: 20px;
 }
 
-.active {
-    background-color: rgb(179, 222, 229);
-}
-
-.triangle {
-    margin-bottom: 3px;
-}
-
 .literally-core-container, .literally-core-container-two {
-    border-style: inset;
+    border-style: solid;
     margin: 10px;
+    border-color: #DDD;
+    border-width: 2px;
 }
 
 .canvas1, .canvas2 {
     flex: 1;
 }
 
-/* Elements generation one */
-.pencil, .eraser, .line, .rectangle, .ellipse, .arrow, .text, .undo, .redo, .triangle {
-    width: 40px;
-    height: 40px;
+.active {
+    background-color: rgb(179, 222, 229);
+}
+
+.pattern-description-container {
+    display: flex;
+}
+
+.pattern-description-one {
+    flex: 1;
     margin-right: 10px;
 }
 
-.GeneratationOneSolutions--elements {
+.generation-one-constraint {
+    width: 30%;
+    margin: 0 auto 20px auto;
+    text-align: center;
+}
+
+.generation-one-representations-container {
     display: flex;
-    justify-content: space-evenly;
+}
+
+.representation-container-one {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.representation-container-two {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.generation-one-elements {
+    width: 80%;
+    margin: auto;
+}
+
+.generation-one-elements__body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pattern-description-two {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.pencil, .eraser, .line, .rectangle, .ellipse, .arrow, .text, .undo, .redo, .triangle {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+}
+
+.triangle {
+    margin-bottom: 3px;
 }
 
 .next-stage-button {
@@ -39,6 +80,11 @@
 .representations-buttons {
     display: flex;
     justify-content: center;
+    margin: 20px;
+}
+
+.representation-button {
+    margin: 0 10px;
 }
 
 .tool-container {
@@ -46,13 +92,10 @@
     align-items: center;
     cursor: pointer;
     border-radius: 4px;
+    height: 80%;
 }
 
 .undo-redo {
-    text-align: center;
-}
-
-.modal-button {
     text-align: center;
 }
 
@@ -63,8 +106,7 @@
 
 .PatternDescription--pattern {
     display: flex;
-    width: 50%;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .second-pattern {
@@ -78,4 +120,154 @@
 
 .canvas-container {
     display: flex;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+/* Generation two */
+.generation-two-container {
+    margin: 20px;
+}
+
+.representations-container {
+    display: flex;
+}
+
+.representation-one {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.representation-two {
+    flex: 1;
+    margin-left: 10px;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+}
+
+.shape-container {
+    min-width: 60px;
+}
+
+.pattern-generation-container {
+    display: flex;
+}
+
+.pattern-generation-one {
+    flex: 1;
+    margin-right: 10px;
+    max-width: 50%;
+}
+
+.pattern-generation-one__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pattern-generation-clear {
+    padding: 0;
+}
+
+.pattern-generation-one__body {
+    padding: 0;
+}
+
+.pattern-generation-two {
+    flex: 1;
+    margin-left: 10px;
+    max-width: 50%;
+}
+
+.pattern-generation-two__body {
+    padding: 0;
+    height: 100px;
+}
+
+.elements-trash-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.elements-pattern-generation {
+    width: 50%;
+}
+
+.trash-container {
+    width: 100px;
+}
+
+.trash-image {
+    background-image: url(./img/trash.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-y: center;
+}
+
+.info-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Generic */
+.modal-button {
+    text-align: center;
+}
+
+/* Banner */
+.progress {
+    width: 500px;
+    margin: 15px auto;
+    background-color: #DDD;
+}
+
+/* Tutorial */
+.tutorial-container {
+    text-align: justify;
+    margin: 10px;
+}
+
+.tutorial-title {
+    margin-top: 0;
+    text-align: center;
+}
+
+.tutorial-text {
+    font-size: 15px;
+}
+
+.tutorial-pattern-container {
+    margin-bottom: 20px;
+}
+
+.tutorial-pattern-image {
+    width: 100%;
+}
+
+.tutorial-pattern-image-special {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.tutorial-patterns-examples {
+    display: flex;
+}
+
+.tutorial-pattern-column {
+    flex: 1;
+}
+
+.tutorial-gif {
+    width: 100%;
+}
+
+.tutorial-gif-container {
+    margin-bottom: 20px;
 }

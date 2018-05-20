@@ -1,0 +1,2 @@
+class GeneratedPattern < ApplicationRecord
+end

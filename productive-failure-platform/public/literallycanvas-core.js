@@ -2907,7 +2907,7 @@ defineShape('Text', {
     this.v = args.v || 0;
     this.text = args.text || '';
     this.color = args.color || 'black';
-    this.font = args.font || '18px sans-serif';
+    this.font = args.font || '32px sans-serif';
     this.forcedWidth = args.forcedWidth || null;
     return this.forcedHeight = args.forcedHeight || null;
   },
@@ -3119,28 +3119,38 @@ defineSVGRenderer('Rectangle', function(shape) {
   y = Math.min(y1, y2);
   width = Math.max(x1, x2) - x;
   height = Math.max(y1, y2) - y;
+  miao = Math.min(width, height)
   if (shape.strokeWidth % 2 !== 0) {
     x += 0.5;
     y += 0.5;
   }
-  return "<rect x='" + x + "' y='" + y + "' width='" + width + "' height='" + height + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
+  return "<rect x='" + x + "' y='" + y + "' width='" + miao + "' height='" + miao + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
 });
 
 defineSVGRenderer('Triangle', function(shape) {
     var height, width, x, x1, x2, y, y1, y2;
     x1 = shape.x;
     y1 = shape.y;
-    x2 = shape.x + shape.width;
+    x2 = shape.x - (shape.width/2);
     y2 = shape.y + shape.height;
-    x = Math.min(x1, x2);
-    y = Math.min(y1, y2);
-    width = Math.max(x1, x2) - x;
-    height = Math.max(y1, y2) - y;
-    if (shape.strokeWidth % 2 !== 0) {
-      x += 0.5;
-      y += 0.5;
-    }
-    return "<rect x='" + x + "' y='" + y + "' width='" + width + "' height='" + height + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
+    x3 = shape.x + (shape.width/2);
+    y3 = shape.y + shape.height;
+    // x = Math.min(x1, x2);
+    // y = Math.min(y1, y2);
+    // width = Math.max(x1, x2) - x;
+    // height = Math.max(y1, y2) - y;
+    // if (shape.strokeWidth % 2 !== 0) {
+    //   x += 0.5;
+    //   y += 0.5;
+    // }
+    return `<polygon fill="${shape.fillColor}" points="${x2},${y2} ${x1},${y1} ${x3},${y3}" stroke="${shape.strokeColor}" stroke-width="${shape.strokeWidth}"/>`
+    // return ("<polygon fill='" + shape.fillColor + "' points='" + x1 + ',')
+    // return ("<polygon fill='" + shape.fillColor + "' points='" + (shape.points.map(function(p) {
+    //     var offset;
+    //     offset = p.strokeWidth % 2 === 0 ? 0.0 : 0.5;
+    //     return (p.x + offset) + "," + (p.y + offset);
+    //   }).join(' ')) + "' stroke='" + shape.strokeColor + "' stroke-width='" + shape.strokeWidth + "' />");
+    // return "<rect x='" + x + "' y='" + y + "' width='" + width + "' height='" + height + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
   });
 
 defineSVGRenderer('SelectionBox', function(shape) {
@@ -3148,12 +3158,13 @@ defineSVGRenderer('SelectionBox', function(shape) {
 });
 
 defineSVGRenderer('Ellipse', function(shape) {
-  var centerX, centerY, halfHeight, halfWidth;
+  var centerX, centerY, halfHeight, halfWidth, radius;
   halfWidth = Math.floor(shape.width / 2);
   halfHeight = Math.floor(shape.height / 2);
-  centerX = shape.x + halfWidth;
-  centerY = shape.y + halfHeight;
-  return "<ellipse cx='" + centerX + "' cy='" + centerY + "' rx='" + (Math.abs(halfWidth)) + "' ry='" + (Math.abs(halfHeight)) + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
+  radius = Math.min(Math.abs(halfWidth), Math.abs(halfHeight))
+  centerX = shape.x + radius;
+  centerY = shape.y + radius;
+  return "<ellipse cx='" + centerX + "' cy='" + centerY + "' rx='" + radius + "' ry='" + radius + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
 });
 
 defineSVGRenderer('Image', function(shape) {
@@ -3348,7 +3359,16 @@ util = {
   renderShapesToSVG: function(shapes, arg, backgroundColor) {
     var height, width, x, y;
     x = arg.x, y = arg.y, width = arg.width, height = arg.height;
-    return ("<svg xmlns='http://www.w3.org/2000/svg' width='" + width + "' height='" + height + "' viewBox='0 0 " + width + " " + height + "'> <rect width='" + width + "' height='" + height + "' x='0' y='0' fill='" + backgroundColor + "' /> <g transform='translate(" + (-x) + ", " + (-y) + ")'> " + (shapes.map(renderShapeToSVG).join('')) + " </g> </svg>").replace(/(\r\n|\n|\r)/gm, "");
+
+    let min = 500;
+    let max = 0;
+    for (let i of shapes) {
+        console.log(i)
+        min = Math.min(min, i.x-i.width)
+        max = Math.max(max, i.x)
+    }
+    width2=max-min;
+    return ("<svg xmlns='http://www.w3.org/2000/svg' width='" + width2 + "' height='" + height + "' viewBox='0 0 " + width2 + " " + height + "'> <rect width='" + width + "' height='" + height + "' x='0' y='0' fill='" + backgroundColor + "' /> <g transform='translate(" + (-x) + ", " + (-y) + ")'> " + (shapes.map(renderShapeToSVG).join('')) + " </g> </svg>").replace(/(\r\n|\n|\r)/gm, "");
   },
   getBoundingRect: function(rects, width, height) {
     var i, len, maxX, maxY, minX, minY, rect;
@@ -4476,7 +4496,7 @@ module.exports = Text = (function(superClass) {
 
   function Text() {
     this.text = '';
-    this.font = 'bold 18px sans-serif';
+    this.font = 'bold 32px sans-serif';
     this.currentShape = null;
     this.currentShapeState = null;
     this.initialShapeBoundingRect = null;

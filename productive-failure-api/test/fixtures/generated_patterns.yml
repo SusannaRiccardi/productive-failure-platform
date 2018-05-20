@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reconstruct_pattern_id: MyString
+  pattern: MyString
+  productive_failure_id: MyString
+
+two:
+  reconstruct_pattern_id: MyString
+  pattern: MyString
+  productive_failure_id: MyString
