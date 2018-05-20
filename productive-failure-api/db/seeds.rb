@@ -19,3 +19,11 @@ patterns = Pattern.create(
         }
     ]
 )
+
+# iteration_consolidations = IterationConsolidation.create(
+#     [
+#         {
+#             pattern: 
+#         }
+#     ]
+# )

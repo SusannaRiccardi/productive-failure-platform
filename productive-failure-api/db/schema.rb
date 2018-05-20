@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509144949) do
+ActiveRecord::Schema.define(version: 20180520083250) do
 
   create_table "activity_patterns", force: :cascade do |t|
     t.string "productive_failure_id"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20180509144949) do
     t.string "reconstruct_pattern_id"
     t.string "pattern"
     t.string "productive_failure_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "iteration_consolidations", force: :cascade do |t|
+    t.string "pattern"
+    t.string "rep1"
+    t.string "rep2"
+    t.string "rep3"
+    t.string "rep4"
+    t.string "rep5"
+    t.string "rep6"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
