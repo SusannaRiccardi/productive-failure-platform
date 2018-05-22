@@ -276,3 +276,27 @@ svg {
 .consolidation-container {
     margin: 20px;
 }
+
+.consolidation-pattern--pattern {
+    display: flex;
+    justify-content: space-around;
+}
+
+.consolidation-rankings {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.consolidation-rankings-representation {
+    flex: 1 0 40%;
+    margin: 20px;
+}
+
+.consolidation-pattern {
+    width: 60%;
+    margin: auto;
+}
+
+.consolidation-representation-body {
+    height: 200px;
+}
