@@ -40,10 +40,7 @@ export default class ConsolidationPattern extends Component {
     
     render() {
         return (
-            <Panel bsStyle="info" className="consolidation-pattern">
-                <Panel.Heading>
-                    <Panel.Title componentClass="h3">Pattern</Panel.Title>
-                </Panel.Heading>
+            <Panel className="consolidation-pattern">
                 <Panel.Body>
                     <div className="consolidation-pattern--pattern">
                         {this.renderPattern()}
