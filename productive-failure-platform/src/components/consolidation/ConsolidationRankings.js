@@ -9,7 +9,7 @@ export default class ConsolidationRankings extends Component {
         super(props);
 
         this.state = {
-            representations: [],
+            representations: props.representations,
             gridElements: 6
         }
 
@@ -18,21 +18,6 @@ export default class ConsolidationRankings extends Component {
         this.getItemStyle = this.getItemStyle.bind(this);
         this.getListStyle = this.getListStyle.bind(this);
         this.renderRepresentation = this.renderRepresentation.bind(this);
-    }
-
-    componentDidMount() {
-        // Create array of representations
-        let representations = [];
-        for (let i = 1; i < 7; i++) {
-            let rep = {
-                id: i,
-                svg: this.props.consolidation[`rep${i}`]
-            }
-            representations.push(rep)
-        }
-        this.setState({
-            representations: representations
-        })
     }
     
     onDragEnd(result) {

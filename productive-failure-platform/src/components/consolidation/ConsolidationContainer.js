@@ -13,9 +13,11 @@ export default class ConsolidationContainer extends Component {
 
         this.state = {
             showModal : true,
-            consolidation : {}
+            consolidation : {},
+            representations : []
         }
 
+        this.shuffleRepresentations = this.shuffleRepresentations.bind(this);
         this.handleOpenCloseModal = this.handleOpenCloseModal.bind(this);
         this.handleSubmitRepresentations = this.handleSubmitRepresentations.bind(this);
     }
@@ -23,11 +25,40 @@ export default class ConsolidationContainer extends Component {
     componentDidMount() {
         axios.get(`http://localhost:3001/api/v1/iteration_consolidations`)
         .then(res => {
+            // Create array of representations
+            let representations = [];
+            for (let i = 1; i < 7; i++) {
+                let rep = {
+                    id: i,
+                    svg: res.data[`rep${i}`]
+                }
+                representations.push(rep)
+            }
+            
+            let shuffledRepresentations = this.shuffleRepresentations(representations)
+
             this.setState({
-                consolidation: res.data
+                consolidation: res.data,
+                representations: shuffledRepresentations
             })
         })
         .catch(err => console.log(err))
+    }
+
+    // Taken from StackOverflow (https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)
+    // Function to shuffle representations
+    shuffleRepresentations(representations) {
+        var currentIndex = representations.length, temporaryValue, randomIndex;
+        
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            temporaryValue = representations[currentIndex];
+            representations[currentIndex] = representations[randomIndex];
+            representations[randomIndex] = temporaryValue;
+        } 
+        return representations;
     }
 
     handleOpenCloseModal() {
@@ -57,9 +88,9 @@ export default class ConsolidationContainer extends Component {
                             />
                         )}
 
-                        {!_.isEmpty(this.state.consolidation) && (
+                        {!_.isEmpty(this.state.representations) && (
                             <ConsolidationRankings 
-                                consolidation={this.state.consolidation}
+                                representations={this.state.representations}
                                 handleOpenTutorial={this.handleOpenCloseModal}
                                 handleSubmitRepresentations={this.handleSubmitRepresentations}
                             />
