@@ -10,7 +10,7 @@ export default class ConsolidationRankings extends Component {
 
         this.state = {
             representations: [],
-            gridElements: 8
+            gridElements: 6
         }
 
         this.onDragEnd = this.onDragEnd.bind(this);
@@ -78,7 +78,8 @@ export default class ConsolidationRankings extends Component {
             {
                 background: isDraggingOver ? 'lightblue' : '',
                 padding: this.state.gridElements,
-                width: 400,
+                width: 500,
+                margin: 'auto'
             }
         )
     }

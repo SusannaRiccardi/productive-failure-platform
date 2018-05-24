@@ -282,21 +282,16 @@ svg {
     justify-content: space-around;
 }
 
-.consolidation-rankings {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.consolidation-rankings-representation {
-    flex: 1 0 40%;
-    margin: 20px;
-}
-
 .consolidation-pattern {
-    width: 60%;
+    width: 65%;
+    margin: 20px auto;
+}
+
+.ConsolidationRankings--container {
+    width: 80%;
     margin: auto;
 }
 
-.consolidation-representation-body {
-    height: 200px;
+.ConsolidationRankings--representation {
+    margin-bottom: 0;
 }
