@@ -295,3 +295,9 @@ svg {
 .ConsolidationRankings--representation {
     margin-bottom: 0;
 }
+
+.ConsolidationRankings--buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}

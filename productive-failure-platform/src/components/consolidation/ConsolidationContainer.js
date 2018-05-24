@@ -17,6 +17,7 @@ export default class ConsolidationContainer extends Component {
         }
 
         this.handleOpenCloseModal = this.handleOpenCloseModal.bind(this);
+        this.handleSubmitRepresentations = this.handleSubmitRepresentations.bind(this);
     }
 
     componentDidMount() {
@@ -33,6 +34,10 @@ export default class ConsolidationContainer extends Component {
         this.setState({
             showModal : !this.state.showModal
         })
+    }
+
+    handleSubmitRepresentations(representations) {
+        console.log(representations)
     }
 
     render() {
@@ -56,6 +61,7 @@ export default class ConsolidationContainer extends Component {
                             <ConsolidationRankings 
                                 consolidation={this.state.consolidation}
                                 handleOpenTutorial={this.handleOpenCloseModal}
+                                handleSubmitRepresentations={this.handleSubmitRepresentations}
                             />
                         )}
                     </div>

@@ -133,9 +133,9 @@ export default class ConsolidationRankings extends Component {
                     </Panel.Body>
                 </Panel>
 
-                <div className="info-buttons">
+                <div className="ConsolidationRankings--buttons">
                     <Button bsStyle="info" onClick={this.props.handleOpenTutorial}>Get info about this step</Button>
-                    <Button bsStyle="primary" onClick={() => console.log('todo submit')}>Submit</Button>
+                    <Button bsStyle="primary" onClick={() => this.props.handleSubmitRepresentations(this.state.representations)}>Submit</Button>
                 </div>
             </DragDropContext>
         );
