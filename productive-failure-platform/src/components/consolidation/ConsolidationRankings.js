@@ -134,7 +134,7 @@ export default class ConsolidationRankings extends Component {
                 </Panel>
 
                 <div className="info-buttons">
-                    <Button bsStyle="info" onClick={() => console.log('todo info')}>Get info about this step</Button>
+                    <Button bsStyle="info" onClick={this.props.handleOpenTutorial}>Get info about this step</Button>
                     <Button bsStyle="primary" onClick={() => console.log('todo submit')}>Submit</Button>
                 </div>
             </DragDropContext>

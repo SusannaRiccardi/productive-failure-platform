@@ -55,6 +55,7 @@ export default class ConsolidationContainer extends Component {
                         {!_.isEmpty(this.state.consolidation) && (
                             <ConsolidationRankings 
                                 consolidation={this.state.consolidation}
+                                handleOpenTutorial={this.handleOpenCloseModal}
                             />
                         )}
                     </div>
