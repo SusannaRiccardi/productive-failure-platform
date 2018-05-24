@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Panel, DropdownButton, MenuItem } from 'react-bootstrap';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Panel, Button } from 'react-bootstrap';
 var _ = require('lodash');
 
 
@@ -9,70 +10,133 @@ export default class ConsolidationRankings extends Component {
 
         this.state = {
             representations: [],
-            rankings: {}
+            gridElements: 8
         }
-        this.renderRepresentations = this.renderRepresentations.bind(this);
-        this.updateRanking = this.updateRanking.bind(this);
-    }  
-    
+
+        this.onDragEnd = this.onDragEnd.bind(this);
+        this.reorderElements = this.reorderElements.bind(this);
+        this.getItemStyle = this.getItemStyle.bind(this);
+        this.getListStyle = this.getListStyle.bind(this);
+        this.renderRepresentation = this.renderRepresentation.bind(this);
+    }
+
     componentDidMount() {
+        // Create array of representations
         let representations = [];
-        let rankings = {}
         for (let i = 1; i < 7; i++) {
             let rep = {
-                rep: i,
+                id: i,
                 svg: this.props.consolidation[`rep${i}`]
             }
             representations.push(rep)
-            rankings[i] = 0
         }
         this.setState({
-            representations: representations,
-            rankings: rankings
-        })
-    }
-
-    renderRepresentations() {
-        return this.state.representations.map(rep => {
-            return (
-                <Panel className={`consolidation-rankings-representation`} bsStyle="info" key={rep.rep}>
-                    <Panel.Body className="consolidation-representation-body">
-                        <div className="consolidation-representation" dangerouslySetInnerHTML={{__html: rep.svg}}/>
-                    </Panel.Body>
-                    {/* Ranking */}
-                    <Panel.Footer>
-                        <DropdownButton
-                            bsStyle="primary"
-                            id={`dropdown-basic`}
-                            title={`Ranking: ${this.state.rankings[rep.rep]}`}
-                        >
-                            <MenuItem eventKey="1" onClick={() => this.updateRanking(rep.rep, 1)}>1</MenuItem>
-                            <MenuItem eventKey="2" onClick={() => this.updateRanking(rep.rep, 2)}>2</MenuItem>
-                            <MenuItem eventKey="3" onClick={() => this.updateRanking(rep.rep, 3)}>3</MenuItem>
-                            <MenuItem eventKey="4" onClick={() => this.updateRanking(rep.rep, 4)}>4</MenuItem>
-                            <MenuItem eventKey="5" onClick={() => this.updateRanking(rep.rep, 5)}>5</MenuItem>
-                            <MenuItem eventKey="6" onClick={() => this.updateRanking(rep.rep, 6)}>6</MenuItem>
-                        </DropdownButton>
-                    </Panel.Footer>
-                </Panel>
-            )
+            representations: representations
         })
     }
     
-    updateRanking(rep, pos) {
-        let newRanking = _.cloneDeep(this.state.rankings);
-        newRanking[rep] = pos;
-
+    onDragEnd(result) {
+        if (!result.destination) {
+            return;
+        }
+      
+        const representations = this.reorderElements(
+            this.state.representations,
+            result.source.index,
+            result.destination.index
+        );
+      
         this.setState({
-            rankings: newRanking
-        })
+            representations,
+        });
+    }
+
+    // Function used to reorder the result
+    reorderElements(list, startIndex, endIndex) {
+        const result = Array.from(list);
+        const [removed] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, removed);
+
+        return result;
+    }
+
+    getItemStyle(isDragging, draggableStyle) { 
+        return (
+            {
+                userSelect: 'none',
+                padding: this.state.gridElements * 2,
+                margin: `0 0 ${this.state.gridElements}px 0`,
+
+                // styles we need to apply on draggables
+                ...draggableStyle
+            }
+        )
+    }
+
+    getListStyle(isDraggingOver) {
+        return (
+            {
+                background: isDraggingOver ? 'lightblue' : '',
+                padding: this.state.gridElements,
+                width: 400,
+            }
+        )
+    }
+
+    renderRepresentation(content) {
+        return (
+            <Panel className={`ConsolidationRankings--representation`}  key={content.id}>
+                <Panel.Body className="ConsolidationRankings--representation__body">
+                    <div className="ConsolidationRankings--representation__svg" dangerouslySetInnerHTML={{__html: content.svg}}/>
+                </Panel.Body>
+            </Panel>
+        )
     }
 
     render() {
         return (
-            <div className="consolidation-rankings">
-                {this.renderRepresentations()}
-            </div>
+            <DragDropContext onDragEnd={this.onDragEnd}>
+                <Panel className="ConsolidationRankings--container" bsStyle="info">
+                    <Panel.Heading className="ConsolidationRankings--heading">
+                        <Panel.Title componentClass="h3">Representations</Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Body className="ConsolidationRankings--body">
+                        <Droppable droppableId="droppable">
+                            {(provided, snapshot) => (
+                                <div
+                                    ref={provided.innerRef}
+                                    style={this.getListStyle(snapshot.isDraggingOver)}>
+                                    {this.state.representations.map((item, index) => (
+                                        <Draggable
+                                            key={item.id}
+                                            draggableId={item.id}
+                                            index={index}>
+                                            {(provided, snapshot) => (
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}
+                                                    style={this.getItemStyle(
+                                                        snapshot.isDragging,
+                                                        provided.draggableProps.style
+                                                    )}>
+                                                    {this.renderRepresentation(item)}
+                                                </div>
+                                            )}
+                                        </Draggable>
+                                    ))}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                    </Panel.Body>
+                </Panel>
+
+                <div className="info-buttons">
+                    <Button bsStyle="info" onClick={() => console.log('todo info')}>Get info about this step</Button>
+                    <Button bsStyle="primary" onClick={() => console.log('todo submit')}>Submit</Button>
+                </div>
+            </DragDropContext>
         );
     }
 }
