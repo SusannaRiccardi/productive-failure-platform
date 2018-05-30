@@ -1,142 +1,3 @@
-// export default class ConsolidationRankings extends Component {
-//     constructor(props) {
-//         super(props);
-
-//         this.state = {
-//             
-//             gridElements: 6
-//         }
-
-//         this.onDragEnd = this.onDragEnd.bind(this);
-//         this.reorderElements = this.reorderElements.bind(this);
-//         this.getItemStyle = this.getItemStyle.bind(this);
-//         this.getListStyle = this.getListStyle.bind(this);
-//         this.renderRepresentation = this.renderRepresentation.bind(this);
-//     }
-    
-//     onDragEnd(result) {
-//         if (!result.destination) {
-//             return;
-//         }
-      
-//         const representations = this.reorderElements(
-//             this.state.representations,
-//             result.source.index,
-//             result.destination.index
-//         );
-      
-//         this.setState({
-//             representations,
-//         });
-//     }
-
-//     // Function used to reorder the result
-//     reorderElements(list, startIndex, endIndex) {
-//         const result = Array.from(list);
-//         const [removed] = result.splice(startIndex, 1);
-//         result.splice(endIndex, 0, removed);
-
-//         return result;
-//     }
-
-//     getItemStyle(isDragging, draggableStyle) { 
-//         return (
-//             {
-                
-//             }
-//         )
-//     }
-
-//     getListStyle(isDraggingOver) {
-//         return (
-//             {
-                
-//             }
-//         )
-//     }
-
-//     render() {
-//         return (
-//             <DragDropContext onDragEnd={this.onDragEnd}>
-//                 <div className="ConsolidationRankings--container">
-//                     <Panel className="ConsolidationRankings--container__placeholders" bsStyle="info">
-//                         <Panel.Heading className="ConsolidationRankings--heading">
-//                             <Panel.Title componentClass="h3">Rankings</Panel.Title>
-//                         </Panel.Heading>
-//                         <Panel.Body className="ConsolidationRankings--body">
-//                             <Droppable droppableId="rank1">
-//                                     {(provided, snapshot) => (
-//                                         <div
-//                                             ref={provided.innerRef}
-//                                             style={this.getListStyle(snapshot.isDraggingOver)}>
-//                                             {this.state.representations.map((item, index) => (
-//                                                 <Draggable
-//                                                     key={item.id}
-//                                                     draggableId={item.id}
-//                                                     index={index}>
-//                                                     {(provided, snapshot) => (
-//                                                         <div
-//                                                             ref={provided.innerRef}
-//                                                             {...provided.draggableProps}
-//                                                             {...provided.dragHandleProps}
-//                                                             style={this.getItemStyle(
-//                                                                 snapshot.isDragging,
-//                                                                 provided.draggableProps.style
-//                                                             )}>
-//                                                             {this.renderRepresentation(item)}
-//                                                         </div>
-//                                                     )}
-//                                                 </Draggable>
-//                                             ))}
-//                                             {provided.placeholder}
-//                                         </div>
-//                                     )}
-//                                 </Droppable>
-//                         </Panel.Body>
-//                     </Panel>
-
-//                     <Panel className="ConsolidationRankings--container__elements" bsStyle="info">
-//                         <Panel.Heading className="ConsolidationRankings--heading">
-//                             <Panel.Title componentClass="h3">Representations</Panel.Title>
-//                         </Panel.Heading>
-//                         <Panel.Body className="ConsolidationRankings--body">
-//                             <Droppable droppableId="droppable">
-//                                 {(provided, snapshot) => (
-//                                     <div
-//                                         ref={provided.innerRef}
-//                                         style={this.getListStyle(snapshot.isDraggingOver)}>
-//                                         {this.state.representations.map((item, index) => (
-//                                             <Draggable
-//                                                 key={item.id}
-//                                                 draggableId={item.id}
-//                                                 index={index}>
-//                                                 {(provided, snapshot) => (
-//                                                     <div
-//                                                         ref={provided.innerRef}
-//                                                         {...provided.draggableProps}
-//                                                         {...provided.dragHandleProps}
-//                                                         style={this.getItemStyle(
-//                                                             snapshot.isDragging,
-//                                                             provided.draggableProps.style
-//                                                         )}>
-//                                                         {this.renderRepresentation(item)}
-//                                                     </div>
-//                                                 )}
-//                                             </Draggable>
-//                                         ))}
-//                                         {provided.placeholder}
-//                                     </div>
-//                                 )}
-//                             </Droppable>
-//                         </Panel.Body>
-//                     </Panel>
-//                 </div>
-
-               
-//             </DragDropContext>
-//         );
-//     }
-// }
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Button, Panel } from 'react-bootstrap';
@@ -159,8 +20,8 @@ export default class ConsolidationRankings extends Component {
         }
 
         this.onDragEnd = this.onDragEnd.bind(this);
+        this.rankElement = this.rankElement.bind(this);
         this.moveElement = this.moveElement.bind(this);
-        this.reorderElements = this.reorderElements.bind(this);
         this.getList = this.getList.bind(this);
         this.getItemStyle = this.getItemStyle.bind(this);
         this.getListStyle = this.getListStyle.bind(this);
@@ -192,109 +53,47 @@ export default class ConsolidationRankings extends Component {
             return;
         }
 
-        console.log(result)
+        if (source.droppableId === 'representations') {
+            if (destination.droppableId !== 'representations') {
+                const movedElement = this.rankElement(
+                    this.getList(source.droppableId),
+                    this.getList(destination.droppableId),
+                    source,
+                    destination
+                )
 
-        // // the element has been dropped into trash
-        // if (destination.droppableId === 'droppable4') {
-        //     if (source.droppableId === 'droppable2') {
-        //         const deleteElement = this.deleteElement(
-        //             this.getList(source.droppableId),
-        //             source.index
-        //         )
+                this.setState({
+                    ...movedElement
+                })
+            }
+        } else {
+            const movedElement = this.moveElement(
+                this.getList(source.droppableId),
+                this.getList(destination.droppableId),
+                source,
+                destination
+            )
 
-        //         this.setState({
-        //             patternOne : deleteElement
-        //         })
-        //     } else if (source.droppableId === 'droppable3') {
-        //         const deleteElement = this.deleteElement(
-        //             this.getList(source.droppableId),
-        //             source.index
-        //         )
-
-        //         this.setState({
-        //             patternTwo : deleteElement
-        //         })
-        //     }
-        // }
-        
-        // if (source.droppableId === "droppable") {
-        //     // Case: move object from elements box to one of the pattern boxes
-        //     if (destination.droppableId === "droppable2" || destination.droppableId === "droppable3") {
-        //         const movedElement = this.moveElement(
-        //             this.getList(source.droppableId),
-        //             this.getList(destination.droppableId),
-        //             source,
-        //             destination
-        //         )
-
-        //         const elements = this.createElements(movedElement.droppable)
-
-        //         if (destination.droppableId === "droppable2") {
-        //             this.setState({
-        //                 elements : elements,
-        //                 patternOne : movedElement.droppable2
-        //             })
-        //         } else {
-        //             this.setState({
-        //                 elements : elements,
-        //                 patternTwo : movedElement.droppable3
-        //             })
-        //         }
-        //     }
-        // } else if (source.droppableId === "droppable2") {
-        //     // Case: move object from pattern one box
-        //     // Case: move the object inside the pattern box
-        //     if (destination.droppableId === source.droppableId) {
-        //         const insideBox = this.reorderElements(
-        //             this.getList(source.droppableId),
-        //             source.index,
-        //             destination.index
-        //         )
-
-        //         this.setState({
-        //             patternOne : insideBox
-        //         })
-        //     } else if (destination.droppableId === "droppable") {
-        //         const deleteElement = this.deleteElement(
-        //             this.getList(source.droppableId),
-        //             source.index
-        //         )
-
-        //         this.setState({
-        //             patternOne : deleteElement
-        //         })
-        //     }
-        // } else {
-        //     // Case: move object from pattern two box
-        //     // Case: move the object inside the pattern box
-        //     if (destination.droppableId === source.droppableId) {
-        //         const insideBox = this.reorderElements(
-        //             this.getList(source.droppableId),
-        //             source.index,
-        //             destination.index
-        //         )
-
-        //         this.setState({
-        //             patternTwo : insideBox
-        //         })
-        //     } else if (destination.droppableId === "droppable") {
-        //         const deleteElement = this.deleteElement(
-        //             this.getList(source.droppableId),
-        //             source.index
-        //         )
-
-        //         this.setState({
-        //             patternTwo : deleteElement
-        //         })
-        //     }
-        // }
+            this.setState({
+                ...movedElement
+            })
+        }
     }
 
-    // Function used to reorder the result
-    reorderElements(list, startIndex, endIndex) {
-        const result = Array.from(list);
-        const [removed] = result.splice(startIndex, 1);
-        result.splice(endIndex, 0, removed);
+    rankElement(source, destination, droppableSource, droppableDestination) {
+        var sourceClone = Array.from(source);
+        var [removed] = sourceClone.splice(droppableSource.index, 1);
+
+        if (destination.length > 0) {
+            sourceClone.push(destination[0]);
+        }
+
+        const destClone = [removed];
+
+        const result = {};
+        result[droppableSource.droppableId] = sourceClone;
+        result[droppableDestination.droppableId] = destClone;
+
         return result;
     }
 
@@ -352,138 +151,6 @@ export default class ConsolidationRankings extends Component {
     render() {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-                {/* <div className="pattern-generation-container"> */}
-                    {/* Pattern one droppable */}
-                    {/* <Panel className="pattern-generation-one" bsStyle="info">
-                        <Panel.Heading className="pattern-generation-one__heading">
-                            <Panel.Title componentClass="h3">Pattern for first representation</Panel.Title>
-                            <Button bsStyle="link" className="pattern-generation-clear" onClick={() => this.clearElements('one')}>Clear</Button>
-                        </Panel.Heading>
-                        <Panel.Body className="pattern-generation-one__body">
-                            <Droppable droppableId="droppable2" direction="horizontal">
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={this.getListStyle(snapshot.isDraggingOver)}>
-                                        {this.state.patternOne.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={this.getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {this.renderShape(item.content)}
-                                                    </div>
-                                                )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                        </Panel.Body>
-                    </Panel> */}
-                    {/* Pattern two droppable */}
-                    {/* <Panel className="pattern-generation-two" bsStyle="info">
-                        <Panel.Heading className="pattern-generation-one__heading">
-                            <Panel.Title componentClass="h3">Pattern for second representation</Panel.Title>
-                            <Button bsStyle="link" className="pattern-generation-clear" onClick={() => this.clearElements('two')}>Clear</Button>
-                        </Panel.Heading>
-                        <Panel.Body className="pattern-generation-two__body">
-                            <Droppable droppableId="droppable3" direction="horizontal">
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={this.getListStyle(snapshot.isDraggingOver)}>
-                                        {this.state.patternTwo.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={this.getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {this.renderShape(item.content)}
-                                                    </div>
-                                                )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                        </Panel.Body>
-                    </Panel> */}
-                {/* </div> */}
-                {/* Elements droppable */}
-                {/* <div className="elements-trash-container"> */}
-                    {/* <Panel className="elements-pattern-generation" bsStyle="info">
-                        <Panel.Heading>
-                            <Panel.Title componentClass="h3">Elements</Panel.Title>
-                        </Panel.Heading>
-                        <Panel.Body className="pattern-generation-two__body">
-                            <Droppable droppableId="droppable" direction="horizontal">
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={this.getElementsStyle(snapshot.isDraggingOver)}>
-                                        {this.state.elements.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={this.getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {this.renderShape(item.content)}
-                                                    </div>
-                                                )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                        </Panel.Body>
-                    </Panel> */}
-                    {/* Trash droppable */}
-                    {/* <Panel bsStyle="info" className="trash-container">
-                        <Panel.Heading>
-                            <Panel.Title componentClass="h3">Trash</Panel.Title>
-                        </Panel.Heading>
-                        <Panel.Body className="pattern-generation-two__body trash-image">
-                            <Droppable droppableId="droppable4" direction="horizontal">
-                                {(provided, snapshot) => (
-                                    <div
-                                        className="trash-pattern-generation"
-                                        ref={provided.innerRef}
-                                        style={this.getTrashStyle(snapshot.isDraggingOver)}>
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                        </Panel.Body>
-                    </Panel> */}
-                {/* </div> */}
                 <div className="ConsolidationRankings--container">
                      <Panel className="ConsolidationRankings--container__placeholders" bsStyle="info">
                          <Panel.Heading className="ConsolidationRankings--heading">
@@ -666,7 +333,7 @@ export default class ConsolidationRankings extends Component {
                             <Panel.Title componentClass="h3">Representations</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body className="ConsolidationRankings--body">
-                            <Droppable droppableId="droppable">
+                            <Droppable droppableId="representations">
                                 {(provided, snapshot) => (
                                     <div
                                         ref={provided.innerRef}
