@@ -25,6 +25,7 @@ export default class ConsolidationRankings extends Component {
         this.getList = this.getList.bind(this);
         this.getItemStyle = this.getItemStyle.bind(this);
         this.getListStyle = this.getListStyle.bind(this);
+        this.getListRankStyle = this.getListRankStyle.bind(this);
         this.renderRepresentation = this.renderRepresentation.bind(this);
     }
 
@@ -67,16 +68,18 @@ export default class ConsolidationRankings extends Component {
                 })
             }
         } else {
-            const movedElement = this.moveElement(
-                this.getList(source.droppableId),
-                this.getList(destination.droppableId),
-                source,
-                destination
-            )
-
-            this.setState({
-                ...movedElement
-            })
+            if (destination.droppableId === 'representations') {
+                const movedElement = this.moveElement(
+                    this.getList(source.droppableId),
+                    this.getList(destination.droppableId),
+                    source,
+                    destination
+                )
+    
+                this.setState({
+                    ...movedElement
+                })
+            }
         }
     }
 
@@ -138,6 +141,17 @@ export default class ConsolidationRankings extends Component {
         )
     }
 
+    getListRankStyle(isDraggingOver) {
+        return (
+            {
+                background: isDraggingOver ? 'lightblue' : '',
+                padding: this.state.gridElements,
+                minHeight: 100,
+                border: '1px solid'
+            }
+        )
+    }
+
     renderRepresentation(content) {
         return (
             <Panel className={`ConsolidationRankings--representation`}  key={content.id}>
@@ -161,7 +175,7 @@ export default class ConsolidationRankings extends Component {
                                 {(provided, snapshot) => (
                                     <div
                                         ref={provided.innerRef}
-                                        style={this.getListStyle(snapshot.isDraggingOver)}>
+                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
                                         {this.state.rank1.map((item, index) => (
                                             <Draggable
                                                 key={item.id}
@@ -189,7 +203,7 @@ export default class ConsolidationRankings extends Component {
                                     {(provided, snapshot) => (
                                     <div
                                         ref={provided.innerRef}
-                                        style={this.getListStyle(snapshot.isDraggingOver)}>
+                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
                                         {this.state.rank2.map((item, index) => (
                                             <Draggable
                                                 key={item.id}
@@ -217,7 +231,7 @@ export default class ConsolidationRankings extends Component {
                                     {(provided, snapshot) => (
                                     <div
                                         ref={provided.innerRef}
-                                        style={this.getListStyle(snapshot.isDraggingOver)}>
+                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
                                         {this.state.rank3.map((item, index) => (
                                             <Draggable
                                                 key={item.id}
@@ -245,7 +259,7 @@ export default class ConsolidationRankings extends Component {
                                 {(provided, snapshot) => (
                                     <div
                                         ref={provided.innerRef}
-                                        style={this.getListStyle(snapshot.isDraggingOver)}>
+                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
                                         {this.state.rank4.map((item, index) => (
                                             <Draggable
                                                 key={item.id}
@@ -273,7 +287,7 @@ export default class ConsolidationRankings extends Component {
                                     {(provided, snapshot) => (
                                     <div
                                         ref={provided.innerRef}
-                                        style={this.getListStyle(snapshot.isDraggingOver)}>
+                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
                                         {this.state.rank5.map((item, index) => (
                                             <Draggable
                                                 key={item.id}
@@ -301,7 +315,7 @@ export default class ConsolidationRankings extends Component {
                                     {(provided, snapshot) => (
                                     <div
                                         ref={provided.innerRef}
-                                        style={this.getListStyle(snapshot.isDraggingOver)}>
+                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
                                         {this.state.rank6.map((item, index) => (
                                             <Draggable
                                                 key={item.id}
