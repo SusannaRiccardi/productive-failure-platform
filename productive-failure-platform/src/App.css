@@ -287,11 +287,6 @@ svg {
     margin: 20px auto;
 }
 
-.ConsolidationRankings--container {
-    width: 80%;
-    margin: auto;
-}
-
 .ConsolidationRankings--representation {
     margin-bottom: 0;
 }
@@ -300,4 +295,18 @@ svg {
     display: flex;
     justify-content: space-between;
     margin: 20px;
+}
+
+.ConsolidationRankings--container {
+    display: flex;
+}
+
+.ConsolidationRankings--container__placeholders {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.ConsolidationRankings--container__elements {
+    flex: 1;
+    margin-left: 10px;
 }
