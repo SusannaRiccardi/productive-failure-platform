@@ -45,16 +45,16 @@ export default class GenerationOneTutorial extends Component {
                         <div className="tutorial-pattern-container">
                             <div className="tutorial-pattern">
                                 <h4>Example</h4>
-                                <img className="tutorial-pattern-image" src={example1} />
+                                <img className="tutorial-pattern-image" src={example1} alt="example one"/>
                             </div>
                             <div className="tutorial-patterns-examples">
                                 <div className="tutorial-pattern-column">
                                     <p className="tutorial-text"><b>Bad</b></p>
-                                    <img className="tutorial-pattern-image-special" src={example1} />
+                                    <img className="tutorial-pattern-image-special" src={example1} alt="example two"/>
                                 </div>
                                 <div className="tutorial-pattern-column">
                                     <p className="tutorial-text"><b>Good</b></p>
-                                    <img className="tutorial-pattern-image" src={example2} />
+                                    <img className="tutorial-pattern-image" src={example2} alt="example three"/>
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
-var _ = require('lodash');
 
 
 // Main page: login or home
@@ -12,6 +11,7 @@ export default class PatternDescription extends Component {
         this.renderPattern = this.renderPattern.bind(this);
     }
 
+    // TODO: remove warning from this function
     renderPattern(givenPattern) {
         let patternArray = givenPattern.pattern.split('-');
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, Modal, Button } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import axios from 'axios';
 import PatternGeneration from './PatternGeneration';
 import GenerationTwoTutorial from './GenerationTwoTutorial';

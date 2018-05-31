@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
-var _ = require('lodash');
 
 
 export default class ConsolidationSolutions extends Component {

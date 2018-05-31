@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Button, Panel } from 'react-bootstrap';
-var _ = require('lodash');
 
 
 export default class ConsolidationRankings extends Component {

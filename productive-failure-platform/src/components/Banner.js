@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, ProgressBar } from 'react-bootstrap';
-var _ = require('lodash');
+import { Navbar, ProgressBar } from 'react-bootstrap';
 
 
 export default class Banner extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PatternDescription from './PatternDescription';
 import GenerationOneSolutions from './GenerationOneSolutions';
 import axios from 'axios';
-import { Modal, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import GenerationOneTutorial from './GenerationOneTutorial';
 import Banner from '../Banner';
 var _ = require('lodash');

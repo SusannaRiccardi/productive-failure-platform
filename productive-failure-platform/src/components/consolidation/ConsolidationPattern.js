@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
-var _ = require('lodash');
 
 
 export default class ConsolidationPattern extends Component {
@@ -11,6 +10,7 @@ export default class ConsolidationPattern extends Component {
         this.renderPattern = this.renderPattern.bind(this);
     }
 
+    // TODO: remove warning from this function
     renderPattern() {
         let patternArray = this.props.pattern.split('-');
 
