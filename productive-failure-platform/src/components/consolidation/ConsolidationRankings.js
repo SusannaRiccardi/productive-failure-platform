@@ -27,6 +27,7 @@ export default class ConsolidationRankings extends Component {
         this.getListStyle = this.getListStyle.bind(this);
         this.getListRankStyle = this.getListRankStyle.bind(this);
         this.renderRepresentation = this.renderRepresentation.bind(this);
+        this.generateRanking = this.generateRanking.bind(this);
     }
 
     /**
@@ -160,6 +161,17 @@ export default class ConsolidationRankings extends Component {
                 </Panel.Body>
             </Panel>
         )
+    }
+
+    generateRanking() {
+        let representations = []
+
+        for (let i = 1; i <= 6; i++) {
+            let rep = this.state[`rank${i}`][0]
+            representations.push(rep)
+        }
+
+        this.props.handleSubmitRepresentations(representations)
     }
 
     render() {
@@ -381,7 +393,7 @@ export default class ConsolidationRankings extends Component {
 
                  <div className="ConsolidationRankings--buttons">
                     <Button bsStyle="info" onClick={this.props.handleOpenTutorial}>Get info about this step</Button>
-                    <Button bsStyle="primary" onClick={() => this.props.handleSubmitRepresentations(this.state.representations)}>Submit</Button>
+                    <Button bsStyle="primary" onClick={() => this.generateRanking()}>Submit</Button>
                 </div>
             </DragDropContext>
         );
