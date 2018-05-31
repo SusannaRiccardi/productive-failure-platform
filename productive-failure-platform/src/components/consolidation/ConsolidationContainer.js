@@ -4,6 +4,7 @@ import ConsolidationTutorial from './ConsolidationTutorial';
 import axios from 'axios';
 import ConsolidationPattern from './ConsolidationPattern';
 import ConsolidationRankings from './ConsolidationRankings';
+import ConsolidationSolutions from './ConsolidationSolutions';
 var _ = require('lodash');
 
 
@@ -14,7 +15,9 @@ export default class ConsolidationContainer extends Component {
         this.state = {
             showModal : true,
             consolidation : {},
-            representations : []
+            representations : [],
+            isEditRanking : true,
+            submittedRepresentations : []
         }
 
         this.shuffleRepresentations = this.shuffleRepresentations.bind(this);
@@ -85,7 +88,10 @@ export default class ConsolidationContainer extends Component {
 
         axios.post('http://localhost:3001/api/v1/iteration_consolidation_solutions', iterationSolution)
         .then(res => {
-            console.log(res)
+            this.setState({
+                submittedRepresentations: representations,
+                isEditRanking: false
+            })
         })
         .catch(err => console.log(err))
     }
@@ -106,12 +112,18 @@ export default class ConsolidationContainer extends Component {
                                 pattern={this.state.consolidation.pattern}
                             />
                         )}
-
-                        {!_.isEmpty(this.state.representations) && (
-                            <ConsolidationRankings 
-                                representations={this.state.representations}
-                                handleOpenTutorial={this.handleOpenCloseModal}
-                                handleSubmitRepresentations={this.handleSubmitRepresentations}
+                        
+                        {this.state.isEditRanking ? (
+                            !_.isEmpty(this.state.representations) && (
+                                <ConsolidationRankings 
+                                    representations={this.state.representations}
+                                    handleOpenTutorial={this.handleOpenCloseModal}
+                                    handleSubmitRepresentations={this.handleSubmitRepresentations}
+                                />
+                            )
+                        ) : (
+                            <ConsolidationSolutions 
+                                representations={this.state.submittedRepresentations}
                             />
                         )}
                     </div>
