@@ -289,6 +289,17 @@ svg {
 
 .ConsolidationRankings--representation {
     margin-bottom: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.ConsolidationRankings--container__elements {
+    height: 70vh;
+}
+
+.ConsolidationRankings--representation__body, .ConsolidationRankings--representation__svg {
+    height: 100%;
+    width: 100%;
 }
 
 .ConsolidationRankings--buttons {
@@ -304,9 +315,14 @@ svg {
 .ConsolidationRankings--container__placeholders {
     flex: 1;
     margin-right: 10px;
+    height: 70vh;
 }
 
 .ConsolidationRankings--container__elements {
     flex: 1;
     margin-left: 10px;
+}
+
+.ConsolidationRankings--body {
+    height: 94%;
 }

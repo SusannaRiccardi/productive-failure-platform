@@ -125,6 +125,7 @@ export default class ConsolidationRankings extends Component {
                 userSelect: 'none',
                 padding: this.state.gridElements * 2,
                 margin: `0 0 ${this.state.gridElements}px 0`,
+                height: 200,                
 
                 // styles we need to apply on draggables
                 ...draggableStyle
@@ -136,7 +137,8 @@ export default class ConsolidationRankings extends Component {
         return (
             {
                 background: isDraggingOver ? 'lightblue' : '',
-                padding: this.state.gridElements
+                overflow: 'auto',
+                height: '100%'
             }
         )
     }
