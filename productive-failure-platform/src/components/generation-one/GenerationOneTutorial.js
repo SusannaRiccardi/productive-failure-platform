@@ -27,59 +27,44 @@ export default class GenerationOneTutorial extends Component {
         return (
             <Modal show={this.props.open} onHide={this.close}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Productive Failure activity - generation, step one</Modal.Title>
+                    <Modal.Title>Step 1: Identify and Describe Patterns</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                {this.state.step === 0 ? (
-                    <div className="tutorial-container">
-                        <h3 className="tutorial-title">Welcome!</h3>
-                        <p className="tutorial-text">You are starting an activity specifically designed to teach you the concept of iteration.</p>
-                        <p className="tutorial-text">At the end of it, you should have a clear understanding of the concept of <b>iteration</b>.</p>
-                    </div>
-                ) : (this.state.step === 1 && (
-                    <div className="tutorial-container">
-                        <h4>How it works</h4>
-                        <p className="tutorial-text">In this step, you are going to see <b>two patterns</b> composed of shapes.</p>
-                        <p className="tutorial-text">Your <b>goal</b> is to describe this pattern in the best way possible, without describing it literally.</p>
-
-                        <div className="tutorial-pattern-container">
-                            <div className="tutorial-pattern">
-                                <h4>Example</h4>
-                                <img className="tutorial-pattern-image" src={example1} alt="example one"/>
-                            </div>
-                            <div className="tutorial-patterns-examples">
-                                <div className="tutorial-pattern-column">
-                                    <p className="tutorial-text"><b>Bad</b></p>
-                                    <img className="tutorial-pattern-image-special" src={example1} alt="example two"/>
-                                </div>
-                                <div className="tutorial-pattern-column">
-                                    <p className="tutorial-text"><b>Good</b></p>
-                                    <img className="tutorial-pattern-image" src={example2} alt="example three"/>
-                                </div>
-                            </div>
+                    {this.state.step === 0 ? (
+                        <div className="tutorial-container">
+                            <h3 className="tutorial-title">Welcome!</h3>
+                            <p className="tutorial-text">You are starting an activity specifically designed to teach you the concept of iteration.</p>
+                            <p className="tutorial-text">At the end of it, you should have a clear understanding of the concept of <b>iteration</b>.</p>
                         </div>
+                    ) : (this.state.step === 1 && (
+                        <div className="tutorial-container">
+                            <h4>How it works</h4>
+                            <p className="tutorial-text">In this step, you are going to see <b>two patterns</b> composed of shapes.</p>
+                            <p className="tutorial-text">Your <b>goal</b> is to describe this pattern in the best way possible, without describing it literally.</p>
 
-                        <p className="tutorial-text">You can select the <b>tools</b> from the elements section, and you can draw in the boxes for the representations.</p>
+                            <p className="tutorial-text">Try to describe it in the most efficient way you can think of.</p>
 
-                        <p className="tutorial-text">For each pattern, you can provide multiple representations.</p>
-                        <p className="tutorial-text">To make things interesting, you will have <b>constraints</b>, meaning that you will have to draw without
-                            using certain tools.
-                        </p>
+                            <p className="tutorial-text">You can select the <b>tools</b> from the elements section, and you can draw in the boxes for the representations.</p>
 
-                        <p className="tutorial-text">Try to add one representation per pattern for every constraint.</p>
-                        <p className="tutorial-text">You can use the back and next buttons to move between your representations.</p>
-                        <p className="tutorial-text">Once you think you reach the last representation, you can click on the <b>finish</b> button to go to next step.</p>
+                            <p className="tutorial-text">For each pattern, you can provide multiple representations.</p>
+                            <p className="tutorial-text">To make things interesting, you will have <b>constraints</b>, meaning that you will have to draw without
+                                using certain tools.
+                            </p>
+
+                            <p className="tutorial-text">Try to add one representation per pattern for every constraint.</p>
+                            <p className="tutorial-text">You can use the back and next buttons to move between your representations.</p>
+                            <p className="tutorial-text">Once you think you reach the last representation, you can click on the <b>finish</b> button to go to next step.</p>
+                        </div>
+                    ))}
+                    <div className="representations-buttons">
+                        {this.state.step === 1 && (
+                            <Button onClick={() => this.setState({step : 0})} className="representation-button">Back</Button>
+                        )}
+                        {this.state.step === 0 && (
+                            <Button onClick={() => this.setState({step : 1})} className="representation-button">Next</Button>
+                        )}
+                        <Button bsStyle="primary" onClick={this.close}>Got it</Button>
                     </div>
-                ))}
-                <div className="representations-buttons">
-                    {this.state.step === 1 && (
-                        <Button onClick={() => this.setState({step : 0})} className="representation-button">Back</Button>
-                    )}
-                    {this.state.step === 0 && (
-                        <Button onClick={() => this.setState({step : 1})} className="representation-button">Next</Button>
-                    )}
-                    <Button bsStyle="primary" onClick={this.close}>Got it</Button>
-                </div>
                 </Modal.Body>
             </Modal>
         )
