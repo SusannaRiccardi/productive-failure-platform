@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
 import { Button, Panel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 var _ = require('lodash');
 var counter = 0;
@@ -30,7 +31,7 @@ export default class PatternGeneration extends Component {
         this.getTrashStyle = this.getTrashStyle.bind(this);
         this.renderShape = this.renderShape.bind(this);
         this.clearElements = this.clearElements.bind(this);
-        this.goToNextStep = this.goToNextStep.bind(this);
+        this.saveGenerationTwo = this.saveGenerationTwo.bind(this);
         this.generatePattern = this.generatePattern.bind(this);
     }
 
@@ -315,7 +316,7 @@ export default class PatternGeneration extends Component {
         }
     }
 
-    goToNextStep() {
+    saveGenerationTwo() {
         // TODO: look at better way to have id of productive failure activity
         let url = window.location.href;
         let splitString = _.split(url, '/');
@@ -507,7 +508,13 @@ export default class PatternGeneration extends Component {
                 <div className="info-buttons">
                     <Button bsStyle="info" onClick={this.props.handleOpenCloseModal}>Get info about this step</Button>
 
-                    {(this.state.patternOne.length > 0 && this.state.patternTwo.length > 0) && <Button bsStyle="primary" onClick={this.goToNextStep}>Finish</Button>}
+                    {(this.state.patternOne.length > 0 && this.state.patternTwo.length > 0) && (
+                        <Link to={`consolidation`}>
+                            <Button className="representation-button" bsStyle="primary" onClick={this.saveGenerationTwo}>
+                                Finish
+                            </Button>                    
+                        </Link>
+                    )}
                 </div>
             </DragDropContext>
         );
