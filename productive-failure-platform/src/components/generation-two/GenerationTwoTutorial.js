@@ -8,7 +8,7 @@ export default class GenerationTwoTutorial extends Component {
         return (
             <Modal show={this.props.open} onHide={this.props.close}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Productive Failure activity - generation, step two</Modal.Title>
+                    <Modal.Title>Step 2: Interpret Pattern Descriptions</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="tutorial-container">
