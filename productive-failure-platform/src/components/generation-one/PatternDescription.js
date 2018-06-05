@@ -19,19 +19,19 @@ export default class PatternDescription extends Component {
             if (shape === "circle") {
                 return (
                     <div className="pattern--circle" key={id}>
-                        <Circle r={15} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        <Circle r={15} fill={{color:'#fac863'}} stroke={{color:'#fac863'}} strokeWidth={3} />
                     </div>
                 )
             } else if (shape === "triangle") {
                 return (
                     <div className="pattern--triangle" key={id}>
-                        <Triangle width={30} height={30} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        <Triangle width={30} height={30} fill={{color:'#d9534f'}} stroke={{color:'#d9534f'}} strokeWidth={3} />
                     </div>
                 )
             } else if (shape === "square") {
                 return (
                     <div className="pattern--square" key={id}>
-                        <Rectangle width={30} height={30} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        <Rectangle width={30} height={30} fill={{color:'#5cb85c'}} stroke={{color:'#5cb85c'}} strokeWidth={3} />
                     </div>
                 )
             }
@@ -42,7 +42,7 @@ export default class PatternDescription extends Component {
     render() {
         return (
             <div className="pattern-description-container">
-                <Panel bsStyle="info" className="pattern-description-one">
+                <Panel bsStyle="primary" className="pattern-description-one">
                     <Panel.Heading>
                         <Panel.Title componentClass="h3">First pattern</Panel.Title>
                     </Panel.Heading>
@@ -52,7 +52,7 @@ export default class PatternDescription extends Component {
                         </div>
                     </Panel.Body>
                 </Panel>
-                <Panel bsStyle="info" className="pattern-description-two">
+                <Panel bsStyle="primary" className="pattern-description-two">
                     <Panel.Heading>
                         <Panel.Title componentClass="h3">Second pattern</Panel.Title>
                     </Panel.Heading>

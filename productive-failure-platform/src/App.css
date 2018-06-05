@@ -20,7 +20,7 @@
 }
 
 .active {
-    background-color: rgb(179, 222, 229);
+    background-color:#5bc0dea8;
 }
 
 .pattern-description-container {
@@ -60,6 +60,7 @@
 .generation-one-elements__body {
     display: flex;
     justify-content: space-between;
+    padding: 10px;
 }
 
 .pattern-description-two {
@@ -68,8 +69,8 @@
 }
 
 .pencil, .eraser, .line, .rectangle, .ellipse, .arrow, .text, .undo, .redo, .triangle {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     margin: 10px;
 }
 
@@ -96,7 +97,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 15px;
     height: 80%;
 }
 
