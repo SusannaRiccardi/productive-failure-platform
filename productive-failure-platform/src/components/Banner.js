@@ -5,25 +5,22 @@ import { Navbar, ProgressBar } from 'react-bootstrap';
 export default class Banner extends Component {
     constructor(props) {
         super(props);
-        
-        this.state = {
-            step : this.findStep(props)
-        }
 
-        this.findStep = this.findStep.bind(this);
+        this.renderStep = this.renderStep.bind(this);
     }
 
-    findStep(props) {
-        let step = 1;
-        if (props.step === 1) {
-            step = 33
-        } else if (props.step === 2) {
-            step = 66
-        } else if (props.step === 3) {
-            step = 100
+    renderStep(step) {
+        switch (step) {
+            case 1:
+                return "Identify and Describe Patterns";
+                break;
+            case 2:
+                return "Interpret Pattern Descriptions";
+                break;
+            case 3: 
+                return "Combine Insights from Different Solutions";
+                break;
         }
-
-        return step;
     }
     
     render() {
@@ -34,7 +31,9 @@ export default class Banner extends Component {
                         Productive Failure
                     </Navbar.Brand>
                 </Navbar.Header>
-                <ProgressBar label={`Progress: ${this.props.step} / 3`} now={this.state.step} />
+                <Navbar.Text>
+                    Step <b>{this.props.step} / 3</b>: {this.renderStep(this.props.step)}
+                </Navbar.Text>
             </Navbar>
         );
     }
