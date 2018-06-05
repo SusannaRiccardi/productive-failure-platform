@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Button, Panel } from 'react-bootstrap';
+import { Button, Panel, Well } from 'react-bootstrap';
 
 
 export default class ConsolidationRankings extends Component {
@@ -125,7 +125,7 @@ export default class ConsolidationRankings extends Component {
                 userSelect: 'none',
                 padding: this.state.gridElements * 2,
                 margin: `0 0 ${this.state.gridElements}px 0`,
-                height: 200,                
+                height: 200,
 
                 // styles we need to apply on draggables
                 ...draggableStyle
@@ -143,13 +143,13 @@ export default class ConsolidationRankings extends Component {
         )
     }
 
-    getListRankStyle(isDraggingOver) {
+    getListRankStyle(isDraggingOver, rank, number) {
         return (
             {
-                background: isDraggingOver ? 'lightblue' : '',
+                // background: isDraggingOver ? 'lightblue' : '',
                 padding: this.state.gridElements,
-                minHeight: 100,
-                border: '1px solid'
+                height: 200,
+                backgroundImage: rank.length === 0 ? `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='120px'><text x='0' y='15' fill='red' font-size='20'>${number}</text></svg>")` : ``,
             }
         )
     }
@@ -179,183 +179,195 @@ export default class ConsolidationRankings extends Component {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className="ConsolidationRankings--container">
-                     <Panel className="ConsolidationRankings--container__placeholders" bsStyle="info">
+                     <Panel className="ConsolidationRankings--container__placeholders" bsStyle="primary">
                          <Panel.Heading className="ConsolidationRankings--heading">
                              <Panel.Title componentClass="h3">Rankings</Panel.Title>
                          </Panel.Heading>
-                         <Panel.Body className="ConsolidationRankings--body">
-                            <Droppable droppableId="rank1">
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
-                                        {this.state.rank1.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={this.getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {this.renderRepresentation(item)}
-                                                    </div>
-                                                )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                            <Droppable droppableId="rank2">
+                         <Panel.Body className="ConsolidationRankings--body__placeholders">
+                            <Well bsSize="small">
+                                <Droppable droppableId="rank1">
                                     {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
-                                        {this.state.rank2.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={this.getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {this.renderRepresentation(item)}
-                                                    </div>
-                                                )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                            <Droppable droppableId="rank3">
+                                        <div
+                                            ref={provided.innerRef}
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank1, 1)}>
+                                            {this.state.rank1.map((item, index) => (
+                                                <Draggable
+                                                    key={item.id}
+                                                    draggableId={item.id}
+                                                    index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            style={this.getItemStyle(
+                                                                snapshot.isDragging,
+                                                                provided.draggableProps.style
+                                                            )}>
+                                                            {this.renderRepresentation(item)}
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </Well>
+                            <Well bsSize="small">
+                                <Droppable droppableId="rank2">
                                     {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
-                                        {this.state.rank3.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={this.getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {this.renderRepresentation(item)}
-                                                    </div>
-                                                )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                            <Droppable droppableId="rank4">
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
-                                        {this.state.rank4.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={this.getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {this.renderRepresentation(item)}
-                                                    </div>
-                                                )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                            <Droppable droppableId="rank5">
+                                        <div
+                                            ref={provided.innerRef}
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank2, 2)}>
+                                            {this.state.rank2.map((item, index) => (
+                                                <Draggable
+                                                    key={item.id}
+                                                    draggableId={item.id}
+                                                    index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            style={this.getItemStyle(
+                                                                snapshot.isDragging,
+                                                                provided.draggableProps.style
+                                                            )}>
+                                                            {this.renderRepresentation(item)}
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </Well>
+                            <Well bsSize="small">
+                                <Droppable droppableId="rank3">
                                     {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
-                                        {this.state.rank5.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={this.getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {this.renderRepresentation(item)}
-                                                    </div>
-                                                )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                            <Droppable droppableId="rank6">
+                                        <div
+                                            ref={provided.innerRef}
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank3, 3)}>
+                                            {this.state.rank3.map((item, index) => (
+                                                <Draggable
+                                                    key={item.id}
+                                                    draggableId={item.id}
+                                                    index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            style={this.getItemStyle(
+                                                                snapshot.isDragging,
+                                                                provided.draggableProps.style
+                                                            )}>
+                                                            {this.renderRepresentation(item)}
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </Well>
+                            <Well bsSize="small">
+                                <Droppable droppableId="rank4">
                                     {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        style={this.getListRankStyle(snapshot.isDraggingOver)}>
-                                        {this.state.rank6.map((item, index) => (
-                                            <Draggable
-                                                key={item.id}
-                                                draggableId={item.id}
-                                                index={index}>
-                                                {(provided, snapshot) => (
-                                                    <div
-                                                        ref={provided.innerRef}
-                                                        {...provided.draggableProps}
-                                                        {...provided.dragHandleProps}
-                                                        style={this.getItemStyle(
-                                                            snapshot.isDragging,
-                                                            provided.draggableProps.style
-                                                        )}>
-                                                        {this.renderRepresentation(item)}
-                                                    </div>
-                                                )}
-                                            </Draggable>
-                                        ))}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
+                                        <div
+                                            ref={provided.innerRef}
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank4, 4)}>
+                                            {this.state.rank4.map((item, index) => (
+                                                <Draggable
+                                                    key={item.id}
+                                                    draggableId={item.id}
+                                                    index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            style={this.getItemStyle(
+                                                                snapshot.isDragging,
+                                                                provided.draggableProps.style
+                                                            )}>
+                                                            {this.renderRepresentation(item)}
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </Well>
+                            <Well bsSize="small">
+                                <Droppable droppableId="rank5">
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank5, 5)}>
+                                            {this.state.rank5.map((item, index) => (
+                                                <Draggable
+                                                    key={item.id}
+                                                    draggableId={item.id}
+                                                    index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            style={this.getItemStyle(
+                                                                snapshot.isDragging,
+                                                                provided.draggableProps.style
+                                                            )}>
+                                                            {this.renderRepresentation(item)}
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </Well>
+                            <Well bsSize="small">
+                                <Droppable droppableId="rank6">
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank6, 6)}>
+                                            {this.state.rank6.map((item, index) => (
+                                                <Draggable
+                                                    key={item.id}
+                                                    draggableId={item.id}
+                                                    index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <div
+                                                            ref={provided.innerRef}
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            style={this.getItemStyle(
+                                                                snapshot.isDragging,
+                                                                provided.draggableProps.style
+                                                            )}>
+                                                            {this.renderRepresentation(item)}
+                                                        </div>
+                                                    )}
+                                                </Draggable>
+                                            ))}
+                                            {provided.placeholder}
+                                        </div>
+                                    )}
+                                </Droppable>
+                            </Well>
                         </Panel.Body>
                     </Panel>
 
-                    <Panel className="ConsolidationRankings--container__elements" bsStyle="info">
+                    <Panel className="ConsolidationRankings--container__elements" bsStyle="primary">
                         <Panel.Heading className="ConsolidationRankings--heading">
                             <Panel.Title componentClass="h3">Representations</Panel.Title>
                         </Panel.Heading>

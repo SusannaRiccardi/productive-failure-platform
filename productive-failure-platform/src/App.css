@@ -326,3 +326,8 @@ svg {
 .ConsolidationRankings--body {
     height: 94%;
 }
+
+.ConsolidationRankings--body__placeholders {
+    overflow: auto;
+    height: 94%;
+}
