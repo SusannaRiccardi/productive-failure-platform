@@ -149,7 +149,7 @@ export default class ConsolidationRankings extends Component {
                 // background: isDraggingOver ? 'lightblue' : '',
                 padding: this.state.gridElements,
                 height: 200,
-                backgroundImage: rank.length === 0 ? `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='120px'><text x='0' y='15' fill='red' font-size='20'>${number}</text></svg>")` : ``,
+                background: rank.length === 0 ? `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='100px' width='120px'><text x='0' y='60' fill='#bdbdbd' font-size='50' font-weight='700' font-family='sans-serif'>${number}</text></svg>") no-repeat center` : ``,
             }
         )
     }
@@ -189,7 +189,7 @@ export default class ConsolidationRankings extends Component {
                                     {(provided, snapshot) => (
                                         <div
                                             ref={provided.innerRef}
-                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank1, 1)}>
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank1, "1st")}>
                                             {this.state.rank1.map((item, index) => (
                                                 <Draggable
                                                     key={item.id}
@@ -219,7 +219,7 @@ export default class ConsolidationRankings extends Component {
                                     {(provided, snapshot) => (
                                         <div
                                             ref={provided.innerRef}
-                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank2, 2)}>
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank2, "2nd")}>
                                             {this.state.rank2.map((item, index) => (
                                                 <Draggable
                                                     key={item.id}
@@ -249,7 +249,7 @@ export default class ConsolidationRankings extends Component {
                                     {(provided, snapshot) => (
                                         <div
                                             ref={provided.innerRef}
-                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank3, 3)}>
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank3, "3rd")}>
                                             {this.state.rank3.map((item, index) => (
                                                 <Draggable
                                                     key={item.id}
@@ -279,7 +279,7 @@ export default class ConsolidationRankings extends Component {
                                     {(provided, snapshot) => (
                                         <div
                                             ref={provided.innerRef}
-                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank4, 4)}>
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank4, "4th")}>
                                             {this.state.rank4.map((item, index) => (
                                                 <Draggable
                                                     key={item.id}
@@ -309,7 +309,7 @@ export default class ConsolidationRankings extends Component {
                                     {(provided, snapshot) => (
                                         <div
                                             ref={provided.innerRef}
-                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank5, 5)}>
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank5, "5th")}>
                                             {this.state.rank5.map((item, index) => (
                                                 <Draggable
                                                     key={item.id}
@@ -339,7 +339,7 @@ export default class ConsolidationRankings extends Component {
                                     {(provided, snapshot) => (
                                         <div
                                             ref={provided.innerRef}
-                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank6, 6)}>
+                                            style={this.getListRankStyle(snapshot.isDraggingOver, this.state.rank6, "6th")}>
                                             {this.state.rank6.map((item, index) => (
                                                 <Draggable
                                                     key={item.id}

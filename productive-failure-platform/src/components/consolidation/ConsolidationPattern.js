@@ -18,19 +18,19 @@ export default class ConsolidationPattern extends Component {
             if (shape === "circle") {
                 return (
                     <div className="pattern--circle" key={id}>
-                        <Circle r={15} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        <Circle r={15} fill={{color:'#fac863'}} stroke={{color:'#fac863'}} strokeWidth={3} />
                     </div>
                 )
             } else if (shape === "triangle") {
                 return (
                     <div className="pattern--triangle" key={id}>
-                        <Triangle width={30} height={30} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        <Triangle width={30} height={30} fill={{color:'#d9534f'}} stroke={{color:'#d9534f'}} strokeWidth={3} />
                     </div>
                 )
             } else if (shape === "square") {
                 return (
                     <div className="pattern--square" key={id}>
-                        <Rectangle width={30} height={30} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                        <Rectangle width={30} height={30} fill={{color:'#5cb85c'}} stroke={{color:'#5cb85c'}} strokeWidth={3} />
                     </div>
                 )
             }
@@ -40,7 +40,10 @@ export default class ConsolidationPattern extends Component {
     
     render() {
         return (
-            <Panel className="consolidation-pattern">
+            <Panel bsStyle="primary" className="consolidation-pattern">
+                <Panel.Heading>
+                    <Panel.Title componentClass="h3">Pattern</Panel.Title>
+                </Panel.Heading>
                 <Panel.Body>
                     <div className="consolidation-pattern--pattern">
                         {this.renderPattern()}
