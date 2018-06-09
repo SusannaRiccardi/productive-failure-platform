@@ -1,5 +1,8 @@
 module Api::V1
     class ActivityPatternsController < ApplicationController
+        before_action :authenticate_user
+        before_action :set_activity_pattern, only: [:show, :update, :destroy]
+
         def index
             @activity_pattern = ActivityPattern.where(productive_failure_id: params[:productive_failure_id])
             render json: @activity_pattern
