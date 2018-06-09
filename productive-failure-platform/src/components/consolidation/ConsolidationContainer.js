@@ -33,7 +33,7 @@ export default class ConsolidationContainer extends Component {
             for (let i = 1; i < 7; i++) {
                 let rep = {
                     id: i,
-                    svg: res.data[`rep${i}`]
+                    svg: res.data[`rep${i}svg`]
                 }
                 representations.push(rep)
             }
@@ -78,12 +78,13 @@ export default class ConsolidationContainer extends Component {
 
         let iterationSolution = {
             productive_failure_id: id,
-            rep1: representations[0].svg,
-            rep2: representations[1].svg,
-            rep3: representations[2].svg,
-            rep4: representations[3].svg,
-            rep5: representations[4].svg,
-            rep6: representations[5].svg,
+            rep1: representations[`rep${1}`].id,
+            rep2: representations[`rep${2}`].id,
+            rep3: representations[`rep${3}`].id,
+            rep4: representations[`rep${4}`].id,
+            rep5: representations[`rep${5}`].id,
+            rep6: representations[`rep${6}`].id,
+            iteration_consolidation_id: this.state.consolidation.id
         }
 
         axios.post('http://localhost:3001/api/v1/iteration_consolidation_solutions', iterationSolution)
@@ -124,6 +125,7 @@ export default class ConsolidationContainer extends Component {
                         ) : (
                             <ConsolidationSolutions 
                                 representations={this.state.submittedRepresentations}
+                                consolidation={this.state.consolidation}
                             />
                         )}
                     </div>

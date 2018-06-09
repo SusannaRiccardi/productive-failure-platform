@@ -13,7 +13,7 @@ module Api::V1
         private
           
         def iteration_consolidation_solution
-            params.require(:iteration_consolidation_solution).permit(:productive_failure_id, :rep1, :rep2, :rep3, :rep4, :rep5, :rep6)
+            params.require(:iteration_consolidation_solution).permit(:productive_failure_id, :rep1, :rep2, :rep3, :rep4, :rep5, :rep6, :iteration_consolidation_id)
         end
     end
 end

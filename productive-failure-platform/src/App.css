@@ -308,23 +308,23 @@ svg {
     width: 100%;
 }
 
-.ConsolidationRankings--buttons {
+.ConsolidationRankings--buttons, .ConsolidationSolutions--buttons {
     display: flex;
     justify-content: space-between;
     margin: 20px;
 }
 
-.ConsolidationRankings--container {
+.ConsolidationRankings--container, .ConsolidationSolutions--container {
     display: flex;
 }
 
-.ConsolidationRankings--container__placeholders {
+.ConsolidationRankings--container__placeholders, .ConsolidationSolutions--container__placeholders, .ConsolidationSolutions--container__elements {
     flex: 1;
     margin-right: 10px;
     height: 70vh;
 }
 
-.ConsolidationRankings--container__elements {
+.ConsolidationRankings--container__elements, .ConsolidationSolutions--container__elements {
     flex: 1;
     margin-left: 10px;
 }
@@ -336,4 +336,23 @@ svg {
 .ConsolidationRankings--body__placeholders {
     overflow: auto;
     height: 94%;
+}
+
+.ConsolidationSolutions--representation, .ConsolidationSolutions--description {
+    height: 200px;
+    width: 100%;
+}
+
+.ConsolidationSolutions--representation__body, .ConsolidationSolutions--representation__svg, .ConsolidationSolutions--description__body {
+    width: 100%;
+    height: 100%;
+}
+
+.ConsolidationSolutions--body, .ConsolidationSolutions--body {
+    overflow: auto;
+    height: 94%;
+}
+
+.ConsolidationSolutions--description__containertext {
+    font-size: 17px;
 }

@@ -136,7 +136,7 @@ export default class ConsolidationRankings extends Component {
     getListStyle(isDraggingOver) {
         return (
             {
-                background: isDraggingOver ? 'lightblue' : '',
+                background: isDraggingOver ? '#5bc0dea8' : '',
                 overflow: 'auto',
                 height: '100%'
             }
@@ -146,7 +146,6 @@ export default class ConsolidationRankings extends Component {
     getListRankStyle(isDraggingOver, rank, number) {
         return (
             {
-                // background: isDraggingOver ? 'lightblue' : '',
                 padding: this.state.gridElements,
                 height: 200,
                 background: rank.length === 0 ? `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='100px' width='120px'><text x='0' y='60' fill='#bdbdbd' font-size='50' font-weight='700' font-family='sans-serif'>${number}</text></svg>") no-repeat center` : ``,
@@ -165,11 +164,11 @@ export default class ConsolidationRankings extends Component {
     }
 
     generateRanking() {
-        let representations = []
+        let representations = {}
 
         for (let i = 1; i <= 6; i++) {
             let rep = this.state[`rank${i}`][0]
-            representations.push(rep)
+            representations[`rep${i}`] = rep;
         }
 
         this.props.handleSubmitRepresentations(representations)
