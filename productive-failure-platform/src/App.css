@@ -356,3 +356,14 @@ svg {
 .ConsolidationSolutions--description__containertext {
     font-size: 17px;
 }
+
+/* Login */
+.Login--Buttons__container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.Login--button {
+    display: flex;
+    justify-content: flex-end;
+}
