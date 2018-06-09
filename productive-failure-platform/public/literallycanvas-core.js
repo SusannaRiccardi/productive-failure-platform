@@ -3119,12 +3119,12 @@ defineSVGRenderer('Rectangle', function(shape) {
   y = Math.min(y1, y2);
   width = Math.max(x1, x2) - x;
   height = Math.max(y1, y2) - y;
-  miao = Math.min(width, height)
+  lenght = Math.min(width, height)
   if (shape.strokeWidth % 2 !== 0) {
     x += 0.5;
     y += 0.5;
   }
-  return "<rect x='" + x + "' y='" + y + "' width='" + miao + "' height='" + miao + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
+  return "<rect x='" + x + "' y='" + y + "' width='" + lenght + "' height='" + lenght + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
 });
 
 defineSVGRenderer('Triangle', function(shape) {
@@ -3135,22 +3135,7 @@ defineSVGRenderer('Triangle', function(shape) {
     y2 = shape.y + shape.height;
     x3 = shape.x + (shape.width/2);
     y3 = shape.y + shape.height;
-    // x = Math.min(x1, x2);
-    // y = Math.min(y1, y2);
-    // width = Math.max(x1, x2) - x;
-    // height = Math.max(y1, y2) - y;
-    // if (shape.strokeWidth % 2 !== 0) {
-    //   x += 0.5;
-    //   y += 0.5;
-    // }
     return `<polygon fill="${shape.fillColor}" points="${x2},${y2} ${x1},${y1} ${x3},${y3}" stroke="${shape.strokeColor}" stroke-width="${shape.strokeWidth}"/>`
-    // return ("<polygon fill='" + shape.fillColor + "' points='" + x1 + ',')
-    // return ("<polygon fill='" + shape.fillColor + "' points='" + (shape.points.map(function(p) {
-    //     var offset;
-    //     offset = p.strokeWidth % 2 === 0 ? 0.0 : 0.5;
-    //     return (p.x + offset) + "," + (p.y + offset);
-    //   }).join(' ')) + "' stroke='" + shape.strokeColor + "' stroke-width='" + shape.strokeWidth + "' />");
-    // return "<rect x='" + x + "' y='" + y + "' width='" + width + "' height='" + height + "' stroke='" + shape.strokeColor + "' fill='" + shape.fillColor + "' stroke-width='" + shape.strokeWidth + "' />";
   });
 
 defineSVGRenderer('SelectionBox', function(shape) {
@@ -3363,7 +3348,6 @@ util = {
     let min = 500;
     let max = 0;
     for (let i of shapes) {
-        console.log(i)
         min = Math.min(min, i.x-i.width)
         max = Math.max(max, i.x)
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Button, Panel, Well } from 'react-bootstrap';
+import { Button, Panel, Well } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 import axios from 'axios';
@@ -212,9 +212,9 @@ export default class GenerationOneSolutions extends Component {
                     <h4>{representation.constraint}</h4>
                 </Well>
                 <div className="generation-one-representations-container">
-                    <Panel bsStyle="info" className="representation-container-one">
+                    <Panel bsStyle="primary" className="representation-container-one">
                         <Panel.Heading>
-                            <Panel.Title componentClass="h3">Representation for first pattern</Panel.Title>
+                            <Panel.Title componentClass="h3">Describe the first pattern here</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body>
                             <div className="literally-core-container">
@@ -235,9 +235,9 @@ export default class GenerationOneSolutions extends Component {
                             </div>
                         </Panel.Body>
                     </Panel>
-                    <Panel bsStyle="info" className="representation-container-two">
+                    <Panel bsStyle="primary" className="representation-container-two">
                         <Panel.Heading>
-                            <Panel.Title componentClass="h3">Representation for second pattern</Panel.Title>
+                            <Panel.Title componentClass="h3">Describe the second pattern here</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body>
                             <div className="literally-core-container-two">
@@ -260,9 +260,9 @@ export default class GenerationOneSolutions extends Component {
                     </Panel>
                 </div>
 
-                <Panel bsStyle="info" className="generation-one-elements">
+                <Panel bsStyle="primary" className="generation-one-elements">
                     <Panel.Heading>
-                        <Panel.Title componentClass="h3">Elements</Panel.Title>
+                        <Panel.Title componentClass="h3">Choose one tool</Panel.Title>
                     </Panel.Heading>
                     <Panel.Body className="generation-one-elements__body">
                         {_.includes(representation.elements, 'pencil') && (

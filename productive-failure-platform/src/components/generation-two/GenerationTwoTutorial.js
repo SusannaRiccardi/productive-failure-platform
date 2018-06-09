@@ -8,7 +8,7 @@ export default class GenerationTwoTutorial extends Component {
         return (
             <Modal show={this.props.open} onHide={this.props.close}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Productive Failure activity - generation, step two</Modal.Title>
+                    <Modal.Title>Step 2: Interpret Pattern Descriptions</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="tutorial-container">
@@ -19,7 +19,7 @@ export default class GenerationTwoTutorial extends Component {
                         <p className="tutorial-text">In order to do this, you can drag and drop the shaps into the containers of the patterns.</p>
 
                         <div className="tutorial-gif-container">
-                                <img className="tutorial-gif" src={gif} />
+                            <img className="tutorial-gif" src={gif} alt="tutorial-gif" />
                         </div>
 
                         <p className="tutorial-text">Once you're done, you can click on the <b>finish</b> button to save and go to the next step.</p>

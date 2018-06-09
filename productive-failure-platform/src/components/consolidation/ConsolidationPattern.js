@@ -3,8 +3,7 @@ import { Panel } from 'react-bootstrap';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
 
 
-// Main page: login or home
-export default class PatternDescription extends Component {
+export default class ConsolidationPattern extends Component {
     constructor(props) {
         super(props);
 
@@ -12,8 +11,8 @@ export default class PatternDescription extends Component {
     }
 
     // TODO: remove warning from this function
-    renderPattern(givenPattern) {
-        let patternArray = givenPattern.pattern.split('-');
+    renderPattern() {
+        let patternArray = this.props.pattern.split('-');
 
         return patternArray.map((shape, id) => {
             if (shape === "circle") {
@@ -41,28 +40,16 @@ export default class PatternDescription extends Component {
     
     render() {
         return (
-            <div className="pattern-description-container">
-                <Panel bsStyle="primary" className="pattern-description-one">
-                    <Panel.Heading>
-                        <Panel.Title componentClass="h3">First pattern</Panel.Title>
-                    </Panel.Heading>
-                    <Panel.Body>
-                        <div className="PatternDescription--pattern">
-                            {this.props.patterns.length > 0 && this.renderPattern(this.props.patterns[0])}
-                        </div>
-                    </Panel.Body>
-                </Panel>
-                <Panel bsStyle="primary" className="pattern-description-two">
-                    <Panel.Heading>
-                        <Panel.Title componentClass="h3">Second pattern</Panel.Title>
-                    </Panel.Heading>
-                    <Panel.Body>
-                        <div className="PatternDescription--pattern">
-                            {this.props.patterns.length > 0 && this.renderPattern(this.props.patterns[1])}
-                        </div>
-                    </Panel.Body>
-                </Panel>
-            </div>
+            <Panel bsStyle="primary" className="consolidation-pattern">
+                <Panel.Heading>
+                    <Panel.Title componentClass="h3">Pattern</Panel.Title>
+                </Panel.Heading>
+                <Panel.Body>
+                    <div className="consolidation-pattern--pattern">
+                        {this.renderPattern()}
+                    </div>
+                </Panel.Body>
+            </Panel>
         );
     }
 }

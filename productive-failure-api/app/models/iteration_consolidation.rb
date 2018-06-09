@@ -1,0 +1,2 @@
+class IterationConsolidation < ApplicationRecord
+end

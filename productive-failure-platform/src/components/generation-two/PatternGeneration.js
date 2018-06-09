@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
 import { Button, Panel } from 'react-bootstrap';
-import trash from '../../img/trash.svg';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 var _ = require('lodash');
 var counter = 0;
@@ -31,7 +31,7 @@ export default class PatternGeneration extends Component {
         this.getTrashStyle = this.getTrashStyle.bind(this);
         this.renderShape = this.renderShape.bind(this);
         this.clearElements = this.clearElements.bind(this);
-        this.goToNextStep = this.goToNextStep.bind(this);
+        this.saveGenerationTwo = this.saveGenerationTwo.bind(this);
         this.generatePattern = this.generatePattern.bind(this);
     }
 
@@ -222,7 +222,7 @@ export default class PatternGeneration extends Component {
     }
 
     deleteElement(source, index) {
-        const [removed] = source.splice(index, 1);
+        source.splice(index, 1);
         return source;
     }
 
@@ -238,9 +238,6 @@ export default class PatternGeneration extends Component {
                 padding: this.state.gridElements * 2,
                 margin: `0 0 ${this.state.gridElements}px 0`,
     
-                // change background colour if dragging
-                // background: isDragging ? '#5cb85c' : '',
-    
                 // styles we need to apply on draggables
                 ...draggableStyle
             }
@@ -250,7 +247,7 @@ export default class PatternGeneration extends Component {
     getListStyle(isDraggingOver) {
         return (
             {
-                background: isDraggingOver ? 'lightblue' : '',
+                background: isDraggingOver ? '#5bc0dea8' : '',
                 display: 'flex',
                 padding: this.state.gridElements,
                 overflow: 'auto',
@@ -263,11 +260,10 @@ export default class PatternGeneration extends Component {
     getElementsStyle(isDraggingOver) {
         return (
             {
-                background: isDraggingOver ? 'lightblue' : '',
+                background: isDraggingOver ? '#5bc0dea8' : '',
                 display: 'flex',
                 padding: this.state.gridElements,
-                minHeight: '100px',
-                alignItems: 'center',
+                height: '100%',
                 justifyContent: 'space-evenly'
             }
         )
@@ -276,7 +272,7 @@ export default class PatternGeneration extends Component {
     getTrashStyle(isDraggingOver) {
         return (
             {
-                background: isDraggingOver ? 'lightblue' : '',
+                background: isDraggingOver ? '#5bc0dea8' : '',
                 display: 'flex',
                 padding: this.state.gridElements,
                 minHeight: '100px',
@@ -290,19 +286,19 @@ export default class PatternGeneration extends Component {
         if (content === "circle") {
             return (
                 <div className="shape-container">
-                    <Circle r={20} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                    <Circle r={20} fill={{color:'#fac863'}} stroke={{color:'#fac863'}} strokeWidth={3} />
                 </div>
             )
         } else if (content === "triangle") {
             return (
                 <div className="shape-container">
-                    <Triangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                    <Triangle width={40} height={40} fill={{color:'#d9534f'}} stroke={{color:'#d9534f'}} strokeWidth={3} />
                 </div>
             )
         } else {
             return (
                 <div className="shape-container">
-                    <Rectangle width={40} height={40} fill={{color:'#17a2b8'}} stroke={{color:'#17a2b8'}} strokeWidth={3} />
+                    <Rectangle width={40} height={40} fill={{color:'#5cb85c'}} stroke={{color:'#5cb85c'}} strokeWidth={3} />
                 </div>
             )
         }
@@ -320,7 +316,7 @@ export default class PatternGeneration extends Component {
         }
     }
 
-    goToNextStep() {
+    saveGenerationTwo() {
         // TODO: look at better way to have id of productive failure activity
         let url = window.location.href;
         let splitString = _.split(url, '/');
@@ -378,7 +374,7 @@ export default class PatternGeneration extends Component {
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className="pattern-generation-container">
                     {/* Pattern one droppable */}
-                    <Panel className="pattern-generation-one" bsStyle="info">
+                    <Panel className="pattern-generation-one" bsStyle="primary">
                         <Panel.Heading className="pattern-generation-one__heading">
                             <Panel.Title componentClass="h3">Pattern for first representation</Panel.Title>
                             <Button bsStyle="link" className="pattern-generation-clear" onClick={() => this.clearElements('one')}>Clear</Button>
@@ -415,7 +411,7 @@ export default class PatternGeneration extends Component {
                         </Panel.Body>
                     </Panel>
                     {/* Pattern two droppable */}
-                    <Panel className="pattern-generation-two" bsStyle="info">
+                    <Panel className="pattern-generation-two" bsStyle="primary">
                         <Panel.Heading className="pattern-generation-one__heading">
                             <Panel.Title componentClass="h3">Pattern for second representation</Panel.Title>
                             <Button bsStyle="link" className="pattern-generation-clear" onClick={() => this.clearElements('two')}>Clear</Button>
@@ -454,7 +450,7 @@ export default class PatternGeneration extends Component {
                 </div>
                 {/* Elements droppable */}
                 <div className="elements-trash-container">
-                    <Panel className="elements-pattern-generation" bsStyle="info">
+                    <Panel className="elements-pattern-generation" bsStyle="primary">
                         <Panel.Heading>
                             <Panel.Title componentClass="h3">Elements</Panel.Title>
                         </Panel.Heading>
@@ -490,7 +486,7 @@ export default class PatternGeneration extends Component {
                         </Panel.Body>
                     </Panel>
                     {/* Trash droppable */}
-                    <Panel bsStyle="info" className="trash-container">
+                    <Panel bsStyle="primary" className="trash-container">
                         <Panel.Heading>
                             <Panel.Title componentClass="h3">Trash</Panel.Title>
                         </Panel.Heading>
@@ -512,7 +508,13 @@ export default class PatternGeneration extends Component {
                 <div className="info-buttons">
                     <Button bsStyle="info" onClick={this.props.handleOpenCloseModal}>Get info about this step</Button>
 
-                    {(this.state.patternOne.length > 0 && this.state.patternTwo.length > 0) && <Button bsStyle="primary" onClick={this.goToNextStep}>Finish</Button>}
+                    {(this.state.patternOne.length > 0 && this.state.patternTwo.length > 0) && (
+                        <Link to={`consolidation`}>
+                            <Button className="representation-button" bsStyle="primary" onClick={this.saveGenerationTwo}>
+                                Finish
+                            </Button>                    
+                        </Link>
+                    )}
                 </div>
             </DragDropContext>
         );

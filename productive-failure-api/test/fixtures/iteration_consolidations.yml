@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pattern: MyString
+  rep1: MyString
+  rep2: MyString
+  rep3: MyString
+  rep4: MyString
+  rep5: MyString
+  rep6: MyString
+
+two:
+  pattern: MyString
+  rep1: MyString
+  rep2: MyString
+  rep3: MyString
+  rep4: MyString
+  rep5: MyString
+  rep6: MyString
