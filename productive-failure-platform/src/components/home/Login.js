@@ -82,7 +82,7 @@ export default class Login extends Component {
 
         axios.post('http://localhost:3001/api/v1/user_token', request)
         .then(res => {
-            this.props.login(res);
+            this.props.login(res, this.state.email);
         })
         // Todo: handle error
         .catch(err => console.log(err))

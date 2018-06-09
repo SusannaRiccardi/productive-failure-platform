@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Login from './Login';
+import UserActivities from './UserActivities';
+import axios from 'axios';
 
 
 export default class Home extends Component {
@@ -7,64 +9,56 @@ export default class Home extends Component {
         super(props);
 
         this.state = {
-            showLogin: false
+            showLogin: false,
+            productiveFailures: []
         }
 
-        // this.login = this.login.bind(this);
-        // this.getProductiveFailures = this.getProductiveFailures.bind(this);
         this.signup = this.signup.bind(this);
         this.login = this.login.bind(this);
+        this.createActivity = this.createActivity.bind(this);
     }
 
     componentDidMount() {
         var jwt = localStorage.getItem("jwt");
         if (!jwt) {
             this.setState({
-                showLogin: true
+                showLogin: true,
             })
         }
     }
 
     signup(res) {
         localStorage.setItem("jwt", res.data.password_digest)
+        localStorage.setItem("email", res.data.email)
 
         this.setState({
             showLogin: false
         })
     }
 
-    login(res) {
+    login(res, email) {
         localStorage.setItem("jwt", res.data.jwt)
+        localStorage.setItem("email", email)
 
         this.setState({
             showLogin: false
         })
     }
     
-    // getProductiveFailures() {
-    //     let token = "Bearer " + localStorage.getItem("jwt")
-    //     console.log(token)
+    createActivity(email) {
+        let productive_failure = {
+            productive_failure: {
+                owner_id: localStorage.getItem('email')
+            }
+        }
 
-    //     axios.get('http://localhost:3001/api/v1/activity_patterns', {
-    //         headers: {
-    //             authorization: token
-    //         }
-    //     })
-    //     .then(res => {
-    //         console.log(res)
-    //     })
-    //     .catch(err => console.log(err))
-    // // $.ajax({
-    // //   url: "http://localhost:3000/api/bananas",
-    // //   type: "GET",
-    // //   beforeSend: function(xhr){xhr.setRequestHeader('Authorization', token)},
-    // //   context: this, // Allows us to use this.setState inside success
-    // //   success: function (result) {
-    // //     console.log(result)
-    // //     this.setState({bananasReceived: JSON.stringify(result)})
-    // //   }
-    // // })
-    // }
+        axios.post('http://localhost:3001/api/v1/productive_failures', productive_failure)
+        .then(res => {
+            this.props.history.push(`productive-failure/${res.data.id}/generation-one`)
+        })
+        // Todo: error in creation account
+        .catch(err => console.log(err))
+    }
 
     render() {
         return (
@@ -76,45 +70,10 @@ export default class Home extends Component {
                 />
 
                 {!this.state.showLogin && (
-                    <p>todo show getProductiveFailures</p>
+                    <UserActivities
+                        createActivity={this.createActivity}
+                    />
                 )}
-
-                {/* <h1 style={{marginTop: "20vh", marginBottom: "5vh"}}>
-                    Login
-                </h1> */}
-
-                {/* Todo: show modal with input and save into state */}
-                {/* <form>
-                    <label htmlFor="email">Email: </label>
-                    <br />
-                    <input
-                        name="email"
-                        id="email"
-                        type="email"
-                    />
-                    <br /><br />
-                    <label htmlFor="password">Password:</label>
-                    <br />
-                    <input
-                        name="password"
-                        id="password"
-                        type="password"
-                    />
-                </form>
-                <br />
-                <button
-                    onClick={this.login}
-                >
-                    Login
-                </button> */}
-                {/* <br />
-                <button
-                    onClick={this.getProductiveFailures}
-                    style={{marginTop: "10vh"}}
-                >
-                    get bananas?
-                </button>
-                <p>{this.state.bananasReceived}</p> */}
             </div>
         );
     }
