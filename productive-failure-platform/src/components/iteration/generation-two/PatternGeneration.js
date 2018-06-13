@@ -8,6 +8,7 @@ var _ = require('lodash');
 var counter = 0;
 
 
+// Component for the drag and drop of the patterns 
 export default class PatternGeneration extends Component {
     constructor(props) {
         super(props);
@@ -221,16 +222,18 @@ export default class PatternGeneration extends Component {
         return result;
     }
 
+    // Delete an element (dragged to the trash)
     deleteElement(source, index) {
         source.splice(index, 1);
         return source;
     }
 
-
+    // Helper function
     getList(id) {
         return this.state[this.id2List[id]];
     }
 
+    // Styling for element in elements list.
     getItemStyle(isDragging, draggableStyle) { 
         return (
             {
@@ -244,6 +247,7 @@ export default class PatternGeneration extends Component {
         )
     }
 
+    // Styling for list (pattern boxes)
     getListStyle(isDraggingOver) {
         return (
             {
@@ -257,6 +261,7 @@ export default class PatternGeneration extends Component {
         )
     }
 
+    // Styling for elements box
     getElementsStyle(isDraggingOver) {
         return (
             {
@@ -269,6 +274,7 @@ export default class PatternGeneration extends Component {
         )
     }
 
+    // Styling for trash box
     getTrashStyle(isDraggingOver) {
         return (
             {
@@ -282,6 +288,7 @@ export default class PatternGeneration extends Component {
         )
     }
 
+    // For each shape, render the correct shape
     renderShape(content) {
         if (content === "circle") {
             return (
@@ -304,6 +311,7 @@ export default class PatternGeneration extends Component {
         }
     }
 
+    // Remove all elements from the selected list when clicking clear
     clearElements(pattern) {
         if (pattern === "one") {
             this.setState({
@@ -316,12 +324,10 @@ export default class PatternGeneration extends Component {
         }
     }
 
+    // Post the generated patterns
     saveGenerationTwo() {
-        // TODO: look at better way to have id of productive failure activity
-        let url = window.location.href;
-        let splitString = _.split(url, '/');
-        let id = splitString[splitString.length - 2];
-
+        // Get the productive failure id
+        const id = localStorage.getItem('productive-failure')
         let generatedPatterns = [];
 
         let patternOne = {

@@ -3,6 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import gif from '../../../img/gif.gif';
 
 
+// tutorial for generation phase two
 export default class GenerationTwoTutorial extends Component {
     render() {
         return (
