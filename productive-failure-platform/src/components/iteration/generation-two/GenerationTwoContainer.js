@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
-import axios from 'axios';
 import PatternGeneration from './PatternGeneration';
 import GenerationTwoTutorial from './GenerationTwoTutorial';
-import Banner from '../Banner';
+import Banner from '../../Banner';
+import axios from 'axios';
 var _ = require('lodash');
 
 
@@ -18,6 +18,7 @@ export default class GenerationTwoContainer extends Component {
         }
 
         this.getReconstructPattern = this.getReconstructPattern.bind(this);
+        this.createReconstructPattern = this.createReconstructPattern.bind(this);
         this.handleOpenCloseModal = this.handleOpenCloseModal.bind(this);
     }
     
@@ -26,64 +27,30 @@ export default class GenerationTwoContainer extends Component {
     }
 
     getReconstructPattern() {
-        // TODO: look at better way to have id of productive failure activity
-        let url = window.location.href;
-        let splitString = _.split(url, '/');
-        let id = splitString[splitString.length - 2];
-
+        // Get the productive failure id
+        const id = localStorage.getItem('productive-failure')
+        // Get token for authentication
         const auth = localStorage.getItem('jwt');
 
-        axios.get(`http://localhost:3001/api/v1/reconstruct_patterns?productive_failure_id=${id}`, {
+        // Load the reconstruct pattern that is related to this productive failure id:
+        // If it exists, then load it and load the corresponding representations. 
+        // Otherwise, create a new one and load the representations.
+        // Also, if the user is not logged in and visits this page, it will be redirected to the home page.
+        axios.get(`http://localhost:3001/api/iteration/reconstruct_patterns?productive_failure_id=${id}`, {
             headers: {
                 Authorization: auth
             }
         })
         .then(response => {
             if (response.data === null || response.data.length === 0) {
-                // Get pattern if no reconstruct_pattern with this productive_failure_id exists
-                axios.get(`http://localhost:3001/api/v1/representation?productive_failure_id=${id}`, {
-                    headers: {
-                        Authorization: auth
-                    }
-                })
-                .then(response => {
-                    this.setState({
-                        representations: response.data
-                    })
-
-                    let reconstructPatterns = [];
-
-                    for (let i = 0; i < response.data.length; i++) {
-                        let reconstructPattern = {
-                            reconstructPattern : {
-                                productive_failure_id: id,
-                                representation_id: response.data[i].id
-                            }
-                        }
-                        reconstructPatterns.push(reconstructPattern)
-                    }
-
-                    axios.post('http://localhost:3001/api/v1/reconstruct_patterns', {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: auth
-                        }, data : JSON.stringify(reconstructPatterns)
-                    })
-                    .then(response => {
-                        this.setState({
-                            reconstructPatterns : response.data
-                        })
-                    })
-                    .catch(error => console.log(error))
-                })
-                .catch(error => console.log(error))
+                this.createReconstructPattern(id, auth);
             } else {
                 this.setState({
                     reconstructPatterns : response.data
                 })
 
                 for (let i = 0; i < response.data.length; i++) {
-                    axios.get(`http://localhost:3001/api/v1/representations/${response.data[i].representation_id}`, {
+                    axios.get(`http://localhost:3001/api/iteration/representations/${response.data[i].representation_id}`, {
                         headers: {
                             Authorization: auth
                         }
@@ -105,6 +72,47 @@ export default class GenerationTwoContainer extends Component {
         })
     }
 
+    createReconstructPattern(id, auth) {
+        // Get representations if no reconstruct_pattern with this productive_failure_id exists
+        axios.get(`http://localhost:3001/api/iteration/representation?productive_failure_id=${id}`, {
+            headers: {
+                Authorization: auth
+            }
+        })
+        .then(response => {
+            // Save representations in the state
+            this.setState({
+                representations: response.data
+            })
+
+            let reconstructPatterns = [];
+            for (let i = 0; i < response.data.length; i++) {
+                let reconstructPattern = {
+                    reconstructPattern : {
+                        productive_failure_id: id,
+                        representation_id: response.data[i].id
+                    }
+                }
+                reconstructPatterns.push(reconstructPattern)
+            }
+
+            axios.post('http://localhost:3001/api/iteration/reconstruct_patterns', {
+                headers: {
+                    Authorization: auth,
+                    'Content-Type': 'application/json'
+                }, data : JSON.stringify(reconstructPatterns)
+            })
+            .then(response => {
+                this.setState({
+                    reconstructPatterns : response.data
+                })
+            })
+            .catch(error => console.log(error))
+        })
+        .catch(error => console.log(error))
+    }
+
+    // handle close and open tutorial modal
     handleOpenCloseModal() {
         this.setState({
             showModal : !this.state.showModal
@@ -116,6 +124,7 @@ export default class GenerationTwoContainer extends Component {
             <div>
                 <Banner step={2}/>
                 <div className="generation-two-container">
+                    {/* tutorial modal */}
                     <GenerationTwoTutorial 
                         open={this.state.showModal}
                         close={this.handleOpenCloseModal}

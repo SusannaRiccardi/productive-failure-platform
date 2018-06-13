@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Home from './components/home/Home';
 import Display from './components/Display';
-import '../src/App.css';
-import '../src/literallycanvas.css';
+import './App.css';
+import './literallycanvas.css';
 
 
 const App = () => (
@@ -11,6 +11,7 @@ const App = () => (
         <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/productive-failure" component={Display}/>
+            <Redirect to={'/'} />
         </Switch>
     </Router>
 )

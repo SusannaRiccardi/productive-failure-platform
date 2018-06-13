@@ -3,7 +3,7 @@ import { Panel } from 'react-bootstrap';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
 
 
-// Main page: login or home
+// Panels containing the two patterns shown in the generation one
 export default class PatternDescription extends Component {
     constructor(props) {
         super(props);
@@ -11,7 +11,7 @@ export default class PatternDescription extends Component {
         this.renderPattern = this.renderPattern.bind(this);
     }
 
-    // TODO: remove warning from this function
+    // render given pattern
     renderPattern(givenPattern) {
         let patternArray = givenPattern.pattern.split('-');
 

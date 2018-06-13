@@ -3,6 +3,7 @@ import { Panel } from 'react-bootstrap';
 import { Rectangle, Circle, Triangle } from 'react-shapes';
 
 
+// Component for showing the pattern in the consolidation phase
 export default class ConsolidationPattern extends Component {
     constructor(props) {
         super(props);
@@ -10,7 +11,6 @@ export default class ConsolidationPattern extends Component {
         this.renderPattern = this.renderPattern.bind(this);
     }
 
-    // TODO: remove warning from this function
     renderPattern() {
         let patternArray = this.props.pattern.split('-');
 

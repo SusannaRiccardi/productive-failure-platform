@@ -1,4 +1,4 @@
-module Api::V1
+module Api::Iteration
     class IterationConsolidationSolutionsController < ApplicationController
         def index
             @iteration_consolidation_solutions = IterationConsolidationSolution.all

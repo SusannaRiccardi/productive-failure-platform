@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 
+// Tutorial component for consolidation phase
 export default class ConsolidationTutorial extends Component {
     render() {
         return (

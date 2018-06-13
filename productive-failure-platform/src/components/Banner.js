@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Navbar, ProgressBar } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
 
+// Navbar at the top of the activity.
 export default class Banner extends Component {
     constructor(props) {
         super(props);
@@ -9,17 +10,16 @@ export default class Banner extends Component {
         this.renderStep = this.renderStep.bind(this);
     }
 
+    // Based on the step of the activity we are currently in, return the title of the step. 
+    // (Only for Iteration at the moment)
     renderStep(step) {
         switch (step) {
             case 1:
                 return "Identify and Describe Patterns";
-                break;
             case 2:
                 return "Interpret Pattern Descriptions";
-                break;
             case 3: 
                 return "Combine Insights from Different Solutions";
-                break;
         }
     }
     
