@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 
+// Tutorial modal for generation one.
 export default class GenerationOneTutorial extends Component {
     constructor() {
         super();
@@ -13,6 +14,7 @@ export default class GenerationOneTutorial extends Component {
         this.close = this.close.bind(this);
     }
 
+    // Reset the step and call the close function sent as a prop
     close() {
         this.setState({
             step: 0
@@ -24,10 +26,12 @@ export default class GenerationOneTutorial extends Component {
     render() {
         return (
             <Modal show={this.props.open} onHide={this.close}>
+                {/* Header for the tutorial */}
                 <Modal.Header closeButton>
                     <Modal.Title>Step 1: Identify and Describe Patterns</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    {/* If we are in step 0 (two steps in total) show different text */}
                     {this.state.step === 0 ? (
                         <div className="tutorial-container">
                             <h3 className="tutorial-title">Welcome!</h3>
@@ -54,6 +58,7 @@ export default class GenerationOneTutorial extends Component {
                             <p className="tutorial-text">Once you think you reach the last representation, you can click on the <b>finish</b> button to go to next step.</p>
                         </div>
                     ))}
+                    {/* Buttons to go back and forth the tutorial */}
                     <div className="representations-buttons">
                         {this.state.step === 1 && (
                             <Button onClick={() => this.setState({step : 0})} className="representation-button">Back</Button>

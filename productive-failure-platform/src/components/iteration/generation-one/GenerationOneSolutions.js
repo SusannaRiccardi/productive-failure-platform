@@ -20,6 +20,7 @@ var lcPatternTwo;
 var tools;
 
 
+// Component containing the canvases for the representations
 export default class GenerationOneSolutions extends Component {
 	constructor(props) {
         super(props)
@@ -35,41 +36,19 @@ export default class GenerationOneSolutions extends Component {
     }
 
     componentDidMount() {
-        // TODO: look at better way to have id of productive failure activity
-        let url = window.location.href;
-        let splitString = _.split(url, '/');
-        let id = splitString[splitString.length - 2];
-        
-        this.setState({
-            productiveFailureId : id
-        })
-
-        // Initialise literally canvas
+        const id = localStorage.getItem('productive-failure');
+        // Initialise literally canvas options
         let options = {
             secondaryColor: '#000',
             backgroundColor: '#fff',
             minHeight: '350px'
         }
 
+        // Initialise literally canvas components
         lcPatternOne = window.LC.init(document.getElementsByClassName('literally-core-container')[0], options);
         lcPatternTwo = window.LC.init(document.getElementsByClassName('literally-core-container-two')[0], options);
 
-        // Clean localStorage if another productive failure activity was created, or load 
-        let previousActivity = localStorage.getItem("productiveFailure");
-        if (previousActivity != id) {
-            // FIX
-            localStorage.setItem("productiveFailure", id);
-        } else if (previousActivity !== null && previousActivity === id) {
-            let canvas1 = localStorage.getItem(`${this.props.patterns[0].id}-${this.state.representationNumber}-json`);
-            let canvas2 = localStorage.getItem(`${this.props.patterns[1].id}-${this.state.representationNumber}-json`);
-            if (canvas1) {
-                lcPatternOne.loadSnapshot(JSON.parse(canvas1));
-            }
-            if (canvas2) {
-                lcPatternTwo.loadSnapshot(JSON.parse(canvas2));
-            }
-        }
-
+        // Initialise tools for the canvas
         tools = [
             {
                 name : 'pencil',
@@ -145,6 +124,7 @@ export default class GenerationOneSolutions extends Component {
         })
     }
 
+    // Activate selected tool in the canvas
     activateTool(tool) {
         let toolObject = _.find(tools, (t) => {
             return t.name === tool
@@ -157,6 +137,7 @@ export default class GenerationOneSolutions extends Component {
         })
     }
 
+    // Save representations in the database
     saveGenerationOne() {
         // Save representations of the two patterns in the local storage
         let canvasRepresentation1JSON = JSON.stringify(lcPatternOne.getSnapshot());
@@ -187,6 +168,9 @@ export default class GenerationOneSolutions extends Component {
                     }
                 }
                 representations.push(representation);
+                // Clear the local storage
+                localStorage.removeItem(`${this.props.patterns[i].id}-${j}-svg`);
+                localStorage.removeItem(`${this.props.patterns[i].id}-${j}-json`);
             }
         }
 
@@ -211,10 +195,12 @@ export default class GenerationOneSolutions extends Component {
 
         return (
             <div className="StageOneSolutions-container">
+                {/* Constraint */}
                 <Well bsSize="small" className="generation-one-constraint">
                     <h4>{representation.constraint}</h4>
                 </Well>
                 <div className="generation-one-representations-container">
+                    {/* Canvas for first pattern */}
                     <Panel bsStyle="primary" className="representation-container-one">
                         <Panel.Heading>
                             <Panel.Title componentClass="h3">Describe the first pattern here</Panel.Title>
@@ -238,6 +224,7 @@ export default class GenerationOneSolutions extends Component {
                             </div>
                         </Panel.Body>
                     </Panel>
+                    {/* Canvas for second pattern */}
                     <Panel bsStyle="primary" className="representation-container-two">
                         <Panel.Heading>
                             <Panel.Title componentClass="h3">Describe the second pattern here</Panel.Title>
@@ -263,6 +250,7 @@ export default class GenerationOneSolutions extends Component {
                     </Panel>
                 </div>
 
+                {/* Panel for tools */}
                 <Panel bsStyle="primary" className="generation-one-elements">
                     <Panel.Heading>
                         <Panel.Title componentClass="h3">Choose one tool</Panel.Title>
