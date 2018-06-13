@@ -3,6 +3,8 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Button, Panel, Well } from 'react-bootstrap';
 
 
+// Component for first phase of consolidation: ranking representations. 
+// It uses the same drag and drop component as generation two
 export default class ConsolidationRankings extends Component {
     constructor(props) {
         super(props);
@@ -83,6 +85,7 @@ export default class ConsolidationRankings extends Component {
         }
     }
 
+    // Function to move in one ranking box
     rankElement(source, destination, droppableSource, droppableDestination) {
         var sourceClone = Array.from(source);
         var [removed] = sourceClone.splice(droppableSource.index, 1);
@@ -115,10 +118,12 @@ export default class ConsolidationRankings extends Component {
         return result;
     }
 
+    // Helper function
     getList(id) {
         return this.state[this.id2List[id]];
     }
 
+    // Styling for items in rankings
     getItemStyle(isDragging, draggableStyle) { 
         return (
             {
@@ -133,6 +138,7 @@ export default class ConsolidationRankings extends Component {
         )
     }
 
+    // Styking for list of representations
     getListStyle(isDraggingOver) {
         return (
             {
@@ -143,6 +149,7 @@ export default class ConsolidationRankings extends Component {
         )
     }
 
+    // Styling for ranking boxes
     getListRankStyle(isDraggingOver, rank, number) {
         return (
             {
@@ -163,6 +170,7 @@ export default class ConsolidationRankings extends Component {
         )
     }
 
+    // Generate object of representations in order of ranking by the user
     generateRanking() {
         let representations = {}
 
@@ -178,6 +186,7 @@ export default class ConsolidationRankings extends Component {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className="ConsolidationRankings--container">
+                    {/* Panel with the rankings */}
                      <Panel className="ConsolidationRankings--container__placeholders" bsStyle="primary">
                          <Panel.Heading className="ConsolidationRankings--heading">
                              <Panel.Title componentClass="h3">Rankings</Panel.Title>
@@ -366,6 +375,7 @@ export default class ConsolidationRankings extends Component {
                         </Panel.Body>
                     </Panel>
 
+                    {/* Panel with representations */}
                     <Panel className="ConsolidationRankings--container__elements" bsStyle="primary">
                         <Panel.Heading className="ConsolidationRankings--heading">
                             <Panel.Title componentClass="h3">Representations</Panel.Title>

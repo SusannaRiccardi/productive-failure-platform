@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Panel } from 'react-bootstrap';
 
 
+// Component for showing the representations and the corresponding descriptions.
 export default class ConsolidationSolutions extends Component {
     constructor(props) {
         super(props);

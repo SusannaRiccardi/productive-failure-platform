@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Banner from '../../Banner';
 import ConsolidationTutorial from './ConsolidationTutorial';
-import axios from 'axios';
 import ConsolidationPattern from './ConsolidationPattern';
 import ConsolidationRankings from './ConsolidationRankings';
 import ConsolidationSolutions from './ConsolidationSolutions';
+import axios from 'axios';
 var _ = require('lodash');
 
 
+// Container for the consolidation phase
 export default class ConsolidationContainer extends Component {
     constructor(props) {
         super(props);
@@ -28,6 +29,7 @@ export default class ConsolidationContainer extends Component {
     componentDidMount() {
         const auth = localStorage.getItem('jwt');
 
+        // Load the iteration consolidation with the representations
         axios.get(`http://localhost:3001/api/iteration/iteration_consolidations`, {
             headers: {
                 Authorization: auth
@@ -44,6 +46,7 @@ export default class ConsolidationContainer extends Component {
                 representations.push(rep)
             }
             
+            // shuffle the order of the representations
             let shuffledRepresentations = this.shuffleRepresentations(representations)
 
             this.setState({
@@ -52,6 +55,7 @@ export default class ConsolidationContainer extends Component {
             })
         })
         .catch(() => {
+            // If not authorized, go back to home
             this.props.history.replace('/')
         })
     }
@@ -72,17 +76,17 @@ export default class ConsolidationContainer extends Component {
         return representations;
     }
 
+    // Handle open and close tutorial modal
     handleOpenCloseModal() {
         this.setState({
             showModal : !this.state.showModal
         })
     }
 
+    // handle submit the iteration consolidation solution
     handleSubmitRepresentations(representations) {
-        // TODO: look at better way to have id of productive failure activity
-        let url = window.location.href;
-        let splitString = _.split(url, '/');
-        let id = splitString[splitString.length - 2];
+        // Get the productive failure id
+        const id = localStorage.getItem('productive-failure') 
 
         let iterationSolution = {
             productive_failure_id: id,
