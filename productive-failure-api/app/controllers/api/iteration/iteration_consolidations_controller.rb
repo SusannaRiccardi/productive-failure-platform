@@ -1,4 +1,4 @@
-module Api::V1
+module Api::Iteration
     class IterationConsolidationsController < ApplicationController
         before_action :authenticate_user, :except => [:create]
 

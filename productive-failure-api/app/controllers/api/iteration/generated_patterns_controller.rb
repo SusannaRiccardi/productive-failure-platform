@@ -1,6 +1,6 @@
 require 'json'
 
-module Api::V1
+module Api::Iteration
     class GeneratedPatternsController < ApplicationController
         def create
             generated_patterns = JSON.parse(params[:data])

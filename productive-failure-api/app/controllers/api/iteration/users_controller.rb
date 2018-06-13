@@ -1,4 +1,4 @@
-module Api::V1
+module Api::Iteration
 class UsersController < ApplicationController
     # GET /users
     def index

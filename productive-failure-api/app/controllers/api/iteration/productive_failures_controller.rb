@@ -1,4 +1,4 @@
-module Api::V1
+module Api::Iteration
     class ProductiveFailuresController < ApplicationController
         def index
             @productive_failures = ProductiveFailure.all

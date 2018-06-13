@@ -1,4 +1,4 @@
-module Api::V1
+module Api::Iteration
     class UserTokenController < Knock::AuthTokenController
     end
 end

@@ -192,7 +192,7 @@ export default class GenerationOneSolutions extends Component {
 
         const auth = localStorage.getItem('jwt');
 
-        axios.post('http://localhost:3001/api/v1/representations', {
+        axios.post('http://localhost:3001/api/iteration/representations', {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: auth

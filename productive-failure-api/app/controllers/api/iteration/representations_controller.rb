@@ -1,6 +1,6 @@
 require 'json'
 
-module Api::V1
+module Api::Iteration
     class RepresentationsController < ApplicationController
         before_action :authenticate_user, :except => [:create]
 

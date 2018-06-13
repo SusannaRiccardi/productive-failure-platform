@@ -30,7 +30,7 @@ export default class Home extends Component {
         localStorage.setItem("jwt", res.data.jwt)
 
         if (!localStorage.getItem('id')) {
-            axios.get(`http://localhost:3001/api/v1/users?email=${email}`)
+            axios.get(`http://localhost:3001/api/iteration/users?email=${email}`)
             .then(res => {
                 localStorage.setItem('id', res.data[0].id)
             })
@@ -51,7 +51,7 @@ export default class Home extends Component {
             }
         }
 
-        axios.post('http://localhost:3001/api/v1/productive_failures', productive_failure)
+        axios.post('http://localhost:3001/api/iteration/productive_failures', productive_failure)
         .then(res => {
             localStorage.setItem('productive-failure', res.data.id)
             // todo: iteration

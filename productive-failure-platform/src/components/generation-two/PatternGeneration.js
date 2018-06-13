@@ -342,7 +342,7 @@ export default class PatternGeneration extends Component {
         }
         generatedPatterns.push(patternTwo);
 
-        axios.post("http://localhost:3001/api/v1/generated_patterns", {
+        axios.post("http://localhost:3001/api/iteration/generated_patterns", {
             headers: {
                 'Content-Type': 'application/json'
             }, data : JSON.stringify(generatedPatterns)

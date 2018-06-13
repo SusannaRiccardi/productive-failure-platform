@@ -65,7 +65,7 @@ export default class Login extends Component {
             }
         }
 
-        axios.post('http://localhost:3001/api/v1/users', newUser)
+        axios.post('http://localhost:3001/api/iteration/users', newUser)
         .then(res => {
             localStorage.setItem("id", res.data.id)
             this.setState({
@@ -88,7 +88,7 @@ export default class Login extends Component {
             }
         }
 
-        axios.post('http://localhost:3001/api/v1/user_token', request)
+        axios.post('http://localhost:3001/api/iteration/user_token', request)
         .then(res => {
             this.props.login(res, this.state.email);
         })

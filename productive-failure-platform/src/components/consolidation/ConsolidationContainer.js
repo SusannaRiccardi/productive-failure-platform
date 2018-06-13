@@ -28,7 +28,7 @@ export default class ConsolidationContainer extends Component {
     componentDidMount() {
         const auth = localStorage.getItem('jwt');
 
-        axios.get(`http://localhost:3001/api/v1/iteration_consolidations`, {
+        axios.get(`http://localhost:3001/api/iteration/iteration_consolidations`, {
             headers: {
                 Authorization: auth
             }
@@ -95,7 +95,7 @@ export default class ConsolidationContainer extends Component {
             iteration_consolidation_id: this.state.consolidation.id
         }
 
-        axios.post('http://localhost:3001/api/v1/iteration_consolidation_solutions', iterationSolution)
+        axios.post('http://localhost:3001/api/iteration/iteration_consolidation_solutions', iterationSolution)
         .then(res => {
             this.setState({
                 submittedRepresentations: representations,
