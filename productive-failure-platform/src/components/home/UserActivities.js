@@ -11,11 +11,8 @@ export default class UserActivities extends Component {
         return (
             <div className="UserActivities--container">
                  <Panel className="UserActivites--createPanel" bsStyle="primary">
-                    <Panel.Heading className="UserActivites__heading">
-                        <Panel.Title componentClass="h3">Start new activity</Panel.Title>
-                    </Panel.Heading>
                     <Panel.Body className="pattern-generation-one__body">
-                        <Button onClick={() => this.props.createActivity()}>Start</Button>
+                        <Button onClick={() => this.props.createActivity()}>Start new activity</Button>
                     </Panel.Body>
                 </Panel>
             </div>

@@ -69,11 +69,13 @@ export default class Home extends Component {
                     login={this.login}
                 />
 
-                {!this.state.showLogin && (
-                    <UserActivities
-                        createActivity={this.createActivity}
-                    />
-                )}
+                <div className="Home--UserActivities">
+                    {!this.state.showLogin && (
+                        <UserActivities
+                            createActivity={this.createActivity}
+                        />
+                    )}
+                </div>
             </div>
         );
     }

@@ -22,6 +22,7 @@ export default class Login extends Component {
         this.handleChangePasswordConfirmation = this.handleChangePasswordConfirmation.bind(this);
         this.sendSignup = this.sendSignup.bind(this);
         this.sendLogin = this.sendLogin.bind(this);
+        this.goBack = this.goBack.bind(this);
     }
 
     openLogin() {
@@ -87,6 +88,16 @@ export default class Login extends Component {
         // Todo: handle error
         .catch(err => console.log(err))
     }
+
+    goBack() {
+        this.setState({
+            showButtons: true,
+            isLogin: false,
+            email: '',
+            password: '',
+            passwordConfirmation: ''
+        })
+    }
     
     render() {
         return (
@@ -97,8 +108,8 @@ export default class Login extends Component {
                 <Modal.Body>
                     {this.state.showButtons && (
                         <div className="Login--Buttons__container">
-                            <Button bsStyle="primary" onClick={() => this.openLogin()}>Login</Button>
-                            <Button bsStyle="primary" onClick={() => this.openSignup()}>Signup</Button>
+                            <Button bsStyle="primary" className="button-login" onClick={() => this.openLogin()}>Login</Button>
+                            <Button bsStyle="primary" className="button-login" onClick={() => this.openSignup()}>Signup</Button>
                         </div>
                     )}
 
@@ -127,6 +138,7 @@ export default class Login extends Component {
                                     </FormGroup>
                                 </form>
                                 <div className="Login--button">
+                                    <Button bsStyle="default" onClick={() => this.goBack()}>Back</Button>
                                     <Button bsStyle="primary" onClick={() => this.sendLogin()}>Login</Button>
                                 </div>
                             </div>
@@ -164,6 +176,7 @@ export default class Login extends Component {
                                     </FormGroup>
                                 </form>
                                 <div className="Login--button">
+                                    <Button bsStyle="default" onClick={() => this.goBack()}>Back</Button>
                                     <Button bsStyle="primary" onClick={() => this.sendSignup()}>Create account</Button>
                                 </div>
                             </div>

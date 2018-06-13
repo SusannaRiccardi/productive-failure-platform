@@ -359,11 +359,23 @@ svg {
 
 /* Login */
 .Login--Buttons__container {
-    display: flex;
-    justify-content: space-around;
+    text-align: center;
+    margin: 10px;
 }
 
 .Login--button {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+}
+
+.button-login {
+    margin: 0 10px;
+}
+
+.Home--UserActivities {
+    margin: 50px;
+}
+
+.UserActivites--createPanel {
+    width: 30%;
 }
