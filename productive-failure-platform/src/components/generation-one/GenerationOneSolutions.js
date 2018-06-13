@@ -57,6 +57,7 @@ export default class GenerationOneSolutions extends Component {
         // Clean localStorage if another productive failure activity was created, or load 
         let previousActivity = localStorage.getItem("productiveFailure");
         if (previousActivity != id) {
+            // FIX
             localStorage.setItem("productiveFailure", id);
         } else if (previousActivity !== null && previousActivity === id) {
             let canvas1 = localStorage.getItem(`${this.props.patterns[0].id}-${this.state.representationNumber}-json`);
@@ -189,9 +190,12 @@ export default class GenerationOneSolutions extends Component {
             }
         }
 
+        const auth = localStorage.getItem('jwt');
+
         axios.post('http://localhost:3001/api/v1/representations', {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: auth
             }, data : JSON.stringify(representations)
         })
         .then(response => {

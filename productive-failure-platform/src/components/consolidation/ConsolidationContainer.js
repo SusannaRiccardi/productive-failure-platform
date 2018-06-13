@@ -26,7 +26,13 @@ export default class ConsolidationContainer extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:3001/api/v1/iteration_consolidations`)
+        const auth = localStorage.getItem('jwt');
+
+        axios.get(`http://localhost:3001/api/v1/iteration_consolidations`, {
+            headers: {
+                Authorization: auth
+            }
+        })
         .then(res => {
             // Create array of representations
             let representations = [];

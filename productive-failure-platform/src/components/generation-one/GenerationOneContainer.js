@@ -33,11 +33,7 @@ export default class GenerationOneContainer extends Component {
     }
 
     checkActivityPattern() {
-        // TODO: look at better way to have id of productive failure activity
-        let url = window.location.href;
-        let splitString = _.split(url, '/');
-        let id = splitString[splitString.length - 2];
-
+        const id = localStorage.getItem('productive-failure')
         const auth = localStorage.getItem('jwt');
 
         axios.get(`http://localhost:3001/api/v1/activity_patterns?productive_failure_id=${id}`, {
