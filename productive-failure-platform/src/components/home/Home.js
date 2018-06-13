@@ -13,7 +13,6 @@ export default class Home extends Component {
             productiveFailures: []
         }
 
-        this.signup = this.signup.bind(this);
         this.login = this.login.bind(this);
         this.createActivity = this.createActivity.bind(this);
     }
@@ -27,18 +26,17 @@ export default class Home extends Component {
         }
     }
 
-    signup(res) {
-        localStorage.setItem("jwt", res.data.password_digest)
-        localStorage.setItem("email", res.data.email)
-
-        this.setState({
-            showLogin: false
-        })
-    }
-
     login(res, email) {
         localStorage.setItem("jwt", res.data.jwt)
-        localStorage.setItem("email", email)
+
+        if (!localStorage.getItem('id')) {
+            axios.get(`http://localhost:3001/api/v1/users?email=${email}`)
+            .then(res => {
+                localStorage.setItem('id', res.data.id)
+            })
+            // todo: catch error
+            .catch(err => console.log(err))
+        }
 
         this.setState({
             showLogin: false
@@ -65,7 +63,6 @@ export default class Home extends Component {
             <div className="Home">
                 <Login 
                     open={this.state.showLogin}
-                    signup={this.signup}
                     login={this.login}
                 />
 

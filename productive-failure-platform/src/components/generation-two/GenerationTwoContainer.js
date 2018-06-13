@@ -85,7 +85,9 @@ export default class GenerationTwoContainer extends Component {
                 }
             }
         })
-        .catch(error => console.log(error))
+        .catch(() => {
+            this.props.history.replace('/')
+        })
     }
 
     handleOpenCloseModal() {

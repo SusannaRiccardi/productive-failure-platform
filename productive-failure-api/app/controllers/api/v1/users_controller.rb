@@ -1,12 +1,10 @@
 module Api::V1
 class UsersController < ApplicationController
-    # before_action :set_user, only: [:show, :create, :new, :update, :destroy]
-  
     # GET /users
     def index
-      @users = User.all
+      @user = User.where(email: params[:email])
   
-      render json: @users
+      render json: @user
     end
   
     # GET /users/1

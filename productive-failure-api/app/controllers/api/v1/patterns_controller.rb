@@ -1,5 +1,7 @@
 module Api::V1
     class PatternsController < ApplicationController
+        before_action :authenticate_user, :except => [:create]
+
         def index
             @patterns = Pattern.order("Random()").first(2)
             render json: @patterns

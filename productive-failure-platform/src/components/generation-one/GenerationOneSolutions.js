@@ -57,7 +57,6 @@ export default class GenerationOneSolutions extends Component {
         // Clean localStorage if another productive failure activity was created, or load 
         let previousActivity = localStorage.getItem("productiveFailure");
         if (previousActivity != id) {
-            localStorage.clear();
             localStorage.setItem("productiveFailure", id);
         } else if (previousActivity !== null && previousActivity === id) {
             let canvas1 = localStorage.getItem(`${this.props.patterns[0].id}-${this.state.representationNumber}-json`);

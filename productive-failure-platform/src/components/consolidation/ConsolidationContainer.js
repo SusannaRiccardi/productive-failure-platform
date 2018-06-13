@@ -45,7 +45,9 @@ export default class ConsolidationContainer extends Component {
                 representations: shuffledRepresentations
             })
         })
-        .catch(err => console.log(err))
+        .catch(() => {
+            this.props.history.replace('/')
+        })
     }
 
     // Taken from StackOverflow (https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array)

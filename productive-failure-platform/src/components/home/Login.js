@@ -67,7 +67,14 @@ export default class Login extends Component {
 
         axios.post('http://localhost:3001/api/v1/users', newUser)
         .then(res => {
-            this.props.signup(res);
+            localStorage.setItem("id", res.data.id)
+            this.setState({
+                isLogin: true,
+                email: '',
+                password: '',
+                passwordConfirmation: ''
+
+            })
         })
         // Todo: error in creation account
         .catch(err => console.log(err))
