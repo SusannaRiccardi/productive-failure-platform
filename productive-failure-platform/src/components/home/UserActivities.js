@@ -12,7 +12,7 @@ export default class UserActivities extends Component {
             <div className="UserActivities--container">
                  <Panel className="UserActivites--createPanel" bsStyle="primary">
                     <Panel.Body className="pattern-generation-one__body">
-                        <Button onClick={() => this.props.createActivity()}>Start new activity</Button>
+                        <Button onClick={() => this.props.createActivity('iteration')}>Start new activity</Button>
                     </Panel.Body>
                 </Panel>
             </div>

@@ -32,7 +32,7 @@ export default class Home extends Component {
         if (!localStorage.getItem('id')) {
             axios.get(`http://localhost:3001/api/v1/users?email=${email}`)
             .then(res => {
-                localStorage.setItem('id', res.data.id)
+                localStorage.setItem('id', res.data[0].id)
             })
             // todo: catch error
             .catch(err => console.log(err))
@@ -43,15 +43,18 @@ export default class Home extends Component {
         })
     }
     
-    createActivity(email) {
+    createActivity(type) {
         let productive_failure = {
             productive_failure: {
-                owner_id: localStorage.getItem('email')
+                owner_id: localStorage.getItem('id'),
+                type: type
             }
         }
 
         axios.post('http://localhost:3001/api/v1/productive_failures', productive_failure)
         .then(res => {
+            localStorage.setItem('productive-failure', res.data.id)
+            // todo: iteration
             this.props.history.push(`productive-failure/${res.data.id}/generation-one`)
         })
         // Todo: error in creation account
