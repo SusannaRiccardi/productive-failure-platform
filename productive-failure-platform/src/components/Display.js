@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import GenerationOneContainer from './generation-one/GenerationOneContainer';
-import GenerationTwoContainer from './generation-two/GenerationTwoContainer';
-import ConsolidationContainer from './consolidation/ConsolidationContainer';
+import GenerationOneContainer from './iteration/generation-one/GenerationOneContainer';
+import GenerationTwoContainer from './iteration/generation-two/GenerationTwoContainer';
+import ConsolidationContainer from './iteration/consolidation/ConsolidationContainer';
 
 export default class Display extends Component {
     render() {

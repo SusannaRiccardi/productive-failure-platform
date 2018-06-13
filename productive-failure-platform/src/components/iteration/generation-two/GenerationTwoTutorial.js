@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import gif from '../../img/gif.gif';
+import gif from '../../../img/gif.gif';
 
 
 export default class GenerationTwoTutorial extends Component {

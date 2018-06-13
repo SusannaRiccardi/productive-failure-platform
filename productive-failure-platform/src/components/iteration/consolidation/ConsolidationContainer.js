@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Banner from '../Banner';
+import Banner from '../../Banner';
 import ConsolidationTutorial from './ConsolidationTutorial';
 import axios from 'axios';
 import ConsolidationPattern from './ConsolidationPattern';

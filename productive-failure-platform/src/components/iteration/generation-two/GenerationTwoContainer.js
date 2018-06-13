@@ -3,7 +3,7 @@ import { Panel } from 'react-bootstrap';
 import axios from 'axios';
 import PatternGeneration from './PatternGeneration';
 import GenerationTwoTutorial from './GenerationTwoTutorial';
-import Banner from '../Banner';
+import Banner from '../../Banner';
 var _ = require('lodash');
 
 

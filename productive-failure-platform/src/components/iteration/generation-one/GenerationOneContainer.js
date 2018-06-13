@@ -4,7 +4,7 @@ import GenerationOneSolutions from './GenerationOneSolutions';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import GenerationOneTutorial from './GenerationOneTutorial';
-import Banner from '../Banner';
+import Banner from '../../Banner';
 var _ = require('lodash');
 
 

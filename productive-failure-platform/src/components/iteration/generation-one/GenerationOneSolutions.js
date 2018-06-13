@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Button, Panel, Well } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import config from '../../config';
+import config from '../../../config';
 import axios from 'axios';
-import pencil from '../../img/pencil.png'
-import eraser from '../../img/eraser.png'
-import line from '../../img/line.png'
-import rectangle from '../../img/rectangle.png'
-import ellipse from '../../img/ellipse.png'
-import arrow from '../../img/arrow.png'
-import redo from '../../img/redo.png'
-import undo from '../../img/undo.png'
-import text from '../../img/text.png'
-import triangle from '../../img/triangle.png'
+import pencil from '../../../img/pencil.png'
+import eraser from '../../../img/eraser.png'
+import line from '../../../img/line.png'
+import rectangle from '../../../img/rectangle.png'
+import ellipse from '../../../img/ellipse.png'
+import arrow from '../../../img/arrow.png'
+import redo from '../../../img/redo.png'
+import undo from '../../../img/undo.png'
+import text from '../../../img/text.png'
+import triangle from '../../../img/triangle.png'
 var _ = require('lodash');
 // literallycanvas variables
 var lcPatternOne;

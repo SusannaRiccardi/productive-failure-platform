@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import example1 from '../../img/example1.png';
-import example2 from '../../img/example2.png';
 
 
 export default class GenerationOneTutorial extends Component {
