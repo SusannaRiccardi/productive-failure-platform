@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180530150002) do
+ActiveRecord::Schema.define(version: 20180609100219) do
 
   create_table "activity_patterns", force: :cascade do |t|
     t.string "productive_failure_id"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20180530150002) do
     t.string "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
   end
 
   create_table "reconstruct_patterns", force: :cascade do |t|
@@ -87,7 +88,9 @@ ActiveRecord::Schema.define(version: 20180530150002) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

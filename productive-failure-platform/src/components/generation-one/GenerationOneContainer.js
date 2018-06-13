@@ -32,17 +32,22 @@ export default class GenerationOneContainer extends Component {
         })
     }
 
-    // TODO: please refactor this
     checkActivityPattern() {
-        // TODO: look at better way to have id of productive failure activity
-        let url = window.location.href;
-        let splitString = _.split(url, '/');
-        let id = splitString[splitString.length - 2];
+        const id = localStorage.getItem('productive-failure')
+        const auth = localStorage.getItem('jwt');
 
-        axios.get(`http://localhost:3001/api/v1/activity_patterns?productive_failure_id=${id}`)
+        axios.get(`http://localhost:3001/api/v1/activity_patterns?productive_failure_id=${id}`, {
+            headers: {
+                Authorization: auth
+            }
+        })
         .then(response => {
             if (response.data === null || response.data.length === 0) {
-                axios.get('http://localhost:3001/api/v1/patterns')
+                axios.get('http://localhost:3001/api/v1/patterns', {
+                    headers: {
+                        Authorization: auth
+                    }
+                })
                 .then(response => {
                     this.setState({
                         patterns: response.data
@@ -62,7 +67,8 @@ export default class GenerationOneContainer extends Component {
 
                     axios.post('http://localhost:3001/api/v1/activity_patterns', {
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            Authorization: auth
                         }, data : JSON.stringify(activityPatterns)
                     })
                     .then(response => {
@@ -79,7 +85,11 @@ export default class GenerationOneContainer extends Component {
                 })
 
                 for (let i = 0; i < response.data.length; i++) {
-                    axios.get(`http://localhost:3001/api/v1/patterns/${response.data[i].pattern_id}`)
+                    axios.get(`http://localhost:3001/api/v1/patterns/${response.data[i].pattern_id}`, {
+                        headers: {
+                            Authorization: auth
+                        }
+                    })
                     .then(response => {
                         let patterns = _.cloneDeep(this.state.patterns)
                         patterns.push(response.data)
@@ -92,7 +102,9 @@ export default class GenerationOneContainer extends Component {
                 }
             }
         })
-        .catch(error => console.log(error))
+        .catch((error) => {
+            this.props.history.replace('/')
+        })
     }
     
     render() {

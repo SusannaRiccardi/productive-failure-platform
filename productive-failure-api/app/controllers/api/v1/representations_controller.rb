@@ -2,6 +2,8 @@ require 'json'
 
 module Api::V1
     class RepresentationsController < ApplicationController
+        before_action :authenticate_user, :except => [:create]
+
         def index
             @representations = Representation.all
             render json: @representations

@@ -356,3 +356,26 @@ svg {
 .ConsolidationSolutions--description__containertext {
     font-size: 17px;
 }
+
+/* Login */
+.Login--Buttons__container {
+    text-align: center;
+    margin: 10px;
+}
+
+.Login--button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-login {
+    margin: 0 10px;
+}
+
+.Home--UserActivities {
+    margin: 50px;
+}
+
+.UserActivites--createPanel {
+    width: 30%;
+}

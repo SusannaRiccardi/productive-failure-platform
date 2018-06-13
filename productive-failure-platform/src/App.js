@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './components/home/Home';
 import Display from './components/Display';
 import '../src/App.css';
 import '../src/literallycanvas.css';

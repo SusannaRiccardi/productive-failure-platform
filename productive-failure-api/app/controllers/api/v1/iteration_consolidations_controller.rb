@@ -1,5 +1,7 @@
 module Api::V1
     class IterationConsolidationsController < ApplicationController
+        before_action :authenticate_user, :except => [:create]
+
         def index
             @iteration_consolidation = IterationConsolidation.order("Random()").first
             render json: @iteration_consolidation

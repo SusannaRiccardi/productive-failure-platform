@@ -39,3 +39,16 @@ iteration_consolidations = IterationConsolidation.create(
         }
     ]
 )
+
+admin = User.new
+admin.email = 'admin@productivefailure.com'
+admin.password = 'admin'
+admin.password_confirmation = 'admin'
+admin.admin = true
+admin.save
+
+user = User.new
+user.email = 'user@productivefailure.com'
+user.password = 'miao'
+user.password_confirmation = 'miao'
+user.save

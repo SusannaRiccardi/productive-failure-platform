@@ -31,11 +31,21 @@ export default class GenerationTwoContainer extends Component {
         let splitString = _.split(url, '/');
         let id = splitString[splitString.length - 2];
 
-        axios.get(`http://localhost:3001/api/v1/reconstruct_patterns?productive_failure_id=${id}`)
+        const auth = localStorage.getItem('jwt');
+
+        axios.get(`http://localhost:3001/api/v1/reconstruct_patterns?productive_failure_id=${id}`, {
+            headers: {
+                Authorization: auth
+            }
+        })
         .then(response => {
             if (response.data === null || response.data.length === 0) {
                 // Get pattern if no reconstruct_pattern with this productive_failure_id exists
-                axios.get(`http://localhost:3001/api/v1/representation?productive_failure_id=${id}`)
+                axios.get(`http://localhost:3001/api/v1/representation?productive_failure_id=${id}`, {
+                    headers: {
+                        Authorization: auth
+                    }
+                })
                 .then(response => {
                     this.setState({
                         representations: response.data
@@ -55,7 +65,8 @@ export default class GenerationTwoContainer extends Component {
 
                     axios.post('http://localhost:3001/api/v1/reconstruct_patterns', {
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            Authorization: auth
                         }, data : JSON.stringify(reconstructPatterns)
                     })
                     .then(response => {
@@ -72,7 +83,11 @@ export default class GenerationTwoContainer extends Component {
                 })
 
                 for (let i = 0; i < response.data.length; i++) {
-                    axios.get(`http://localhost:3001/api/v1/representations/${response.data[i].representation_id}`)
+                    axios.get(`http://localhost:3001/api/v1/representations/${response.data[i].representation_id}`, {
+                        headers: {
+                            Authorization: auth
+                        }
+                    })
                     .then(response => {
                         let representations = _.cloneDeep(this.state.representations)
                         representations.push(response.data)
@@ -85,7 +100,9 @@ export default class GenerationTwoContainer extends Component {
                 }
             }
         })
-        .catch(error => console.log(error))
+        .catch(() => {
+            this.props.history.replace('/')
+        })
     }
 
     handleOpenCloseModal() {
