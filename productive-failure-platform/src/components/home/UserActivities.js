@@ -8,23 +8,14 @@ export default class UserActivities extends Component {
         super(props);
 
         this.state = {
-            productive_failures : []
+            productive_failures : props.productive_failures
         }
-
-        this.renderRepresentations = this.renderRepresentations.bind(this);
     }
 
-    componentDidMount() {
-        let id = localStorage.getItem('id');
-        if (id) {
-            axios.get(`http://localhost:3001/api/iteration/productive_failures?owner_id=${id}`)
-            .then(res => {
-                this.setState({
-                    productive_failures: res.data
-                })
-            })
-            .catch(err => console.log(err))
-        }
+    componentWillReceiveProps(props) {
+        this.setState({
+            productive_failures: props.productive_failures
+        })
     }
 
     renderRepresentations() {
@@ -40,13 +31,11 @@ export default class UserActivities extends Component {
     render() {
         return (
             <div className="UserActivities--container">
-                 <Panel className="UserActivites--createPanel" bsStyle="primary">
-                    <Panel.Body className="pattern-generation-one__body">
-                        <Button onClick={() => this.props.createActivity('iteration')}>Start new activity</Button>
-                    </Panel.Body>
+                 <Panel className="UserActivites--createPanel" onClick={() => this.props.createActivity('iteration')}>
+                    <Panel.Body>Start new Productive Failure activity on Iteration</Panel.Body>
                 </Panel>
 
-                <Table responsive>
+                <Table responsive striped>
                     <thead>
                         <tr>
                             <th>Type</th>

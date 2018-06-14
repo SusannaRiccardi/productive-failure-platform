@@ -378,4 +378,14 @@ svg {
 
 .UserActivites--createPanel {
     width: 30%;
+    height: 100%;
+}
+
+.table-responsive {
+    width: 40%;
+}
+
+.UserActivities--container {
+    display: flex;
+    justify-content: space-around;
 }

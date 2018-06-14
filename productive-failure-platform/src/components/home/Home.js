@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login';
 import UserActivities from './UserActivities';
 import axios from 'axios';
+import Banner from '../Banner';
 
 
 export default class Home extends Component {
@@ -24,6 +25,17 @@ export default class Home extends Component {
                 showLogin: true,
             })
         }
+
+        let id = localStorage.getItem('id')
+        if (id) {
+            axios.get(`http://localhost:3001/api/iteration/productive_failures?owner_id=${id}`)
+            .then(res => {
+                this.setState({
+                    productiveFailures: res.data
+                })
+            })
+            .catch(err => console.log(err))
+        }
     }
 
     login(res, email) {
@@ -33,6 +45,14 @@ export default class Home extends Component {
             axios.get(`http://localhost:3001/api/iteration/users?email=${email}`)
             .then(res => {
                 localStorage.setItem('id', res.data[0].id)
+
+                axios.get(`http://localhost:3001/api/iteration/productive_failures?owner_id=${res.data[0].id}`)
+                .then(res => {
+                    this.setState({
+                        productiveFailures: res.data
+                    })
+                })
+                .catch(err => console.log(err))
             })
             // todo: catch error
             .catch(err => console.log(err))
@@ -64,6 +84,7 @@ export default class Home extends Component {
     render() {
         return (
             <div className="Home">
+                <Banner/>
                 <Login 
                     open={this.state.showLogin}
                     login={this.login}
@@ -73,6 +94,7 @@ export default class Home extends Component {
                     {!this.state.showLogin && (
                         <UserActivities
                             createActivity={this.createActivity}
+                            productive_failures={this.state.productiveFailures}
                         />
                     )}
                 </div>

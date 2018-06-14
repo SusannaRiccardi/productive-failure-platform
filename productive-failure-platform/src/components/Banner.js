@@ -31,9 +31,13 @@ export default class Banner extends Component {
                         Productive Failure
                     </Navbar.Brand>
                 </Navbar.Header>
-                <Navbar.Text>
-                    Step <b>{this.props.step} / 3</b>: {this.renderStep(this.props.step)}
-                </Navbar.Text>
+                {this.props.step && 
+                    (
+                        <Navbar.Text>
+                            Step <b>{this.props.step} / 3</b>: {this.renderStep(this.props.step)}
+                        </Navbar.Text>
+                    )
+                }
             </Navbar>
         );
     }
