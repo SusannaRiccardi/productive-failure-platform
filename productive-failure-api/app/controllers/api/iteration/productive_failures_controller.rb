@@ -1,7 +1,7 @@
 module Api::Iteration
     class ProductiveFailuresController < ApplicationController
         def index
-            @productive_failures = ProductiveFailure.all
+            @productive_failures = ProductiveFailure.where(owner_id: params[:owner_id])
             render json: @productive_failures
         end
 
@@ -13,7 +13,7 @@ module Api::Iteration
         private
           
         def productive_failure
-            params.require(:productive_failure).permit(:owner_id)
+            params.require(:productive_failure).permit(:owner_id, :activity_type)
         end
     end
 end

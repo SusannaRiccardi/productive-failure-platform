@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20180609100219) do
     t.string "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "type"
+    t.string "activity_type"
   end
 
   create_table "reconstruct_patterns", force: :cascade do |t|

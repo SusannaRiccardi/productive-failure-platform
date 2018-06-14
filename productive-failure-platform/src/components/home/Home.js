@@ -47,7 +47,7 @@ export default class Home extends Component {
         let productive_failure = {
             productive_failure: {
                 owner_id: localStorage.getItem('id'),
-                type: type
+                activity_type: type
             }
         }
 
