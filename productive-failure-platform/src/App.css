@@ -389,3 +389,9 @@ svg {
     display: flex;
     justify-content: space-around;
 }
+
+.Logout-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}

@@ -3,6 +3,7 @@ import Login from './Login';
 import UserActivities from './UserActivities';
 import axios from 'axios';
 import Banner from '../Banner';
+import { Button } from 'react-bootstrap';
 
 
 export default class Home extends Component {
@@ -15,6 +16,7 @@ export default class Home extends Component {
         }
 
         this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
         this.createActivity = this.createActivity.bind(this);
     }
 
@@ -62,6 +64,11 @@ export default class Home extends Component {
             showLogin: false
         })
     }
+
+    logout() {
+        localStorage.clear();
+        window.location.reload();
+    }
     
     createActivity(type) {
         let productive_failure = {
@@ -97,6 +104,8 @@ export default class Home extends Component {
                             productive_failures={this.state.productiveFailures}
                         />
                     )}
+
+                {!this.state.showLogin && <Button bsStyle="primary" className="Logout-button" onClick={() => this.logout()}>Logout</Button>}
                 </div>
             </div>
         );
