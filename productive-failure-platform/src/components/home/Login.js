@@ -8,8 +8,7 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            showButtons: true,
-            isLogin: false,
+            isLogin: true,
             email: '',
             password: '',
             passwordConfirmation: ''
@@ -22,19 +21,17 @@ export default class Login extends Component {
         this.handleChangePasswordConfirmation = this.handleChangePasswordConfirmation.bind(this);
         this.sendSignup = this.sendSignup.bind(this);
         this.sendLogin = this.sendLogin.bind(this);
-        this.goBack = this.goBack.bind(this);
     }
 
     openLogin() {
         this.setState({
-            showButtons: false,
             isLogin: true
         })
     }
 
     openSignup() {
         this.setState({
-            showButtons: false
+            isLogin: false
         })
     }
 
@@ -95,99 +92,80 @@ export default class Login extends Component {
         // Todo: handle error
         .catch(err => console.log(err))
     }
-
-    goBack() {
-        this.setState({
-            showButtons: true,
-            isLogin: false,
-            email: '',
-            password: '',
-            passwordConfirmation: ''
-        })
-    }
     
     render() {
         return (
             <Modal show={this.props.open}>
                 <Modal.Header>
-                    <Modal.Title>Login - Signup</Modal.Title>
+                    <Modal.Title>{this.state.isLogin ? "Login" : "Signup"}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {this.state.showButtons && (
-                        <div className="Login--Buttons__container">
-                            <Button bsStyle="primary" className="button-login" onClick={() => this.openLogin()}>Login</Button>
-                            <Button bsStyle="primary" className="button-login" onClick={() => this.openSignup()}>Signup</Button>
+                    {this.state.isLogin ? (
+                        <div className="Login--login">
+                            <form>
+                                <FormGroup>
+                                    <ControlLabel>Email</ControlLabel>
+                                    <FormControl
+                                        type="text"
+                                        value={this.state.email}
+                                        placeholder="Enter email"
+                                        onChange={this.handleChangeEmail}
+                                    />
+                                </FormGroup>
+
+                                <FormGroup>
+                                    <ControlLabel>Password</ControlLabel>
+                                    <FormControl
+                                        type="password"
+                                        value={this.state.password}
+                                        placeholder="Enter password"
+                                        onChange={this.handleChangePassword}
+                                    />
+                                </FormGroup>
+                            </form>
+                            <div className="Login--button">
+                                <Button bsStyle="default" onClick={() => this.openSignup()}>Go to Signup</Button>
+                                <Button bsStyle="primary" onClick={() => this.sendLogin()}>Login</Button>
+                            </div>
                         </div>
-                    )}
+                    ) : (
+                        <div className="Login--signup">
+                            <form>
+                                <FormGroup>
+                                    <ControlLabel>Email</ControlLabel>
+                                    <FormControl
+                                        type="text"
+                                        value={this.state.email}
+                                        placeholder="Enter email"
+                                        onChange={this.handleChangeEmail}
+                                    />
+                                </FormGroup>
 
-                    {!this.state.showButtons && (
-                        this.state.isLogin ? (
-                            <div className="Login--login">
-                                <form>
-                                    <FormGroup>
-                                        <ControlLabel>Email</ControlLabel>
-                                        <FormControl
-                                            type="text"
-                                            value={this.state.email}
-                                            placeholder="Enter email"
-                                            onChange={this.handleChangeEmail}
-                                        />
-                                    </FormGroup>
+                                <FormGroup>
+                                    <ControlLabel>Password</ControlLabel>
+                                    <FormControl
+                                        type="password"
+                                        value={this.state.password}
+                                        placeholder="Enter password"
+                                        onChange={this.handleChangePassword}
+                                    />
+                                </FormGroup>
 
-                                    <FormGroup>
-                                        <ControlLabel>Password</ControlLabel>
-                                        <FormControl
-                                            type="password"
-                                            value={this.state.password}
-                                            placeholder="Enter password"
-                                            onChange={this.handleChangePassword}
-                                        />
-                                    </FormGroup>
-                                </form>
-                                <div className="Login--button">
-                                    <Button bsStyle="default" onClick={() => this.goBack()}>Back</Button>
-                                    <Button bsStyle="primary" onClick={() => this.sendLogin()}>Login</Button>
-                                </div>
+                                <FormGroup>
+                                    <ControlLabel>Confirm password</ControlLabel>
+                                    <FormControl
+                                        type="password"
+                                        value={this.state.passwordConfirmation}
+                                        placeholder="Enter password"
+                                        onChange={this.handleChangePasswordConfirmation}
+                                    />
+                                </FormGroup>
+                            </form>
+                            <div className="Login--button">
+                                <Button bsStyle="default" onClick={() => this.openLogin()}>Go to Login</Button>
+                                <Button bsStyle="primary" onClick={() => this.sendSignup()}>Create account</Button>
                             </div>
-                        ) : (
-                            <div className="Login--signup">
-                                <form>
-                                    <FormGroup>
-                                        <ControlLabel>Email</ControlLabel>
-                                        <FormControl
-                                            type="text"
-                                            value={this.state.email}
-                                            placeholder="Enter email"
-                                            onChange={this.handleChangeEmail}
-                                        />
-                                    </FormGroup>
-
-                                    <FormGroup>
-                                        <ControlLabel>Password</ControlLabel>
-                                        <FormControl
-                                            type="password"
-                                            value={this.state.password}
-                                            placeholder="Enter password"
-                                            onChange={this.handleChangePassword}
-                                        />
-                                    </FormGroup>
-
-                                    <FormGroup>
-                                        <ControlLabel>Confirm password</ControlLabel>
-                                        <FormControl
-                                            type="password"
-                                            value={this.state.passwordConfirmation}
-                                            placeholder="Enter password"
-                                            onChange={this.handleChangePasswordConfirmation}
-                                        />
-                                    </FormGroup>
-                                </form>
-                                <div className="Login--button">
-                                    <Button bsStyle="default" onClick={() => this.goBack()}>Back</Button>
-                                    <Button bsStyle="primary" onClick={() => this.sendSignup()}>Create account</Button>
-                                </div>
-                            </div>
-                        )
+                        </div>
                     )}
                 </Modal.Body>
             </Modal>
