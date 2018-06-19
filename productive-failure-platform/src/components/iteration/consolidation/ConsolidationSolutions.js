@@ -39,6 +39,9 @@ export default class ConsolidationSolutions extends Component {
         return this.state.representations.map((rep, key) => {
             return (
                 <Panel className={`ConsolidationSolutions--representation`}  key={key}>
+                    <Panel.Heading>
+                        {key+1}
+                    </Panel.Heading>
                     <Panel.Body className="ConsolidationSolutions--representation__body">
                         <div className="ConsolidationSolutions--representation__svg" dangerouslySetInnerHTML={{__html: rep}}/>
                     </Panel.Body>
@@ -51,6 +54,9 @@ export default class ConsolidationSolutions extends Component {
         return this.state.descriptions.map((desc, key) => {
             return (
                 <Panel className={`ConsolidationSolutions--description`}  key={key}>
+                    <Panel.Heading>
+                        {key+1}
+                    </Panel.Heading>
                     <Panel.Body className="ConsolidationSolutions--description__body">
                         <div className="ConsolidationSolutions--description__containertext">
                             <p className="ConsolidationSolutions--description__text">{desc}</p>

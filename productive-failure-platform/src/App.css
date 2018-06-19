@@ -339,11 +339,15 @@ svg {
 }
 
 .ConsolidationSolutions--representation, .ConsolidationSolutions--description {
+    width: 100%;
+}
+
+.ConsolidationSolutions--representation__body, .ConsolidationSolutions--description__body {
     height: 200px;
     width: 100%;
 }
 
-.ConsolidationSolutions--representation__body, .ConsolidationSolutions--representation__svg, .ConsolidationSolutions--description__body {
+.ConsolidationSolutions--representation__svg {
     width: 100%;
     height: 100%;
 }
