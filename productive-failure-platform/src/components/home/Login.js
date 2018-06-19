@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { Modal, Button, FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
 import axios from 'axios';
 
 
@@ -11,7 +11,9 @@ export default class Login extends Component {
             isLogin: true,
             email: '',
             password: '',
-            passwordConfirmation: ''
+            passwordConfirmation: '',
+            validationError: null,
+            validationErrorString: null
         }
 
         this.openLogin = this.openLogin.bind(this);
@@ -90,7 +92,12 @@ export default class Login extends Component {
             this.props.login(res, this.state.email);
         })
         // Todo: handle error
-        .catch(err => console.log(err))
+        .catch(err => {
+            this.setState({
+                validationError: "error",
+                validationErrorString: "Wrong email or password."
+            })
+        })
     }
     
     render() {
@@ -103,7 +110,7 @@ export default class Login extends Component {
                     {this.state.isLogin ? (
                         <div className="Login--login">
                             <form>
-                                <FormGroup>
+                                <FormGroup validationState={this.state.validationError}>
                                     <ControlLabel>Email</ControlLabel>
                                     <FormControl
                                         type="text"
@@ -111,9 +118,10 @@ export default class Login extends Component {
                                         placeholder="Enter email"
                                         onChange={this.handleChangeEmail}
                                     />
+                                    <HelpBlock>{this.state.validationErrorString}</HelpBlock>
                                 </FormGroup>
 
-                                <FormGroup>
+                                <FormGroup validationState={this.state.validationError}>
                                     <ControlLabel>Password</ControlLabel>
                                     <FormControl
                                         type="password"
@@ -121,6 +129,7 @@ export default class Login extends Component {
                                         placeholder="Enter password"
                                         onChange={this.handleChangePassword}
                                     />
+                                    <HelpBlock>{this.state.validationErrorString}</HelpBlock>
                                 </FormGroup>
                             </form>
                             <div className="Login--button">
