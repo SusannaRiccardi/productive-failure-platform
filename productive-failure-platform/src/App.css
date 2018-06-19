@@ -357,6 +357,10 @@ svg {
     font-size: 17px;
 }
 
+.ConsolidationRankings--well {
+    padding: 0;
+}
+
 /* Login */
 .Login--Buttons__container {
     text-align: center;

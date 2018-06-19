@@ -128,7 +128,7 @@ export default class ConsolidationRankings extends Component {
         return (
             {
                 userSelect: 'none',
-                padding: this.state.gridElements * 2,
+                padding: '10px',
                 margin: `0 0 ${this.state.gridElements}px 0`,
                 height: 200,
 
@@ -153,7 +153,7 @@ export default class ConsolidationRankings extends Component {
     getListRankStyle(isDraggingOver, rank, number) {
         return (
             {
-                padding: this.state.gridElements,
+                // padding: this.state.gridElements,
                 height: 200,
                 background: rank.length === 0 ? `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='100px' width='120px'><text x='0' y='60' fill='#bdbdbd' font-size='50' font-weight='700' font-family='sans-serif'>${number}</text></svg>") no-repeat center` : ``,
             }
@@ -192,7 +192,7 @@ export default class ConsolidationRankings extends Component {
                              <Panel.Title componentClass="h3">Rankings</Panel.Title>
                          </Panel.Heading>
                          <Panel.Body className="ConsolidationRankings--body__placeholders">
-                            <Well bsSize="small">
+                            <Well bsSize="small" className="ConsolidationRankings--well">
                                 <Droppable droppableId="rank1">
                                     {(provided, snapshot) => (
                                         <div
@@ -222,7 +222,7 @@ export default class ConsolidationRankings extends Component {
                                     )}
                                 </Droppable>
                             </Well>
-                            <Well bsSize="small">
+                            <Well bsSize="small" className="ConsolidationRankings--well">
                                 <Droppable droppableId="rank2">
                                     {(provided, snapshot) => (
                                         <div
@@ -252,7 +252,7 @@ export default class ConsolidationRankings extends Component {
                                     )}
                                 </Droppable>
                             </Well>
-                            <Well bsSize="small">
+                            <Well bsSize="small" className="ConsolidationRankings--well">
                                 <Droppable droppableId="rank3">
                                     {(provided, snapshot) => (
                                         <div
@@ -282,7 +282,7 @@ export default class ConsolidationRankings extends Component {
                                     )}
                                 </Droppable>
                             </Well>
-                            <Well bsSize="small">
+                            <Well bsSize="small" className="ConsolidationRankings--well">
                                 <Droppable droppableId="rank4">
                                     {(provided, snapshot) => (
                                         <div
@@ -312,7 +312,7 @@ export default class ConsolidationRankings extends Component {
                                     )}
                                 </Droppable>
                             </Well>
-                            <Well bsSize="small">
+                            <Well bsSize="small" className="ConsolidationRankings--well">
                                 <Droppable droppableId="rank5">
                                     {(provided, snapshot) => (
                                         <div
@@ -342,7 +342,7 @@ export default class ConsolidationRankings extends Component {
                                     )}
                                 </Droppable>
                             </Well>
-                            <Well bsSize="small">
+                            <Well bsSize="small" className="ConsolidationRankings--well">
                                 <Droppable droppableId="rank6">
                                     {(provided, snapshot) => (
                                         <div
