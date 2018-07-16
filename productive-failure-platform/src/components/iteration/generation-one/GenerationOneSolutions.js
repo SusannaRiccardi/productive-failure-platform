@@ -157,13 +157,15 @@ export default class GenerationOneSolutions extends Component {
                 return activity.pattern_id == this.props.patterns[i].id
             })
 
+
+
             // iterate over representations
             for (let j = 0; j < config.representations.length; j++) {
                 let representation = {
                     representation : {
                         constraint: config.representations[j].constraint,
                         svg: localStorage.getItem(`${this.props.patterns[i].id}-${j}-svg`),
-                        productive_failure_id: this.state.productiveFailureId,
+                        productive_failure_id: localStorage.getItem('productive-failure'),
                         activity_pattern_id: activityPattern.id
                     }
                 }

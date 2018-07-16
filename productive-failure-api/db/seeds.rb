@@ -11,7 +11,7 @@ patterns = Pattern.create(
         {
             pattern: "circle-triangle-square-square-circle-triangle-square-square-circle-triangle-square-square-circle-triangle-square-square"
         }, {
-            pattern: "square-circle-triangle-square-circle-triangle-square-circle-triangle-square-circle-triangle-quare-circle-triangle-square"
+            pattern: "square-circle-triangle-square-circle-triangle-square-circle-triangle-square-circle-triangle-square-circle-triangle-square"
         }, {
             pattern: "circle-circle-triangle-square-circle-circle-triangle-square-circle-circle-triangle-square-circle-circle-triangle-square"
         }, {

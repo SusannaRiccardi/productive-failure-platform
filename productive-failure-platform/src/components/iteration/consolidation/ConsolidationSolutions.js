@@ -14,6 +14,7 @@ export default class ConsolidationSolutions extends Component {
 
         this.renderRepresentations = this.renderRepresentations.bind(this);
         this.renderDescriptions = this.renderDescriptions.bind(this);
+        this.goToHome = this.goToHome.bind(this);
     }
 
     componentDidMount() {
@@ -67,6 +68,10 @@ export default class ConsolidationSolutions extends Component {
         })
     }
 
+    goToHome() {
+        window.location.replace('/')
+    }
+
     render() {
         return (
             <div>
@@ -92,7 +97,7 @@ export default class ConsolidationSolutions extends Component {
 
                  <div className="ConsolidationSolutions--buttons">
                     <Button bsStyle="info" onClick={this.props.handleOpenTutorial}>Get info about this step</Button>
-                    <Button bsStyle="primary" onClick={() => console.log('todo go to home')}>Finish activity</Button>
+                    <Button bsStyle="primary" onClick={() => this.goToHome()}>Finish activity</Button>
                 </div>
             </div>
         );
