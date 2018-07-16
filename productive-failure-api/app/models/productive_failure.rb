@@ -1,0 +1,2 @@
+class ProductiveFailure < ApplicationRecord
+end

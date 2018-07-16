@@ -1,0 +1,2 @@
+class Representation < ApplicationRecord
+end
